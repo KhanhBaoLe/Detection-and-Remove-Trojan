@@ -68,6 +68,20 @@ class DatabaseManager:
         self.session.commit()
         return detection.id
     
+    def mark_as_removed(self, detection_id):
+        """Đánh dấu threat đã bị xóa"""
+        detection = self.session.query(TrojanDetection).filter_by(id=detection_id).first()
+        if detection:
+            detection.is_removed = True
+            detection.is_quarantined = True
+            self.session.commit()
+            return True
+        return False
+    
+    def get_removed_count(self):
+        """Đếm số threats đã bị xóa"""
+        return self.session.query(TrojanDetection).filter_by(is_removed=True).count()
+    
     def get_all_scans(self, limit=50):
         return self.session.query(ScanHistory).order_by(ScanHistory.start_time.desc()).limit(limit).all()
     
