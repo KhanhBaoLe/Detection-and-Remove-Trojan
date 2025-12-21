@@ -1,0 +1,7 @@
+venv/
+dist/
+__pycache__
+build/
+__init__.py
+database/scanner.db
+config/api_keys.py

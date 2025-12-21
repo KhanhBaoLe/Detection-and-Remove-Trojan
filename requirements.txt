@@ -1,0 +1,7 @@
+SQLAlchemy==2.0.23
+pathlib
+python-magic
+watchdog  # File system monitoring
+reportlab  # PDF export
+matplotlib  # Charts
+pillow  # Icons/Images
