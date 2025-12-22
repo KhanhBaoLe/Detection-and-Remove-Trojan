@@ -8,14 +8,14 @@ from database.db_manager import DatabaseManager
 from scanner.signature_scanner import SignatureScanner
 from scanner.behaviour_scanner import BehaviourScanner
 from scanner.full_scan import FullScanner
-from scanner.virustotal_scanner import VirusTotalScanner  # ← CHỈ IMPORT FILE NÀY
+from scanner.virustotal_scanner import VirusTotalScanner
 from config.settings import QUARANTINE_DIR
 
 class TrojanScannerGUI:
     def __init__(self):
         self.root = tk.Tk()
-        self.root.title("Trojan Detection & Removal System - With VirusTotal")
-        self.root.geometry("1150x800")
+        self.root.title("Trojan Detection & Removal System - Static + Dynamic Analysis")
+        self.root.geometry("1200x850")
         self.root.resizable(False, False)
         
         self.db = DatabaseManager()
@@ -33,7 +33,6 @@ class TrojanScannerGUI:
             if VIRUSTOTAL_API_KEY and VIRUSTOTAL_API_KEY != "YOUR_API_KEY_HERE":
                 self.vt_api_key = VIRUSTOTAL_API_KEY
                 self.log_message("✅ VirusTotal API key loaded successfully")
-                self.log_message(f"🔒 API Key: {VIRUSTOTAL_API_KEY[:15]}...{VIRUSTOTAL_API_KEY[-10:]}")
             else:
                 self.log_message("⚠️ VirusTotal API key not configured")
         except:
@@ -49,12 +48,16 @@ class TrojanScannerGUI:
     
     def create_widgets(self):
         # Header
-        header = tk.Frame(self.root, bg='#2c3e50', height=70)
+        header = tk.Frame(self.root, bg='#2c3e50', height=80)
         header.pack(fill='x')
         
         title = tk.Label(header, text="🛡️ TROJAN DETECTION SYSTEM", 
                         font=('Arial', 18, 'bold'), bg='#2c3e50', fg='white')
-        title.pack(pady=15)
+        title.pack(pady=10)
+        
+        subtitle = tk.Label(header, text="Static Scan + Dynamic Behaviour Analysis", 
+                           font=('Arial', 10), bg='#2c3e50', fg='#ecf0f1')
+        subtitle.pack()
         
         # Main container
         main_frame = tk.Frame(self.root)
@@ -64,31 +67,43 @@ class TrojanScannerGUI:
         scan_frame = tk.LabelFrame(main_frame, text="🔍 Scan Options", font=('Arial', 11, 'bold'))
         scan_frame.pack(fill='x', pady=(0, 8))
         
-        btn_frame1 = tk.Frame(scan_frame)
-        btn_frame1.pack(pady=5)
+        btn_frame = tk.Frame(scan_frame)
+        btn_frame.pack(pady=8)
         
-        tk.Button(btn_frame1, text="📁 Signature Scan", width=17, height=2,
+        # ROW 1
+        row1 = tk.Frame(btn_frame)
+        row1.pack(pady=4)
+        
+        tk.Button(row1, text="📋 Static Scan\n(Signature)", width=18, height=3,
                  command=self.signature_scan, bg='#3498db', fg='white',
-                 font=('Arial', 9, 'bold')).grid(row=0, column=0, padx=4)
+                 font=('Arial', 9, 'bold')).grid(row=0, column=0, padx=5)
         
-        tk.Button(btn_frame1, text="🔎 Behaviour Scan", width=17, height=2,
+        tk.Button(row1, text="🔬 Dynamic Scan\n(Behaviour)", width=18, height=3,
                  command=self.behaviour_scan, bg='#9b59b6', fg='white',
-                 font=('Arial', 9, 'bold')).grid(row=0, column=1, padx=4)
+                 font=('Arial', 9, 'bold')).grid(row=0, column=1, padx=5)
         
-        tk.Button(btn_frame1, text="🚀 Full Scan", width=17, height=2,
+        tk.Button(row1, text="🚀 Full Scan\n(Static + Dynamic)", width=18, height=3,
                  command=self.full_scan, bg='#e74c3c', fg='white',
-                 font=('Arial', 9, 'bold')).grid(row=0, column=2, padx=4)
+                 font=('Arial', 9, 'bold')).grid(row=0, column=2, padx=5)
         
-        btn_frame2 = tk.Frame(scan_frame)
-        btn_frame2.pack(pady=5)
+        # ROW 2
+        row2 = tk.Frame(btn_frame)
+        row2.pack(pady=4)
         
-        tk.Button(btn_frame2, text="🌐 VirusTotal API", width=17, height=2,
+        tk.Button(row2, text="🌐 VirusTotal API", width=18, height=2,
                  command=self.virustotal_scan, bg='#16a085', fg='white',
-                 font=('Arial', 9, 'bold')).grid(row=0, column=0, padx=4)
+                 font=('Arial', 9, 'bold')).grid(row=0, column=0, padx=5)
         
-        tk.Button(btn_frame2, text="🗑️ Remove Threats", width=17, height=2,
+        tk.Button(row2, text="🗑️ Remove Threats", width=18, height=2,
                  command=self.remove_threats, bg='#e67e22', fg='white',
-                 font=('Arial', 9, 'bold')).grid(row=0, column=1, padx=4)
+                 font=('Arial', 9, 'bold')).grid(row=0, column=1, padx=5)
+        
+        # Info labels
+        info_frame = tk.Frame(scan_frame)
+        info_frame.pack(pady=5)
+        
+        tk.Label(info_frame, text="💡 Static = Fast signature check | Dynamic = Execute & Monitor | Full = Smart combination", 
+                font=('Arial', 8), fg='#7f8c8d').pack()
         
         # Statistics frame
         stats_frame = tk.LabelFrame(main_frame, text="📊 Statistics", font=('Arial', 11, 'bold'))
@@ -107,12 +122,12 @@ class TrojanScannerGUI:
             self.stats_labels[key] = tk.Label(stats_inner, text=str(value), font=('Arial', 9), fg='#e74c3c')
             self.stats_labels[key].grid(row=0, column=idx*2+1, padx=8)
         
-        # === LOG FRAME ===
-        log_frame = tk.LabelFrame(main_frame, text="📝 Activity Log (Proof of VirusTotal Integration)", 
+        # LOG FRAME
+        log_frame = tk.LabelFrame(main_frame, text="📜 Activity Log", 
                                   font=('Arial', 10, 'bold'))
         log_frame.pack(fill='x', pady=(0, 8))
         
-        self.log_text = scrolledtext.ScrolledText(log_frame, height=6, font=('Courier', 8),
+        self.log_text = scrolledtext.ScrolledText(log_frame, height=7, font=('Courier', 8),
                                                    bg='#1e1e1e', fg='#00ff00', wrap=tk.WORD)
         self.log_text.pack(fill='both', expand=True, padx=5, pady=5)
         
@@ -128,7 +143,7 @@ class TrojanScannerGUI:
         
         self.tree = ttk.Treeview(tree_frame, yscrollcommand=scrollbar.set,
                                 columns=('ID', 'Type', 'Path', 'Time', 'Files', 'Threats', 'Removed', 'Status'),
-                                show='headings', height=9)
+                                show='headings', height=8)
         
         self.tree.heading('ID', text='ID')
         self.tree.heading('Type', text='Type')
@@ -140,8 +155,8 @@ class TrojanScannerGUI:
         self.tree.heading('Status', text='Status')
         
         self.tree.column('ID', width=40)
-        self.tree.column('Type', width=90)
-        self.tree.column('Path', width=200)
+        self.tree.column('Type', width=120)
+        self.tree.column('Path', width=250)
         self.tree.column('Time', width=130)
         self.tree.column('Files', width=60)
         self.tree.column('Threats', width=70)
@@ -172,39 +187,82 @@ class TrojanScannerGUI:
         tk.Button(bottom_frame, text="❌ Exit", width=14,
                  command=self.root.quit).pack(side='right', padx=4)
     
+    def signature_scan(self):
+        """Static Scan - Nhanh"""
+        path = filedialog.askdirectory(title="Select folder for STATIC scan")
+        if path:
+            self.log_message(f"📋 Starting STATIC scan: {path}")
+            self.log_message(f"⚡ Mode: Signature-based detection (Fast)")
+            threading.Thread(target=self._run_scan, args=('signature', path), daemon=True).start()
+    
+    def behaviour_scan(self):
+        """Dynamic Scan - Execute & Monitor"""
+        # Ask user to choose between file or folder
+        choice = messagebox.askyesnocancel(
+            "Scan Selection",
+            "Choose what to scan:\n\n"
+            "YES = Scan a single file\n"
+            "NO = Scan a folder"
+        )
+        
+        if choice is None:  # Cancel
+            return
+        
+        if choice:  # Yes - scan single file
+            path = filedialog.askopenfilename(
+                title="Select file for DYNAMIC scan",
+                filetypes=[("All files", "*.*"), ("Executable", "*.exe"), ("DLL", "*.dll"), ("Scripts", "*.ps1 *.bat *.cmd *.vbs")]
+            )
+        else:  # No - scan folder
+            path = filedialog.askdirectory(title="Select folder for DYNAMIC scan")
+        
+        if path:
+            result = messagebox.askyesno(
+                "Dynamic Analysis Warning",
+                "⚠️ Dynamic scan will EXECUTE files in a monitored environment.\n\n"
+                "This may:\n"
+                "• Use significant CPU/Memory\n"
+                "• Take 5+ minutes per file\n"
+                "• Trigger Windows Defender\n\n"
+                "Continue?"
+            )
+            if result:
+                self.log_message(f"🔬 Starting DYNAMIC scan: {path}")
+                self.log_message(f"⚡ Mode: Execute & Monitor behaviour")
+                threading.Thread(target=self._run_scan, args=('behaviour', path), daemon=True).start()
+    
+    def full_scan(self):
+        """Full Scan - Smart Static + Selective Dynamic"""
+        path = filedialog.askdirectory(title="Select folder for FULL scan")
+        if path:
+            result = messagebox.askyesno(
+                "Full Scan Confirmation",
+                "🚀 Full Scan will:\n\n"
+                "1. Run STATIC scan on all files (fast)\n"
+                "2. Select 3-5 most suspicious files\n"
+                "3. Run DYNAMIC analysis on selected files\n"
+                "4. Combine results\n\n"
+                "This may take 15-30 minutes. Continue?"
+            )
+            if result:
+                self.log_message(f"🚀 Starting FULL scan: {path}")
+                self.log_message(f"⚡ Mode: Smart Static + Selective Dynamic")
+                threading.Thread(target=self._run_scan, args=('full', path), daemon=True).start()
+    
     def virustotal_scan(self):
-        """Scan PURE VirusTotal API - KHÔNG CHẠY LOGIC NỘI BỘ"""
+        """Scan PURE VirusTotal API"""
         if not self.vt_api_key:
             messagebox.showwarning(
                 "API Key Required",
-                "Please set your VirusTotal API key first!\n\n"
-                "Edit config/api_keys.py"
+                "Please set your VirusTotal API key first!\n\nEdit config/api_keys.py"
             )
             return
         
         path = filedialog.askdirectory(title="Select folder to scan with VirusTotal")
         if path:
-            self.log_message(f"🌐 Starting PURE VirusTotal API scan: {path}")
+            self.log_message(f"🌐 Starting VirusTotal API scan: {path}")
             self.log_message(f"⚡ Mode: API ONLY (no internal checks)")
             threading.Thread(target=self._run_scan, args=('virustotal', path), daemon=True).start()
-    
-    def signature_scan(self):
-        path = filedialog.askdirectory(title="Select folder")
-        if path:
-            self.log_message(f"📁 Starting signature scan: {path}")
-            threading.Thread(target=self._run_scan, args=('signature', path), daemon=True).start()
-    
-    def behaviour_scan(self):
-        path = filedialog.askdirectory(title="Select folder")
-        if path:
-            self.log_message(f"🔎 Starting behaviour scan: {path}")
-            threading.Thread(target=self._run_scan, args=('behaviour', path), daemon=True).start()
-    
-    def full_scan(self):
-        path = filedialog.askdirectory(title="Select folder")
-        if path:
-            self.log_message(f"🚀 Starting full scan: {path}")
-            threading.Thread(target=self._run_scan, args=('full', path), daemon=True).start()
     
     def _run_scan(self, scan_type, path):
         try:
@@ -222,25 +280,10 @@ class TrojanScannerGUI:
                 threats = scanner.threats_found
                 
             elif scan_type == 'virustotal':
-                # ===== SỬ DỤNG virustotal_scanner.py - PHƯƠNG THỨC scan_folder_api_only() =====
                 self.log_message("🌐 Initializing VirusTotal API scanner...")
-                self.log_message("⚡ No EICAR/Signature/Behaviour checks")
-                self.log_message("🔒 Using virustotal_scanner.py")
-                
                 vt_scanner = VirusTotalScanner(self.vt_api_key)
-                
-                # GỌI PHƯƠNG THỨC MỚI: scan_folder_api_only()
                 files_scanned, threats = vt_scanner.scan_folder_api_only(path)
                 threats_count = len(threats)
-                
-                # Log VirusTotal proof
-                if threats:
-                    self.log_message(f"✅ VirusTotal API responded successfully")
-                    self.log_message(f"📊 Detected by VirusTotal: {threats_count} threats")
-                    for threat in threats[:3]:  # Show first 3
-                        self.log_message(f"  🔴 {os.path.basename(threat['file_path'])}: {threat.get('vt_detection', 'N/A')}")
-                else:
-                    self.log_message(f"✅ All files clean according to VirusTotal")
                 
             else:  # full
                 scanner = FullScanner(self.db)
@@ -248,12 +291,21 @@ class TrojanScannerGUI:
             
             # Lưu threats vào database
             for threat in threats:
+                # Format behaviours nếu có
+                detection_method = threat.get('detection_method', scan_type)
+                
+                # Tạo trojan name với behaviours info nếu có
+                trojan_name = threat['trojan_name']
+                if 'behaviours' in threat and threat['behaviours']:
+                    behaviours_str = '; '.join(threat['behaviours'][:3])  # Lấy 3 behaviours đầu
+                    trojan_name = f"{trojan_name} [{behaviours_str}]"
+                
                 self.db.add_detection(
                     scan_id=scan_id,
                     file_path=threat['file_path'],
                     file_hash=threat.get('file_hash', 'N/A'),
-                    trojan_name=threat['trojan_name'],
-                    detection_method=threat['detection_method'],
+                    trojan_name=trojan_name,
+                    detection_method=detection_method,
                     threat_level=threat['threat_level']
                 )
             
@@ -265,11 +317,20 @@ class TrojanScannerGUI:
             
             self.root.after(0, self.refresh_all)
             
-            msg = f"Scan completed!\n\nFiles: {files_scanned}\nThreats: {threats_count}"
-            if scan_type == 'virustotal':
-                msg += "\n\n✅ PURE VirusTotal API used"
-                msg += "\n⚡ No internal checks performed"
-                msg += f"\n📊 Check log for details"
+            # Custom message based on scan type
+            if scan_type == 'full':
+                static_threats = [t for t in threats if t.get('detection_method') in ['signature', 'static-eicar']]
+                dynamic_threats = [t for t in threats if t.get('detection_method') == 'dynamic']
+                msg = f"Full Scan completed!\n\nFiles scanned: {files_scanned}\n"
+                msg += f"Static threats: {len(static_threats)}\n"
+                msg += f"Dynamic threats: {len(dynamic_threats)}\n"
+                msg += f"Total threats: {threats_count}"
+            elif scan_type == 'behaviour':
+                msg = f"Dynamic Scan completed!\n\nFiles analyzed: {files_scanned}\n"
+                msg += f"Malicious behaviours: {threats_count}\n\n"
+                msg += "⚠️ Check logs for detailed behaviour analysis"
+            else:
+                msg = f"Scan completed!\n\nFiles: {files_scanned}\nThreats: {threats_count}"
             
             self.log_message(f"✅ Scan #{scan_id} completed")
             messagebox.showinfo("Scan Complete", msg)
@@ -320,7 +381,7 @@ class TrojanScannerGUI:
         
         detail_window = tk.Toplevel(self.root)
         detail_window.title(f"Scan Details - ID: {scan_id}")
-        detail_window.geometry("1000x550")
+        detail_window.geometry("1100x600")
         
         tk.Label(detail_window, text=f"📊 Threats Detected: {len(detections)}", 
                 font=('Arial', 13, 'bold')).pack(pady=10)
@@ -336,13 +397,13 @@ class TrojanScannerGUI:
                                   show='headings')
         
         detail_tree.heading('File', text='File Path')
-        detail_tree.heading('Trojan', text='Trojan Name')
+        detail_tree.heading('Trojan', text='Trojan Name / Behaviours')
         detail_tree.heading('Method', text='Detection Method')
         detail_tree.heading('Level', text='Threat Level')
         detail_tree.heading('Removed', text='Removed')
         
-        detail_tree.column('File', width=300)
-        detail_tree.column('Trojan', width=250)
+        detail_tree.column('File', width=250)
+        detail_tree.column('Trojan', width=400)
         detail_tree.column('Method', width=120)
         detail_tree.column('Level', width=100)
         detail_tree.column('Removed', width=80)
@@ -357,7 +418,6 @@ class TrojanScannerGUI:
         scrollbar.config(command=detail_tree.yview)
     
     def export_report(self):
-        """Export chi tiết để thuyết trình"""
         filename = filedialog.asksaveasfilename(
             defaultextension=".txt",
             filetypes=[("Text files", "*.txt"), ("All files", "*.*")]
@@ -367,12 +427,11 @@ class TrojanScannerGUI:
             scans = self.db.get_all_scans(limit=100)
             with open(filename, 'w', encoding='utf-8') as f:
                 f.write("="*80 + "\n")
-                f.write("TROJAN DETECTION SYSTEM - VIRUSTOTAL INTEGRATION REPORT\n")
+                f.write("TROJAN DETECTION SYSTEM - STATIC + DYNAMIC ANALYSIS REPORT\n")
                 f.write("="*80 + "\n\n")
                 
                 f.write(f"Report Generated: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}\n\n")
                 
-                # Statistics
                 stats = self.db.get_statistics()
                 stats['threats_removed'] = self.db.get_removed_count()
                 f.write("OVERALL STATISTICS:\n")
@@ -381,7 +440,6 @@ class TrojanScannerGUI:
                     f.write(f"{key.replace('_', ' ').title()}: {value}\n")
                 f.write("\n")
                 
-                # Scan details
                 f.write("SCAN HISTORY:\n")
                 f.write("="*80 + "\n\n")
                 
@@ -394,7 +452,6 @@ class TrojanScannerGUI:
                     f.write(f"Threats Found: {scan.threats_found}\n")
                     f.write(f"Status: {scan.status}\n")
                     
-                    # Detection details
                     detections = self.db.get_detections_by_scan(scan.id)
                     if detections:
                         f.write(f"\nDetections ({len(detections)}):\n")
@@ -407,19 +464,6 @@ class TrojanScannerGUI:
                             f.write(f"    Hash: {det.file_hash}\n\n")
                     
                     f.write("-"*80 + "\n\n")
-                
-                # VirusTotal proof section
-                f.write("\nVIRUSTOTAL INTEGRATION PROOF:\n")
-                f.write("="*80 + "\n")
-                f.write("This system uses PURE VirusTotal API via virustotal_scanner.py\n")
-                f.write("Evidence of integration:\n")
-                f.write("1. API Key configured in config/api_keys.py\n")
-                f.write("2. Detection method 'virustotal' in scan results\n")
-                f.write("3. Trojan names prefixed with [VT]\n")
-                f.write("4. Detection rates from 70+ antivirus engines\n")
-                f.write("5. Method: scan_folder_api_only() in virustotal_scanner.py\n")
-                f.write("6. No EICAR/signature/behaviour checks during VT scan\n")
-                f.write("="*80 + "\n")
             
             self.log_message(f"📋 Report exported: {filename}")
             messagebox.showinfo("Success", "Report exported successfully!")
@@ -433,10 +477,21 @@ class TrojanScannerGUI:
             detections = self.db.get_detections_by_scan(scan.id)
             removed_count = sum(1 for d in detections if d.is_removed)
             
+            # Format scan type display
+            scan_type_display = scan.scan_type
+            if scan.scan_type == 'signature':
+                scan_type_display = '📋 Static'
+            elif scan.scan_type == 'behaviour':
+                scan_type_display = '🔬 Dynamic'
+            elif scan.scan_type == 'full':
+                scan_type_display = '🚀 Full'
+            elif scan.scan_type == 'virustotal':
+                scan_type_display = '🌐 VirusTotal'
+            
             self.tree.insert('', 'end', values=(
                 scan.id,
-                scan.scan_type,
-                scan.scan_path[:25] + '...' if len(scan.scan_path) > 25 else scan.scan_path,
+                scan_type_display,
+                scan.scan_path[:30] + '...' if len(scan.scan_path) > 30 else scan.scan_path,
                 scan.start_time.strftime('%Y-%m-%d %H:%M:%S') if scan.start_time else '',
                 scan.files_scanned,
                 scan.threats_found,
