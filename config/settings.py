@@ -15,12 +15,21 @@ QUARANTINE_DIR = os.path.join(BASE_DIR, 'quarantine', 'quarantined')
 LOG_DIR = os.path.join(BASE_DIR, 'logs')
 SIGNATURE_DIR = os.path.join(BASE_DIR, 'signatures')
 
+# DYNAMIC ANALYSIS SETTINGS
+DYNAMIC_ANALYSIS_ENABLED = True
+DYNAMIC_TIMEOUT_SECONDS = 30
+DYNAMIC_MONITOR_DIR = os.path.join(BASE_DIR, 'dynamic_analysis', 'monitors')
+DYNAMIC_SAMPLES_DIR = os.path.join(BASE_DIR, 'dynamic_analysis', 'samples')
+DYNAMIC_ENABLE_NETWORK = False  # Tắt mạng vì an toàn
+
 # Tạo thư mục nếu chưa có
 for directory in [
     os.path.dirname(DATABASE_PATH),
     QUARANTINE_DIR,
     LOG_DIR,
-    SIGNATURE_DIR
+    SIGNATURE_DIR,
+    DYNAMIC_MONITOR_DIR,
+    DYNAMIC_SAMPLES_DIR
 ]:
     os.makedirs(directory, exist_ok=True)
 
