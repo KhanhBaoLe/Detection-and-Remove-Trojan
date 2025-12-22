@@ -2,15 +2,14 @@ import hashlib
 import os
 from datetime import datetime
 
-def calculate_file_hash(file_path, algorithm='md5'):
-    """Tính hash của file"""
+def calculate_file_hash(file_path):
     try:
-        hash_obj = hashlib.new(algorithm)
-        with open(file_path, 'rb') as f:
+        sha256 = hashlib.sha256()
+        with open(file_path, "rb") as f:
             for chunk in iter(lambda: f.read(4096), b""):
-                hash_obj.update(chunk)
-        return hash_obj.hexdigest()
-    except Exception as e:
+                sha256.update(chunk)
+        return sha256.hexdigest()
+    except Exception:
         return None
 
 def get_file_info(file_path):

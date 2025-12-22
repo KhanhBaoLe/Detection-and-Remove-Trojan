@@ -2,4 +2,3 @@ venv/
 dist/
 __pycache__
 build/
-__init__.py

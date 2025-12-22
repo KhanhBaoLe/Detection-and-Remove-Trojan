@@ -1,0 +1,28 @@
+[2025-12-21 14:51:01,560] [ERROR] [BaseScanner] Failed to scan EICAR file: C:\Users\khanh\AppData\Local\Temp\tmpmla3m26e
+Traceback (most recent call last):
+  File "C:\Users\khanh\Detection-and-Remove-Trojan\scanner\base_scanner.py", line 38, in scan_eicar
+    with open(file_path, "rb") as f:
+OSError: [Errno 22] Invalid argument: 'C:\\Users\\khanh\\AppData\\Local\\Temp\\tmpmla3m26e'
+[2025-12-21 14:53:37,295] [ERROR] [BaseScanner] Failed to scan EICAR file: C:\Users\khanh\AppData\Local\Temp\tmpm1h6bqmi
+Traceback (most recent call last):
+  File "C:\Users\khanh\Detection-and-Remove-Trojan\scanner\base_scanner.py", line 38, in scan_eicar
+    with open(file_path, "rb") as f:
+OSError: [Errno 22] Invalid argument: 'C:\\Users\\khanh\\AppData\\Local\\Temp\\tmpm1h6bqmi'
+[2025-12-21 14:55:18,773] [ERROR] [BaseScanner] Failed to scan EICAR file: C:\Users\khanh\AppData\Local\Temp\tmp21b1irir
+Traceback (most recent call last):
+  File "C:\Users\khanh\Detection-and-Remove-Trojan\scanner\base_scanner.py", line 35, in scan_eicar
+    data = Path(file_path).read_bytes()
+  File "C:\Python Versions\lib\pathlib.py", line 1126, in read_bytes
+    with self.open(mode='rb') as f:
+  File "C:\Python Versions\lib\pathlib.py", line 1119, in open
+    return self._accessor.open(self, mode, buffering, encoding, errors,
+OSError: [Errno 22] Invalid argument: 'C:\\Users\\khanh\\AppData\\Local\\Temp\\tmp21b1irir'
+[2025-12-21 14:57:18,466] [ERROR] [BaseScanner] Failed to scan EICAR file: C:\Users\khanh\AppData\Local\Temp\tmpjaf1myt5
+Traceback (most recent call last):
+  File "C:\Users\khanh\Detection-and-Remove-Trojan\scanner\base_scanner.py", line 35, in scan_eicar
+    data = Path(file_path).read_bytes()
+  File "C:\Python Versions\lib\pathlib.py", line 1126, in read_bytes
+    with self.open(mode='rb') as f:
+  File "C:\Python Versions\lib\pathlib.py", line 1119, in open
+    return self._accessor.open(self, mode, buffering, encoding, errors,
+OSError: [Errno 22] Invalid argument: 'C:\\Users\\khanh\\AppData\\Local\\Temp\\tmpjaf1myt5'
