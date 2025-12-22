@@ -1,0 +1,46 @@
+[2025-12-21 14:38:24,050] [INFO] [DB] New scan added | type=signature path=D:/pythoncode
+[2025-12-21 14:38:24,052] [INFO] [SignatureScanner] Start signature scan: D:/pythoncode
+[2025-12-21 14:38:24,078] [INFO] [SignatureScanner] Total files to scan (signature): 0
+[2025-12-21 14:38:24,078] [INFO] [SignatureScanner] Signature scan completed | files_scanned=0 | threats=0
+[2025-12-21 14:38:32,456] [INFO] [DB] New scan added | type=full path=D:/pythoncode/Final_AI
+[2025-12-21 14:38:32,457] [INFO] [FullScanner] Start full scan: D:/pythoncode/Final_AI
+[2025-12-21 14:38:32,457] [INFO] [SignatureScanner] Start signature scan: D:/pythoncode/Final_AI
+[2025-12-21 14:38:32,464] [INFO] [SignatureScanner] Total files to scan (signature): 0
+[2025-12-21 14:38:32,465] [INFO] [SignatureScanner] Signature scan completed | files_scanned=0 | threats=0
+[2025-12-21 14:38:32,465] [INFO] [BehaviourScanner] Start behaviour scan: D:/pythoncode/Final_AI
+[2025-12-21 14:38:32,466] [INFO] [BehaviourScanner] Loaded behaviour patterns: 2
+[2025-12-21 14:38:32,473] [INFO] [BehaviourScanner] Total files to scan (behaviour): 0
+[2025-12-21 14:38:32,473] [INFO] [BehaviourScanner] Behaviour scan completed | files_scanned=0 | threats=0
+[2025-12-21 14:38:32,473] [INFO] [FullScanner] Full scan completed | files=0 | threats=0
+[2025-12-21 14:51:01,560] [ERROR] [BaseScanner] Failed to scan EICAR file: C:\Users\khanh\AppData\Local\Temp\tmpmla3m26e
+Traceback (most recent call last):
+  File "C:\Users\khanh\Detection-and-Remove-Trojan\scanner\base_scanner.py", line 38, in scan_eicar
+    with open(file_path, "rb") as f:
+OSError: [Errno 22] Invalid argument: 'C:\\Users\\khanh\\AppData\\Local\\Temp\\tmpmla3m26e'
+[2025-12-21 14:53:37,295] [ERROR] [BaseScanner] Failed to scan EICAR file: C:\Users\khanh\AppData\Local\Temp\tmpm1h6bqmi
+Traceback (most recent call last):
+  File "C:\Users\khanh\Detection-and-Remove-Trojan\scanner\base_scanner.py", line 38, in scan_eicar
+    with open(file_path, "rb") as f:
+OSError: [Errno 22] Invalid argument: 'C:\\Users\\khanh\\AppData\\Local\\Temp\\tmpm1h6bqmi'
+[2025-12-21 14:55:18,773] [ERROR] [BaseScanner] Failed to scan EICAR file: C:\Users\khanh\AppData\Local\Temp\tmp21b1irir
+Traceback (most recent call last):
+  File "C:\Users\khanh\Detection-and-Remove-Trojan\scanner\base_scanner.py", line 35, in scan_eicar
+    data = Path(file_path).read_bytes()
+  File "C:\Python Versions\lib\pathlib.py", line 1126, in read_bytes
+    with self.open(mode='rb') as f:
+  File "C:\Python Versions\lib\pathlib.py", line 1119, in open
+    return self._accessor.open(self, mode, buffering, encoding, errors,
+OSError: [Errno 22] Invalid argument: 'C:\\Users\\khanh\\AppData\\Local\\Temp\\tmp21b1irir'
+[2025-12-21 14:57:18,466] [ERROR] [BaseScanner] Failed to scan EICAR file: C:\Users\khanh\AppData\Local\Temp\tmpjaf1myt5
+Traceback (most recent call last):
+  File "C:\Users\khanh\Detection-and-Remove-Trojan\scanner\base_scanner.py", line 35, in scan_eicar
+    data = Path(file_path).read_bytes()
+  File "C:\Python Versions\lib\pathlib.py", line 1126, in read_bytes
+    with self.open(mode='rb') as f:
+  File "C:\Python Versions\lib\pathlib.py", line 1119, in open
+    return self._accessor.open(self, mode, buffering, encoding, errors,
+OSError: [Errno 22] Invalid argument: 'C:\\Users\\khanh\\AppData\\Local\\Temp\\tmpjaf1myt5'
+[2025-12-22 23:03:43,403] [INFO] [DB] New scan added | type=full path=D:/Detection-and-Remove-Trojan
+[2025-12-22 23:05:33,997] [INFO] [DB] New scan added | type=full path=D:/Detection-and-Remove-Trojan
+[2025-12-22 23:07:56,604] [INFO] [DB] New scan added | type=full path=D:/Detection-and-Remove-Trojan
+[2025-12-22 23:08:29,168] [INFO] [DB] New scan added | type=full path=D:/Detection-and-Remove-Trojan

@@ -1,15 +1,17 @@
 import tkinter as tk
-from tkinter import messagebox, filedialog, ttk, simpledialog, scrolledtext
+from tkinter import messagebox, filedialog, ttk, scrolledtext
 from datetime import datetime
 import threading
 import os
 import shutil
+from pathlib import Path
 from database.db_manager import DatabaseManager
 from scanner.signature_scanner import SignatureScanner
 from scanner.behaviour_scanner import BehaviourScanner
 from scanner.full_scan import FullScanner
-from scanner.virustotal_scanner import VirusTotalScanner  # ← CHỈ IMPORT FILE NÀY
+from scanner.virustotal_scanner import VirusTotalScanner
 from config.settings import QUARANTINE_DIR
+from scanner.dynamic_analysis_api import DynamicAPI
 
 class TrojanScannerGUI:
     def __init__(self):
@@ -47,6 +49,111 @@ class TrojanScannerGUI:
             self.log_text.see('end')
             self.root.update_idletasks()
     
+    def dynamic_analysis(self):
+        """Phân tích động một sample hoặc folder"""
+        choice = messagebox.askyesno(
+            "Dynamic Analysis",
+            "Chọn loại scan:\n\n"
+            "YES = Scan 1 file\n"
+            "NO = Scan cả folder (tất cả .exe/.bat/.py)"
+        )
+        
+        if choice is None:
+            return
+        
+        if choice:  # Scan file
+            sample_path = filedialog.askopenfilename(
+                title="Select sample file for dynamic analysis",
+                filetypes=[
+                    ("Executable files", "*.exe"),
+                    ("Batch files", "*.bat"),
+                    ("Python files", "*.py"),
+                    ("All files", "*.*")
+                ]
+            )
+        else:  # Scan folder
+            sample_path = filedialog.askdirectory(
+                title="Select folder for dynamic analysis"
+            )
+        
+        if not sample_path:
+            return
+        
+        self.log_message(f"🔬 Starting dynamic analysis for: {sample_path}")
+        
+        threading.Thread(
+            target=self._run_dynamic_analysis,
+            args=(sample_path,),
+            daemon=True
+        ).start()
+    
+    def _run_dynamic_analysis(self, sample_path):
+        """Chạy dynamic analysis trong background"""
+        try:
+            api = DynamicAPI(self.db)
+            
+            if os.path.isdir(sample_path):
+                self.log_message("📁 Scanning folder - analyzing all .exe/.bat/.py files...")
+                result = api.analyze(sample_path, timeout=10, capture_network=False)
+                self._display_folder_results(result)
+            else:
+                self.log_message("⏱️ Starting sample execution (10s timeout)...")
+                result = api.analyze(sample_path, timeout=10, capture_network=False)
+                self._display_file_results(result)
+                
+        except Exception as e:
+            self.log_message(f"❌ Exception: {str(e)}")
+    
+    def _display_file_results(self, result):
+        """Hiển thị kết quả phân tích file đơn"""
+        if result['success']:
+            self.log_message(f"✅ Dynamic analysis completed")
+            self.log_message(f"📊 Exit code: {result['exit_code']}")
+            self.log_message(f"⏱️ Duration: {result['duration']:.2f}s")
+            self.log_message(f"🔴 Threat score: {result['threat_score']:.1f}/100")
+            
+            summary = result['summary']
+            
+            if summary.get('process_summary'):
+                proc = summary['process_summary'][0]
+                self.log_message(f"📦 Child processes: {len(proc.get('child_processes', []))}")
+                self.log_message(f"💾 Peak memory: {proc.get('max_memory_mb', 0):.1f} MB")
+            
+            if summary.get('fs_summary'):
+                fs = summary['fs_summary'][0]
+                self.log_message(f"📄 Files created: {fs.get('files_created', 0)}")
+                self.log_message(f"🔨 Files modified: {fs.get('files_modified', 0)}")
+        else:
+            self.log_message(f"❌ Error: {result.get('error')}")
+    
+    def _display_folder_results(self, result):
+        """Hiển thị kết quả phân tích folder"""
+        if result.get('success'):
+            self.log_message(f"✅ Folder analysis completed")
+            self.log_message(f"📊 Total files found: {result['total_files']}")
+            self.log_message(f"✔️ Successfully analyzed: {result['successful']}")
+            self.log_message(f"❌ Failed: {result['failed']}")
+            
+            self.log_message("\n" + "━" * 70)
+            self.log_message("📋 DETAILED RESULTS:")
+            self.log_message("━" * 70)
+            
+            for file_result in result.get('files_results', []):
+                file_name = os.path.basename(file_result['file'])
+                
+                if file_result['status'] == 'success':
+                    threat_score = file_result.get('threat_score', 0)
+                    threat_icon = "🔴" if threat_score > 50 else "🟡" if threat_score > 20 else "🟢"
+                    self.log_message(
+                        f"{threat_icon} {file_name:<40} Score: {threat_score:>6.1f}/100"
+                    )
+                else:
+                    self.log_message(
+                        f"❌ {file_name:<40} Error: {file_result.get('error', 'Unknown')}"
+                    )
+        else:
+            self.log_message(f"❌ Error: {result.get('error')}")
+            
     def create_widgets(self):
         # Header
         header = tk.Frame(self.root, bg='#2c3e50', height=70)
@@ -68,27 +175,31 @@ class TrojanScannerGUI:
         btn_frame1.pack(pady=5)
         
         tk.Button(btn_frame1, text="📁 Signature Scan", width=17, height=2,
-                 command=self.signature_scan, bg='#3498db', fg='white',
-                 font=('Arial', 9, 'bold')).grid(row=0, column=0, padx=4)
+                command=self.signature_scan, bg='#3498db', fg='white',
+                font=('Arial', 9, 'bold')).grid(row=0, column=0, padx=4)
         
         tk.Button(btn_frame1, text="🔎 Behaviour Scan", width=17, height=2,
-                 command=self.behaviour_scan, bg='#9b59b6', fg='white',
-                 font=('Arial', 9, 'bold')).grid(row=0, column=1, padx=4)
+                command=self.behaviour_scan, bg='#9b59b6', fg='white',
+                font=('Arial', 9, 'bold')).grid(row=0, column=1, padx=4)
         
         tk.Button(btn_frame1, text="🚀 Full Scan", width=17, height=2,
-                 command=self.full_scan, bg='#e74c3c', fg='white',
-                 font=('Arial', 9, 'bold')).grid(row=0, column=2, padx=4)
+                command=self.full_scan, bg='#e74c3c', fg='white',
+                font=('Arial', 9, 'bold')).grid(row=0, column=2, padx=4)
         
         btn_frame2 = tk.Frame(scan_frame)
         btn_frame2.pack(pady=5)
         
         tk.Button(btn_frame2, text="🌐 VirusTotal API", width=17, height=2,
-                 command=self.virustotal_scan, bg='#16a085', fg='white',
-                 font=('Arial', 9, 'bold')).grid(row=0, column=0, padx=4)
+                command=self.virustotal_scan, bg='#16a085', fg='white',
+                font=('Arial', 9, 'bold')).grid(row=0, column=0, padx=4)
+        
+        tk.Button(btn_frame2, text="🔬 Dynamic Analysis", width=17, height=2,
+                command=self.dynamic_analysis, bg='#16a085', fg='white',
+                font=('Arial', 9, 'bold')).grid(row=0, column=2, padx=4)
         
         tk.Button(btn_frame2, text="🗑️ Remove Threats", width=17, height=2,
-                 command=self.remove_threats, bg='#e67e22', fg='white',
-                 font=('Arial', 9, 'bold')).grid(row=0, column=1, padx=4)
+                command=self.remove_threats, bg='#e67e22', fg='white',
+                font=('Arial', 9, 'bold')).grid(row=0, column=1, padx=4)
         
         # Statistics frame
         stats_frame = tk.LabelFrame(main_frame, text="📊 Statistics", font=('Arial', 11, 'bold'))
@@ -107,7 +218,7 @@ class TrojanScannerGUI:
             self.stats_labels[key] = tk.Label(stats_inner, text=str(value), font=('Arial', 9), fg='#e74c3c')
             self.stats_labels[key].grid(row=0, column=idx*2+1, padx=8)
         
-        # === LOG FRAME ===
+        # LOG FRAME
         log_frame = tk.LabelFrame(main_frame, text="📝 Activity Log (Proof of VirusTotal Integration)", 
                                   font=('Arial', 10, 'bold'))
         log_frame.pack(fill='x', pady=(0, 8))
@@ -173,7 +284,7 @@ class TrojanScannerGUI:
                  command=self.root.quit).pack(side='right', padx=4)
     
     def virustotal_scan(self):
-        """Scan PURE VirusTotal API - KHÔNG CHẠY LOGIC NỘI BỘ"""
+        """Scan PURE VirusTotal API"""
         if not self.vt_api_key:
             messagebox.showwarning(
                 "API Key Required",
@@ -187,7 +298,7 @@ class TrojanScannerGUI:
             self.log_message(f"🌐 Starting PURE VirusTotal API scan: {path}")
             self.log_message(f"⚡ Mode: API ONLY (no internal checks)")
             threading.Thread(target=self._run_scan, args=('virustotal', path), daemon=True).start()
-    
+
     def signature_scan(self):
         path = filedialog.askdirectory(title="Select folder")
         if path:
@@ -222,22 +333,18 @@ class TrojanScannerGUI:
                 threats = scanner.threats_found
                 
             elif scan_type == 'virustotal':
-                # ===== SỬ DỤNG virustotal_scanner.py - PHƯƠNG THỨC scan_folder_api_only() =====
                 self.log_message("🌐 Initializing VirusTotal API scanner...")
                 self.log_message("⚡ No EICAR/Signature/Behaviour checks")
                 self.log_message("🔒 Using virustotal_scanner.py")
                 
                 vt_scanner = VirusTotalScanner(self.vt_api_key)
-                
-                # GỌI PHƯƠNG THỨC MỚI: scan_folder_api_only()
                 files_scanned, threats = vt_scanner.scan_folder_api_only(path)
                 threats_count = len(threats)
                 
-                # Log VirusTotal proof
                 if threats:
                     self.log_message(f"✅ VirusTotal API responded successfully")
                     self.log_message(f"📊 Detected by VirusTotal: {threats_count} threats")
-                    for threat in threats[:3]:  # Show first 3
+                    for threat in threats[:3]:
                         self.log_message(f"  🔴 {os.path.basename(threat['file_path'])}: {threat.get('vt_detection', 'N/A')}")
                 else:
                     self.log_message(f"✅ All files clean according to VirusTotal")
@@ -245,7 +352,7 @@ class TrojanScannerGUI:
             else:  # full
                 scanner = FullScanner(self.db)
                 files_scanned, threats_count, threats = scanner.scan(path)
-            
+
             # Lưu threats vào database
             for threat in threats:
                 self.db.add_detection(
@@ -269,7 +376,6 @@ class TrojanScannerGUI:
             if scan_type == 'virustotal':
                 msg += "\n\n✅ PURE VirusTotal API used"
                 msg += "\n⚡ No internal checks performed"
-                msg += f"\n📊 Check log for details"
             
             self.log_message(f"✅ Scan #{scan_id} completed")
             messagebox.showinfo("Scan Complete", msg)
@@ -281,32 +387,42 @@ class TrojanScannerGUI:
             messagebox.showerror("Error", f"Scan failed: {str(e)}")
     
     def remove_threats(self):
+        """Remove/quarantine threats"""
         if not self.current_scan_id:
             messagebox.showwarning("Warning", "Please run a scan first!")
             return
-        
-        detections = self.db.get_detections_by_scan(self.current_scan_id)
+
+        detections = self.db.get_active_detections_by_scan(self.current_scan_id)
         if not detections:
             messagebox.showinfo("Info", "No threats to remove!")
             return
+
+        if not messagebox.askyesno("Confirm", f"Move {len(detections)} threats to quarantine?"):
+            return
+
+        removed = 0
+        for detection in detections:
+            try:
+                if os.path.exists(detection.file_path):
+                    src = Path(detection.file_path)
+                    filename = os.path.basename(detection.file_path)
+                    dest = Path(QUARANTINE_DIR) / f"{detection.id}_{filename}"
+                    
+                    # Tránh trùng tên
+                    counter = 1
+                    while dest.exists():
+                        dest = Path(QUARANTINE_DIR) / f"{detection.id}_{counter}_{filename}"
+                        counter += 1
+                    
+                    src.rename(dest)
+                    self.db.mark_as_quarantined(detection.id, str(dest))
+                    removed += 1
+                    self.log_message(f"🗑️ Quarantined: {filename}")
+            except Exception as e:
+                self.log_message(f"⚠️ Failed: {filename} - {str(e)}")
         
-        if messagebox.askyesno("Confirm", f"Move {len(detections)} threats to quarantine?"):
-            removed = 0
-            for detection in detections:
-                try:
-                    if os.path.exists(detection.file_path):
-                        filename = os.path.basename(detection.file_path)
-                        dest = os.path.join(QUARANTINE_DIR, f"{detection.id}_{filename}")
-                        shutil.move(detection.file_path, dest)
-                        
-                        self.db.mark_as_removed(detection.id)
-                        removed += 1
-                        self.log_message(f"🗑️ Quarantined: {filename}")
-                except Exception as e:
-                    self.log_message(f"⚠️ Failed: {filename} - {str(e)}")
-            
-            messagebox.showinfo("Success", f"Moved {removed} files to quarantine!")
-            self.refresh_all()
+        messagebox.showinfo("Success", f"Moved {removed} files to quarantine!")
+        self.refresh_all()
     
     def show_scan_details(self, event=None):
         selection = self.tree.selection()
@@ -357,7 +473,7 @@ class TrojanScannerGUI:
         scrollbar.config(command=detail_tree.yview)
     
     def export_report(self):
-        """Export chi tiết để thuyết trình"""
+        """Export report to file"""
         filename = filedialog.asksaveasfilename(
             defaultextension=".txt",
             filetypes=[("Text files", "*.txt"), ("All files", "*.*")]
