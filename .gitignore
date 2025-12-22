@@ -1,7 +1,65 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+env/
 venv/
-dist/
-__pycache__
+ENV/
 build/
-__init__.py
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+
+# PyInstaller
+*.manifest
+*.spec
+build/
+dist/
+main.exe
+*.dmg
+
+# Database
 database/scanner.db
+database/*.db
+*.sqlite
+*.sqlite3
+
+# Config
 config/api_keys.py
+config/.env
+.env
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Logs
+logs/
+*.log
+
+# OS
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Project specific
+quarantine/
+dynamic_analysis/samples/
+temp/
+cache/

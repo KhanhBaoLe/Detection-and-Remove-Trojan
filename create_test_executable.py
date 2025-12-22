@@ -1,5 +1,5 @@
 import os
-import tempfile
+import subprocess
 
 def create_test_batch():
     """Tạo file .bat test đơn giản"""
@@ -39,6 +39,7 @@ exit /b 0
     print(f"✅ Created test file: {test_file}")
     return test_file
 
+
 def create_test_python():
     """Tạo file .py test đơn giản"""
     python_code = '''#!/usr/bin/env python3
@@ -75,28 +76,10 @@ time.sleep(2)
     print(f"✅ Created test file: {test_file}")
     return test_file
 
-if __name__ == "__main__":
-    print("Creating test files for dynamic analysis...")
-    print()
-    
-    create_test_batch()
-    create_test_python()
-    
-    print()
-    print("✅ Test files created successfully!")
-    print()
-    print("Now run the main program and use Dynamic Analysis to test:")
-    print("  1. Click '🔬 Dynamic Analysis'")
-    print("  2. Select 'YES' to scan a single file")
-    print("  3. Choose 'test_sample.bat' or 'test_sample.py'")
-    print()
-    print("You should see the analysis results in the log window!")
-    
+
 def create_test_exe():
     """Tạo file .exe test bằng PyInstaller"""
-    # Tạo script Python đơn giản
-    simple_code = '''
-import os
+    simple_code = '''import os
 import time
 
 print("Test EXE started")
@@ -109,7 +92,6 @@ print("Test complete")
 time.sleep(2)
 '''
     
-    # Lưu script
     project_root = os.path.dirname(os.path.abspath(__file__))
     script_file = os.path.join(project_root, "simple_test.py")
     
@@ -117,12 +99,12 @@ time.sleep(2)
         f.write(simple_code)
     
     # Build EXE
-    import subprocess
     try:
         result = subprocess.run(
             ["pyinstaller", "--onefile", "--windowed", script_file],
             cwd=project_root,
-            capture_output=True
+            capture_output=True,
+            timeout=60
         )
         
         exe_file = os.path.join(project_root, "dist", "simple_test.exe")
@@ -133,10 +115,35 @@ time.sleep(2)
         else:
             print("❌ PyInstaller failed - using BAT instead")
             return None
-    except:
-        print("⚠️ PyInstaller not available - use BAT test instead")
+    except Exception as e:
+        print(f"⚠️ PyInstaller error: {e}")
         return None
 
-if __name__ == "__main__":
-    print("Creating test .exe file...")
+
+def main():
+    print("="*70)
+    print("🔧 Creating test files for dynamic analysis...")
+    print("="*70)
+    print()
+    
+    create_test_batch()
+    create_test_python()
     create_test_exe()
+    
+    print()
+    print("="*70)
+    print("✅ Test files created successfully!")
+    print("="*70)
+    print()
+    print("Now run the main program and use Dynamic Analysis:")
+    print("  1. python main.py")
+    print("  2. Click '🔬 Dynamic Analysis'")
+    print("  3. Select 'YES' to scan a single file")
+    print("  4. Choose 'test_sample.bat' or 'test_sample.py'")
+    print()
+    print("You should see the analysis results in the log window!")
+    print()
+
+
+if __name__ == "__main__":
+    main()

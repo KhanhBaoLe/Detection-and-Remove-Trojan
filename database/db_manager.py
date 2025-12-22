@@ -11,7 +11,8 @@ import json
 
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 from config.settings import DATABASE_PATH
-
+from utils.logger import setup_logger
+logger = setup_logger("DB")
 class DatabaseManager:
     def __init__(self):
         self.engine = create_engine(f'sqlite:///{DATABASE_PATH}')
@@ -51,10 +52,17 @@ class DatabaseManager:
         self.session.commit()
     
     def add_scan(self, scan_type, scan_path):
-        scan = ScanHistory(scan_type=scan_type, scan_path=scan_path)
-        self.session.add(scan)
-        self.session.commit()
-        return scan.id
+        try:
+            scan = ScanHistory(scan_type=scan_type, scan_path=scan_path)
+            self.session.add(scan)
+            self.session.commit()
+            logger.info(f"New scan added | type={scan_type} path={scan_path}")
+            return scan.id
+        except Exception as e:
+            logger.exception("Failed to add scan")
+            self.session.rollback()
+            raise
+
     
     def update_scan(self, scan_id, **kwargs):
         scan = self.session.query(ScanHistory).filter_by(id=scan_id).first()
@@ -96,13 +104,35 @@ class DatabaseManager:
     def check_signature(self, file_hash):
         return self.session.query(SignatureDB).filter_by(signature_hash=file_hash).first()
     
-    def is_whitelisted(self, file_hash):
-        return self.session.query(Whitelist).filter_by(file_hash=file_hash).first() is not None
-    
-    def add_to_whitelist(self, file_hash, file_path):
-        whitelist = Whitelist(file_hash=file_hash, file_path=file_path)
-        self.session.add(whitelist)
+    def is_whitelisted(self, file_hash=None, file_path=None):
+        query = self.session.query(Whitelist)
+
+        if file_hash:
+            query = query.filter_by(file_hash=file_hash)
+
+        if file_path:
+            query = query.filter_by(file_path=file_path)
+
+        return query.first() is not None
+        
+    def add_whitelist(self, value):
+        exists = self.session.query(Whitelist)\
+            .filter(
+                (Whitelist.file_hash == value) |
+                (Whitelist.file_path == value)
+            ).first()
+
+        if exists:
+            return False
+
+        wl = Whitelist(
+            file_hash=value if len(value) == 32 else None,
+            file_path=value if len(value) != 32 else None
+        )
+        self.session.add(wl)
         self.session.commit()
+        return True
+
     
     def get_statistics(self):
         total_scans = self.session.query(ScanHistory).count()
@@ -113,6 +143,7 @@ class DatabaseManager:
             'total_threats': total_threats,
             'critical_threats': critical_threats
         }
+
     
     # ===== DYNAMIC ANALYSIS METHODS =====
     
@@ -192,5 +223,55 @@ class DatabaseManager:
                 setattr(run, key, value)
             self.session.commit()
     
+
+    def mark_as_quarantined(self, detection_id, new_path):
+        detection = self.session.query(TrojanDetection).filter_by(id=detection_id).first()
+        if detection:
+            detection.is_quarantined = True
+            detection.file_path = new_path
+            self.session.commit()
+
+    def remove_detection(self, detection_id):
+        detection = self.session.query(TrojanDetection)\
+            .filter_by(id=detection_id)\
+            .first()
+
+        if not detection:
+            return False
+
+        self.session.delete(detection)
+        self.session.commit()
+        return True
+
+    def list_detections(
+        self,
+        scan_id=None,
+        quarantined=None,
+        threat_level=None,
+        detection_method=None
+    ):
+        query = self.session.query(TrojanDetection)
+
+        if scan_id is not None:
+            query = query.filter_by(scan_id=scan_id)
+
+        if quarantined is not None:
+            query = query.filter_by(is_quarantined=quarantined)
+
+        if threat_level:
+            query = query.filter_by(threat_level=threat_level)
+
+        if detection_method:
+            query = query.filter_by(detection_method=detection_method)
+
+        return query.all()
+
+
+    def get_active_detections_by_scan(self, scan_id):
+        return self.session.query(TrojanDetection)\
+            .filter_by(scan_id=scan_id, is_quarantined=False)\
+            .all()
+
+
     def close(self):
         self.session.close()

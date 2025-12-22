@@ -1,14 +1,15 @@
 import tkinter as tk
-from tkinter import messagebox, filedialog, ttk, simpledialog, scrolledtext
+from tkinter import messagebox, filedialog, ttk, scrolledtext
 from datetime import datetime
 import threading
 import os
 import shutil
+from pathlib import Path
 from database.db_manager import DatabaseManager
 from scanner.signature_scanner import SignatureScanner
 from scanner.behaviour_scanner import BehaviourScanner
 from scanner.full_scan import FullScanner
-from scanner.virustotal_scanner import VirusTotalScanner  # ← CHỈ IMPORT FILE NÀY
+from scanner.virustotal_scanner import VirusTotalScanner
 from config.settings import QUARANTINE_DIR
 from scanner.dynamic_analysis_api import DynamicAPI
 
@@ -50,7 +51,6 @@ class TrojanScannerGUI:
     
     def dynamic_analysis(self):
         """Phân tích động một sample hoặc folder"""
-        # Hỏi user chọn file hay folder
         choice = messagebox.askyesno(
             "Dynamic Analysis",
             "Chọn loại scan:\n\n"
@@ -81,7 +81,6 @@ class TrojanScannerGUI:
         
         self.log_message(f"🔬 Starting dynamic analysis for: {sample_path}")
         
-        # Chạy trong thread nền
         threading.Thread(
             target=self._run_dynamic_analysis,
             args=(sample_path,),
@@ -91,11 +90,8 @@ class TrojanScannerGUI:
     def _run_dynamic_analysis(self, sample_path):
         """Chạy dynamic analysis trong background"""
         try:
-            from scanner.dynamic_analysis_api import DynamicAPI
-            
             api = DynamicAPI(self.db)
             
-            # Kiểm tra file hay folder
             if os.path.isdir(sample_path):
                 self.log_message("📁 Scanning folder - analyzing all .exe/.bat/.py files...")
                 result = api.analyze(sample_path, timeout=10, capture_network=False)
@@ -118,14 +114,12 @@ class TrojanScannerGUI:
             
             summary = result['summary']
             
-            # Log process info
-            if summary['process_summary']:
+            if summary.get('process_summary'):
                 proc = summary['process_summary'][0]
                 self.log_message(f"📦 Child processes: {len(proc.get('child_processes', []))}")
                 self.log_message(f"💾 Peak memory: {proc.get('max_memory_mb', 0):.1f} MB")
             
-            # Log FS info
-            if summary['fs_summary']:
+            if summary.get('fs_summary'):
                 fs = summary['fs_summary'][0]
                 self.log_message(f"📄 Files created: {fs.get('files_created', 0)}")
                 self.log_message(f"🔨 Files modified: {fs.get('files_modified', 0)}")
@@ -134,7 +128,7 @@ class TrojanScannerGUI:
     
     def _display_folder_results(self, result):
         """Hiển thị kết quả phân tích folder"""
-        if result['success']:
+        if result.get('success'):
             self.log_message(f"✅ Folder analysis completed")
             self.log_message(f"📊 Total files found: {result['total_files']}")
             self.log_message(f"✔️ Successfully analyzed: {result['successful']}")
@@ -144,7 +138,7 @@ class TrojanScannerGUI:
             self.log_message("📋 DETAILED RESULTS:")
             self.log_message("━" * 70)
             
-            for file_result in result['files_results']:
+            for file_result in result.get('files_results', []):
                 file_name = os.path.basename(file_result['file'])
                 
                 if file_result['status'] == 'success':
@@ -224,7 +218,7 @@ class TrojanScannerGUI:
             self.stats_labels[key] = tk.Label(stats_inner, text=str(value), font=('Arial', 9), fg='#e74c3c')
             self.stats_labels[key].grid(row=0, column=idx*2+1, padx=8)
         
-        # === LOG FRAME ===
+        # LOG FRAME
         log_frame = tk.LabelFrame(main_frame, text="📝 Activity Log (Proof of VirusTotal Integration)", 
                                   font=('Arial', 10, 'bold'))
         log_frame.pack(fill='x', pady=(0, 8))
@@ -290,7 +284,7 @@ class TrojanScannerGUI:
                  command=self.root.quit).pack(side='right', padx=4)
     
     def virustotal_scan(self):
-        """Scan PURE VirusTotal API - KHÔNG CHẠY LOGIC NỘI BỘ"""
+        """Scan PURE VirusTotal API"""
         if not self.vt_api_key:
             messagebox.showwarning(
                 "API Key Required",
@@ -304,7 +298,7 @@ class TrojanScannerGUI:
             self.log_message(f"🌐 Starting PURE VirusTotal API scan: {path}")
             self.log_message(f"⚡ Mode: API ONLY (no internal checks)")
             threading.Thread(target=self._run_scan, args=('virustotal', path), daemon=True).start()
-    
+
     def signature_scan(self):
         path = filedialog.askdirectory(title="Select folder")
         if path:
@@ -339,22 +333,18 @@ class TrojanScannerGUI:
                 threats = scanner.threats_found
                 
             elif scan_type == 'virustotal':
-                # ===== SỬ DỤNG virustotal_scanner.py - PHƯƠNG THỨC scan_folder_api_only() =====
                 self.log_message("🌐 Initializing VirusTotal API scanner...")
                 self.log_message("⚡ No EICAR/Signature/Behaviour checks")
                 self.log_message("🔒 Using virustotal_scanner.py")
                 
                 vt_scanner = VirusTotalScanner(self.vt_api_key)
-                
-                # GỌI PHƯƠNG THỨC MỚI: scan_folder_api_only()
                 files_scanned, threats = vt_scanner.scan_folder_api_only(path)
                 threats_count = len(threats)
                 
-                # Log VirusTotal proof
                 if threats:
                     self.log_message(f"✅ VirusTotal API responded successfully")
                     self.log_message(f"📊 Detected by VirusTotal: {threats_count} threats")
-                    for threat in threats[:3]:  # Show first 3
+                    for threat in threats[:3]:
                         self.log_message(f"  🔴 {os.path.basename(threat['file_path'])}: {threat.get('vt_detection', 'N/A')}")
                 else:
                     self.log_message(f"✅ All files clean according to VirusTotal")
@@ -362,7 +352,7 @@ class TrojanScannerGUI:
             else:  # full
                 scanner = FullScanner(self.db)
                 files_scanned, threats_count, threats = scanner.scan(path)
-            
+
             # Lưu threats vào database
             for threat in threats:
                 self.db.add_detection(
@@ -386,7 +376,6 @@ class TrojanScannerGUI:
             if scan_type == 'virustotal':
                 msg += "\n\n✅ PURE VirusTotal API used"
                 msg += "\n⚡ No internal checks performed"
-                msg += f"\n📊 Check log for details"
             
             self.log_message(f"✅ Scan #{scan_id} completed")
             messagebox.showinfo("Scan Complete", msg)
@@ -398,32 +387,42 @@ class TrojanScannerGUI:
             messagebox.showerror("Error", f"Scan failed: {str(e)}")
     
     def remove_threats(self):
+        """Remove/quarantine threats"""
         if not self.current_scan_id:
             messagebox.showwarning("Warning", "Please run a scan first!")
             return
-        
-        detections = self.db.get_detections_by_scan(self.current_scan_id)
+
+        detections = self.db.get_active_detections_by_scan(self.current_scan_id)
         if not detections:
             messagebox.showinfo("Info", "No threats to remove!")
             return
+
+        if not messagebox.askyesno("Confirm", f"Move {len(detections)} threats to quarantine?"):
+            return
+
+        removed = 0
+        for detection in detections:
+            try:
+                if os.path.exists(detection.file_path):
+                    src = Path(detection.file_path)
+                    filename = os.path.basename(detection.file_path)
+                    dest = Path(QUARANTINE_DIR) / f"{detection.id}_{filename}"
+                    
+                    # Tránh trùng tên
+                    counter = 1
+                    while dest.exists():
+                        dest = Path(QUARANTINE_DIR) / f"{detection.id}_{counter}_{filename}"
+                        counter += 1
+                    
+                    src.rename(dest)
+                    self.db.mark_as_quarantined(detection.id, str(dest))
+                    removed += 1
+                    self.log_message(f"🗑️ Quarantined: {filename}")
+            except Exception as e:
+                self.log_message(f"⚠️ Failed: {filename} - {str(e)}")
         
-        if messagebox.askyesno("Confirm", f"Move {len(detections)} threats to quarantine?"):
-            removed = 0
-            for detection in detections:
-                try:
-                    if os.path.exists(detection.file_path):
-                        filename = os.path.basename(detection.file_path)
-                        dest = os.path.join(QUARANTINE_DIR, f"{detection.id}_{filename}")
-                        shutil.move(detection.file_path, dest)
-                        
-                        self.db.mark_as_removed(detection.id)
-                        removed += 1
-                        self.log_message(f"🗑️ Quarantined: {filename}")
-                except Exception as e:
-                    self.log_message(f"⚠️ Failed: {filename} - {str(e)}")
-            
-            messagebox.showinfo("Success", f"Moved {removed} files to quarantine!")
-            self.refresh_all()
+        messagebox.showinfo("Success", f"Moved {removed} files to quarantine!")
+        self.refresh_all()
     
     def show_scan_details(self, event=None):
         selection = self.tree.selection()
@@ -474,7 +473,7 @@ class TrojanScannerGUI:
         scrollbar.config(command=detail_tree.yview)
     
     def export_report(self):
-        """Export chi tiết để thuyết trình"""
+        """Export report to file"""
         filename = filedialog.asksaveasfilename(
             defaultextension=".txt",
             filetypes=[("Text files", "*.txt"), ("All files", "*.*")]
