@@ -1,7 +1,14 @@
 import os
 from scanner.base_scanner import BaseScanner
 from utils.file_hash import calculate_file_hash
-from config.settings import SIGNATURE_HASH_ALGO, SCAN_SKIP_DIRS
+from utils.pe_utils import analyze_pe_file, is_pe_file, is_trusted_signer
+from config.settings import (
+    SIGNATURE_HASH_ALGO,
+    SCAN_SKIP_DIRS,
+    TRUSTED_SIGNERS,
+    PE_HEURISTIC_MIN_SCORE,
+    PE_TRUSTED_SIGNER_MAX_SCORE,
+)
 
 
 class SignatureScanner(BaseScanner):
@@ -84,6 +91,10 @@ class SignatureScanner(BaseScanner):
             print(f"\n[{files_scanned}/{len(files_to_scan)}] 📂 Scanning: {file_name}")
 
             try:
+                detected = False
+                is_pe = is_pe_file(file_path)
+                pe_heuristics = None
+
                 # 1️⃣ Check EICAR test file
                 if self.scan_eicar(file_path):
                     print("    🔴 EICAR test file detected!")
@@ -108,6 +119,23 @@ class SignatureScanner(BaseScanner):
                 if self.db_manager.is_whitelisted(file_hash):
                     print("    ✅ File in whitelist, skipping...")
                     continue
+
+                # 3b️⃣ Trusted signer whitelist (PE only)
+                if is_pe:
+                    pe_heuristics = analyze_pe_file(file_path)
+                    trusted, matched_signer = is_trusted_signer(file_path, TRUSTED_SIGNERS)
+                    pe_score = pe_heuristics.get("score", 0.0) if pe_heuristics else 0.0
+                    if trusted and pe_score < PE_TRUSTED_SIGNER_MAX_SCORE:
+                        print(
+                            f"    ✅ Trusted signer '{matched_signer}' "
+                            f"(heuristics score {pe_score:.1f}) - skipping..."
+                        )
+                        continue
+                    elif trusted:
+                        print(
+                            f"    ⚠️ Trusted signer '{matched_signer}' but "
+                            f"heuristics score {pe_score:.1f}, continuing scan"
+                        )
 
                 # 4️⃣ Check local signature database
                 signature = self.db_manager.check_signature(file_hash)
@@ -149,6 +177,7 @@ class SignatureScanner(BaseScanner):
                                 'detection_method': 'virustotal',
                                 'vt_detection': vt_result['detection_rate']
                             })
+                            detected = True
                         else:
                             print("    ✅ VIRUSTOTAL: File is CLEAN")
 
@@ -161,6 +190,39 @@ class SignatureScanner(BaseScanner):
                 else:
                     print("    ℹ️ VirusTotal disabled - local scan only")
                     print("    ✅ No threat detected in local database")
+
+                if detected:
+                    continue
+
+                # 6️⃣ PE static heuristics (only if still not detected)
+                if is_pe:
+                    pe_heuristics = pe_heuristics or analyze_pe_file(file_path)
+                    if pe_heuristics.get("analysis_error"):
+                        print(f"    ⚠️ PE heuristic error: {pe_heuristics['analysis_error']}")
+                    else:
+                        score = pe_heuristics.get("score", 0.0)
+                        reasons = pe_heuristics.get("reasons", [])
+                        if score >= PE_HEURISTIC_MIN_SCORE:
+                            threat_level = 'high'
+                            if score >= 9.0:
+                                threat_level = 'critical'
+                            elif score < 7.5:
+                                threat_level = 'medium'
+
+                            trojan_name = "Suspicious.PE.Heuristic"
+                            if reasons:
+                                trojan_name += f" ({'; '.join(reasons[:2])})"
+
+                            self.record_detection(scan_id, {
+                                'file_path': file_path,
+                                'file_hash': file_hash,
+                                'trojan_name': trojan_name,
+                                'threat_level': threat_level,
+                                'detection_method': 'static_heuristic'
+                            })
+                            continue
+                        else:
+                            print(f"    ✅ PE heuristics clean (score {score:.1f})")
 
             except Exception as e:
                 print(f"    ⚠️ Error: {str(e)}")
