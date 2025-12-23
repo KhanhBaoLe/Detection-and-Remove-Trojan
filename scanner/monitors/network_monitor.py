@@ -73,28 +73,50 @@ class NetworkMonitor:
         return self.records
 
     def get_summary(self):
+        """
+        Safe, trimmed view of captured network activity.
+        """
+        base_summary = {
+            "total_connections": 0,
+            "remote_hosts": [],
+            "connections": []
+        }
+
         if not self.enabled:
             return {
                 "status": "disabled",
-                "total_connections": 0,
-                "remote_hosts": []
+                **base_summary
             }
 
         if not self.records:
             return {
                 "status": "no_network_activity",
-                "total_connections": 0,
-                "remote_hosts": []
+                **base_summary
             }
 
         hosts = set()
+        connections = []
+
         for r in self.records:
+            if not isinstance(r, dict):
+                continue
+
             remote = r.get("remote_addr")
+            local = r.get("local_addr")
+            status = r.get("status")
+
             if remote:
                 hosts.add(remote.split(":")[0])
 
+            connections.append({
+                "remote": remote,
+                "local": local,
+                "status": status
+            })
+
         return {
             "status": "ok",
-            "total_connections": len(self.records),
-            "remote_hosts": list(hosts)
+            "total_connections": len(connections),
+            "remote_hosts": list(hosts),
+            "connections": connections[:50]
         }

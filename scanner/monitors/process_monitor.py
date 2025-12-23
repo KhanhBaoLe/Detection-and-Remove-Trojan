@@ -105,7 +105,9 @@ class ProcessMonitor:
                 "total_records": 0,
                 "max_memory_mb": 0,
                 "max_cpu_percent": 0,
-                "child_processes": []
+                "child_processes": [],
+                "open_files": [],
+                "cpu_memory_samples": []
             }
 
         max_memory = max(
@@ -117,6 +119,12 @@ class ProcessMonitor:
             (r.get('cpu_percent', 0) for r in self.records),
             default=0
         )
+
+        opened_files = list(set(
+            f
+            for r in self.records
+            for f in r.get('open_files', [])
+        ))
 
         child_processes = list(set(
             c.get('name')
@@ -130,5 +138,8 @@ class ProcessMonitor:
             "total_records": len(self.records),
             "max_memory_mb": max_memory / (1024 * 1024),
             "max_cpu_percent": max_cpu,
-            "child_processes": child_processes
+            "child_processes": child_processes,
+            "open_files": opened_files[:25],
+            # Lightly sampled CPU/memory timeline for behaviour logging
+            "cpu_memory_samples": self.cpu_memory[:100]
         }

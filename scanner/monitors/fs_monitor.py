@@ -117,7 +117,8 @@ class FileSystemMonitor:
                 "files_created": 0,
                 "files_modified": 0,
                 "created_files": [],
-                "modified_files": []
+                "modified_files": [],
+                "events": []
             }
 
         created = []
@@ -138,5 +139,7 @@ class FileSystemMonitor:
             "files_created": len(created),
             "files_modified": len(modified),
             "created_files": created[:20],
-            "modified_files": modified[:20]
+            "modified_files": modified[:20],
+            # Include a small slice of raw events for richer behaviour logs
+            "events": self.file_events[:50]
         }

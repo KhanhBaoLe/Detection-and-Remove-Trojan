@@ -199,6 +199,17 @@ class DatabaseManager:
         fs_summary = safe_first(behavior_data.get("fs_summary"))
         network_summary = safe_first(behavior_data.get("network_summary"))
 
+        network_indicators = (
+            network_summary.get("connections")
+            or network_summary.get("remote_hosts", [])
+        )
+
+        note_payload = {
+            "status": behavior_data.get("status"),
+            "reason": behavior_data.get("reason"),
+            "sandbox_dir": behavior_data.get("sandbox_dir")
+        }
+
         sample = BehaviorSample(
             dynamic_run_id=dynamic_run_id,
 
@@ -209,9 +220,8 @@ class DatabaseManager:
             files_created=json.dumps(fs_summary.get("created_files", [])),
             files_modified=json.dumps(fs_summary.get("modified_files", [])),
 
-            network_indicators=json.dumps(
-                network_summary.get("connections", [])
-            ),
+            network_indicators=json.dumps(network_indicators),
+            notes=json.dumps(note_payload),
 
             threat_score=self._calculate_threat_score(
                 process_summary,
@@ -236,7 +246,8 @@ class DatabaseManager:
         if fs.get("modified_files"):
             score += 15
 
-        if network.get("connections"):
+        connections = network.get("connections") or network.get("remote_hosts")
+        if connections:
             score += 25
 
         return min(score, 100)

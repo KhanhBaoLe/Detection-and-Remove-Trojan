@@ -21,7 +21,9 @@ class ExecutionResult:
         network_monitors=None,
         duration=0,
         status="completed",
-        reason=None
+        reason=None,
+        sandbox_dir=None,
+        copied_sample=None
     ):
         self.sample_path = sample_path
         self.exit_code = exit_code
@@ -29,6 +31,8 @@ class ExecutionResult:
         self.status = status          # completed | skipped | failed
         self.reason = reason          # not_executable | timeout | error
         self.timestamp = datetime.now().isoformat()
+        self.sandbox_dir = sandbox_dir
+        self.copied_sample = copied_sample
 
         self.process_monitors = process_monitors or []
         self.fs_monitors = fs_monitors or []
@@ -42,9 +46,24 @@ class ExecutionResult:
             "reason": self.reason,
             "duration": self.duration,
             "timestamp": self.timestamp,
+            "sandbox_dir": self.sandbox_dir,
+            "copied_sample": self.copied_sample,
             "process_summary": [m.get_summary() for m in self.process_monitors],
             "fs_summary": [m.get_summary() for m in self.fs_monitors],
             "network_summary": [m.get_summary() for m in self.network_monitors],
+            # Trimmed raw events for richer behaviour logs
+            "process_events": [
+                getattr(m, "get_records", lambda: [])()[:50]
+                for m in self.process_monitors
+            ],
+            "fs_events": [
+                getattr(m, "get_records", lambda: [])()[:50]
+                for m in self.fs_monitors
+            ],
+            "network_events": [
+                getattr(m, "get_records", lambda: [])()[:50]
+                for m in self.network_monitors
+            ],
         }
 
 
@@ -54,6 +73,7 @@ class DynamicRunner:
         self.enable_network = enable_network
         self.process = None
         self.monitors = []
+        self.sandbox_dir = None
 
     def run_sample(self, sample_path, env_opts=None):
         """
@@ -65,6 +85,14 @@ class DynamicRunner:
 
         start_time = time.time()
         sandbox_dir = tempfile.mkdtemp(prefix="dyn_", dir=DYNAMIC_SANDBOX_DIR)
+        self.sandbox_dir = sandbox_dir
+
+        sandbox_temp = os.path.join(sandbox_dir, "tmp")
+        sandbox_appdata = os.path.join(sandbox_dir, "appdata")
+        sandbox_home = os.path.join(sandbox_dir, "home")
+        for d in [sandbox_temp, sandbox_appdata, sandbox_home]:
+            os.makedirs(d, exist_ok=True)
+
         copied_sample = os.path.join(sandbox_dir, os.path.basename(sample_path))
         shutil.copy2(sample_path, copied_sample)
 
@@ -73,6 +101,22 @@ class DynamicRunner:
             env = os.environ.copy()
             if env_opts:
                 env.update(env_opts)
+
+            sandbox_env = {
+                "TEMP": sandbox_temp,
+                "TMP": sandbox_temp,
+                "APPDATA": sandbox_appdata,
+                "LOCALAPPDATA": sandbox_appdata,
+                "USERPROFILE": sandbox_home,
+                "HOME": sandbox_home,
+            }
+            env.update(sandbox_env)
+
+            if not self.enable_network:
+                # Best-effort network hardening for sandboxed runs
+                env["NO_PROXY"] = "*"
+                for proxy_key in ["http_proxy", "https_proxy", "HTTP_PROXY", "HTTPS_PROXY"]:
+                    env[proxy_key] = ""
 
             # ===== EXECUTE SAMPLE =====
             self.process = subprocess.Popen(
@@ -86,7 +130,11 @@ class DynamicRunner:
 
             # ===== INIT MONITORS =====
             process_monitor = ProcessMonitor(self.process.pid, timeout=self.timeout)
-            fs_monitor = FileSystemMonitor(sample_path, timeout=self.timeout)
+            fs_monitor = FileSystemMonitor(
+                sample_path,
+                monitor_dirs=[sandbox_dir, sandbox_temp, sandbox_appdata],
+                timeout=self.timeout
+            )
             network_monitor = NetworkMonitor(
                 self.process.pid,
                 timeout=self.timeout,
@@ -99,11 +147,15 @@ class DynamicRunner:
                 monitor.start()
 
             # ===== WAIT PROCESS =====
+            status = "completed"
+            reason = None
             try:
                 exit_code = self.process.wait(timeout=self.timeout)
             except subprocess.TimeoutExpired:
                 self.process.kill()
                 exit_code = -1
+                status = "failed"
+                reason = "timeout"
 
             # ===== STOP MONITORS =====
             for monitor in self.monitors:
@@ -118,7 +170,10 @@ class DynamicRunner:
                 fs_monitors=[fs_monitor],
                 network_monitors=[network_monitor],
                 duration=duration,
-                status="completed"
+                status=status,
+                reason=reason,
+                sandbox_dir=sandbox_dir,
+                copied_sample=copied_sample
             )
 
         # ==========================================================
