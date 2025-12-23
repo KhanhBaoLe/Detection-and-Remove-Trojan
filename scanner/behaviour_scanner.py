@@ -2,6 +2,7 @@ import os
 from scanner.base_scanner import BaseScanner
 from database.models import BehaviourPattern
 from utils.file_hash import calculate_file_hash
+from config.settings import SCAN_SKIP_DIRS, SIGNATURE_HASH_ALGO
 
 
 class BehaviourScanner(BaseScanner):
@@ -11,12 +12,9 @@ class BehaviourScanner(BaseScanner):
         self.threats_found = []
 
         # ✅ Skip unnecessary folders (same as SignatureScanner)
-        self.skip_dirs = {
-            '.git', '__pycache__', 'build', 'dist',
-            '.venv', 'venv', 'node_modules'
-        }
+        self.skip_dirs = set(SCAN_SKIP_DIRS)
 
-    def scan(self, path):
+    def scan(self, path, scan_id=None):
         """Scan files using behaviour-based detection"""
         self.threats_found = []
         files_scanned = 0
@@ -65,12 +63,17 @@ class BehaviourScanner(BaseScanner):
             print(f"[{files_scanned}/{len(files_to_scan)}] 📂 Scanning: {file_name}")
 
             try:
+                file_hash = calculate_file_hash(file_path, algorithm=SIGNATURE_HASH_ALGO)
+                if file_hash and self.db_manager.is_whitelisted(file_hash):
+                    print("    ✅ File in whitelist, skipping behaviour scan...")
+                    continue
+
                 # ===== CHECK 1: EICAR TEST FILE =====
                 if self.scan_eicar(file_path):
                     print("    🔴 EICAR pattern detected!")
-                    self.threats_found.append({
+                    self.record_detection(scan_id, {
                         'file_path': file_path,
-                        'file_hash': calculate_file_hash(file_path),
+                        'file_hash': file_hash or calculate_file_hash(file_path),
                         'trojan_name': "EICAR-Test-File (Behaviour Detection)",
                         'threat_level': 'high',
                         'detection_method': 'behaviour'
@@ -100,7 +103,11 @@ class BehaviourScanner(BaseScanner):
                     b'cmd.exe', b'powershell', b'download',
                     b'http://', b'https://',
                     b'CreateProcess', b'VirtualAlloc',
-                    b'WriteProcessMemory', b'CreateRemoteThread'
+                    b'WriteProcessMemory', b'CreateRemoteThread',
+                    b'Base64Decode', b'PowerShell -enc', b'WScript.Shell',
+                    b'Registry::SetValue', b'WinExec', b'GetAsyncKeyState',
+                    b'Add-MpPreference', b'Invoke-WebRequest', b'AutoIt3.exe',
+                    b'Schtasks', b'RunDll32'
                 ]
 
                 for keyword in suspicious_keywords:
@@ -109,6 +116,13 @@ class BehaviourScanner(BaseScanner):
                         keyword_str = keyword.decode('utf-8', errors='ignore')
                         detected_patterns.append(f"Keyword: {keyword_str}")
                         print(f"    ⚠️ Suspicious keyword: {keyword_str} (+1.5)")
+
+                # ===== CHECK 4: PACKER / OBFUSCATION HINTS =====
+                packer_markers = [b'UPX0', b'UPX1', b'MPRESS', b'ASPACK']
+                if any(marker in content for marker in packer_markers):
+                    suspicious_score += 2.0
+                    detected_patterns.append("PackerMarker")
+                    print("    ⚠️ Packer marker detected (+2.0)")
 
                 # ===== VERDICT =====
                 if suspicious_score >= 7.0:

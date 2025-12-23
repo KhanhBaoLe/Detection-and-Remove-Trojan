@@ -1,7 +1,10 @@
 import subprocess
 import os
 import time
+import shutil
+import tempfile
 from datetime import datetime
+from config.settings import DYNAMIC_SANDBOX_DIR
 
 from scanner.monitors.process_monitor import ProcessMonitor
 from scanner.monitors.fs_monitor import FileSystemMonitor
@@ -61,6 +64,9 @@ class DynamicRunner:
             raise FileNotFoundError(f"Sample not found: {sample_path}")
 
         start_time = time.time()
+        sandbox_dir = tempfile.mkdtemp(prefix="dyn_", dir=DYNAMIC_SANDBOX_DIR)
+        copied_sample = os.path.join(sandbox_dir, os.path.basename(sample_path))
+        shutil.copy2(sample_path, copied_sample)
 
         try:
             # ===== PREPARE ENV =====
@@ -70,10 +76,11 @@ class DynamicRunner:
 
             # ===== EXECUTE SAMPLE =====
             self.process = subprocess.Popen(
-                sample_path,
+                copied_sample,
                 env=env,
                 stdout=subprocess.DEVNULL,
                 stderr=subprocess.DEVNULL,
+                cwd=sandbox_dir,
                 creationflags=0x200  # CREATE_NEW_PROCESS_GROUP (Windows)
             )
 
@@ -122,7 +129,7 @@ class DynamicRunner:
                 duration = time.time() - start_time
 
                 return ExecutionResult(
-                    sample_path=sample_path,
+                    sample_path=copied_sample,
                     exit_code=-216,
                     duration=duration,
                     status="skipped",
@@ -136,6 +143,11 @@ class DynamicRunner:
         except Exception as e:
             self._cleanup()
             raise Exception(f"Dynamic analysis failed: {str(e)}")
+        finally:
+            try:
+                shutil.rmtree(sandbox_dir, ignore_errors=True)
+            except Exception:
+                pass
 
     def _cleanup(self):
         """Terminate process and stop monitors safely"""

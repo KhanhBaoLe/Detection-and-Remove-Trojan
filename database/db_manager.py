@@ -10,7 +10,7 @@ import os
 import json
 
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
-from config.settings import DATABASE_PATH
+from config.settings import DATABASE_PATH, SIGNATURE_DIR, SIGNATURE_HASH_ALGO
 
 
 class DatabaseManager:
@@ -40,10 +40,125 @@ class DatabaseManager:
                     pattern_type="registry",
                     pattern_value="HKLM\\Software\\Microsoft\\Windows\\CurrentVersion\\Run",
                     severity_score=7.5
+                ),
+                BehaviourPattern(
+                    pattern_name="Process Injection",
+                    pattern_type="api",
+                    pattern_value="WriteProcessMemory",
+                    severity_score=6.0
+                ),
+                BehaviourPattern(
+                    pattern_name="Network Beacon",
+                    pattern_type="network",
+                    pattern_value="http://",
+                    severity_score=4.0
+                ),
+                BehaviourPattern(
+                    pattern_name="Powershell Encoded",
+                    pattern_type="powershell",
+                    pattern_value="PowerShell -enc",
+                    severity_score=5.0
                 )
             ])
 
         self.session.commit()
+
+        # Load external signature bundles (if any)
+        self.sync_signature_dir()
+        # Load external behaviour pattern bundles (if any)
+        self.sync_behaviour_patterns()
+
+    def sync_signature_dir(self):
+        """
+        Import signatures from files in SIGNATURE_DIR.
+        Format per line: hash,trojan_name,threat_level
+        """
+        if not os.path.isdir(SIGNATURE_DIR):
+            return
+
+        added = 0
+        for fname in os.listdir(SIGNATURE_DIR):
+            if not fname.lower().endswith((".txt", ".sig", ".csv")):
+                continue
+            path = os.path.join(SIGNATURE_DIR, fname)
+            try:
+                with open(path, "r", encoding="utf-8", errors="ignore") as f:
+                    for line in f:
+                        line = line.strip()
+                        if not line or line.startswith("#"):
+                            continue
+                        parts = [p.strip() for p in line.split(",")]
+                        if len(parts) < 2:
+                            continue
+                        signature_hash = parts[0].lower()
+                        trojan_name = parts[1] or "Unknown"
+                        threat_level = parts[2] if len(parts) > 2 else "high"
+
+                        if not signature_hash:
+                            continue
+                        if self.session.query(SignatureDB).filter_by(
+                            signature_hash=signature_hash
+                        ).first():
+                            continue
+
+                        self.session.add(SignatureDB(
+                            signature_hash=signature_hash,
+                            trojan_name=trojan_name,
+                            threat_level=threat_level
+                        ))
+                        added += 1
+                self.session.commit()
+            except Exception:
+                self.session.rollback()
+                continue
+
+        if added:
+            print(f"✅ Synced {added} signatures from {SIGNATURE_DIR}")
+
+    def sync_behaviour_patterns(self):
+        """
+        Import behaviour patterns from JSON bundles in SIGNATURE_DIR.
+        Expected schema: list of dicts with keys
+        pattern_name, pattern_type, pattern_value, severity_score, is_active
+        """
+        bundle_path = os.path.join(SIGNATURE_DIR, "behaviour_patterns.json")
+        if not os.path.isfile(bundle_path):
+            return
+
+        added = 0
+        try:
+            with open(bundle_path, "r", encoding="utf-8") as f:
+                data = json.load(f)
+                if not isinstance(data, list):
+                    return
+
+            for pattern in data:
+                name = (pattern.get("pattern_name") or "").strip()
+                if not name:
+                    continue
+
+                existing = self.session.query(BehaviourPattern)\
+                    .filter_by(pattern_name=name)\
+                    .first()
+                if existing:
+                    continue
+
+                self.session.add(BehaviourPattern(
+                    pattern_name=name,
+                    pattern_type=pattern.get("pattern_type", "generic"),
+                    pattern_value=pattern.get("pattern_value", ""),
+                    severity_score=pattern.get("severity_score", 5.0),
+                    is_active=pattern.get("is_active", True)
+                ))
+                added += 1
+
+            self.session.commit()
+        except Exception:
+            self.session.rollback()
+            return
+
+        if added:
+            print(f"✅ Synced {added} behaviour patterns from {bundle_path}")
 
     # BASIC SCAN METHODS
     def add_scan(self, scan_type, scan_path):

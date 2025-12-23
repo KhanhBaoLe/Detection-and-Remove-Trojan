@@ -15,7 +15,7 @@ class FullScanner:
         self.sig_scanner = SignatureScanner(db_manager)
         self.beh_scanner = BehaviourScanner(db_manager)
 
-    def scan(self, path):
+    def scan(self, path, scan_id=None):
         """
         Thực hiện full scan (static + behaviour)
 
@@ -30,10 +30,10 @@ class FullScanner:
         """
 
         # ===== 1. SIGNATURE SCAN =====
-        files_sig, _ = self.sig_scanner.scan(path)
+        files_sig, _ = self.sig_scanner.scan(path, scan_id=scan_id)
 
         # ===== 2. BEHAVIOUR SCAN =====
-        files_beh, _ = self.beh_scanner.scan(path)
+        files_beh, _ = self.beh_scanner.scan(path, scan_id=scan_id)
 
         # ===== 3. MERGE THREATS =====
         all_threats = (

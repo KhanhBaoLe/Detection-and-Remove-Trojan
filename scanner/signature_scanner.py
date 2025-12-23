@@ -1,6 +1,7 @@
 import os
 from scanner.base_scanner import BaseScanner
 from utils.file_hash import calculate_file_hash
+from config.settings import SIGNATURE_HASH_ALGO, SCAN_SKIP_DIRS
 
 
 class SignatureScanner(BaseScanner):
@@ -18,10 +19,14 @@ class SignatureScanner(BaseScanner):
         self.threats_found = []
 
         # ✅ Skip unnecessary folders
-        self.skip_dirs = {
-            '.git', '__pycache__', 'build', 'dist',
-            '.venv', 'venv', 'node_modules'
-        }
+        self.skip_dirs = set(SCAN_SKIP_DIRS)
+
+        # ✅ Sync local signature repo into DB (hash,trojan_name,level)
+        try:
+            if self.db_manager and hasattr(self.db_manager, "sync_signature_dir"):
+                self.db_manager.sync_signature_dir()
+        except Exception as e:
+            print(f"⚠️ Cannot sync signatures directory: {e}")
 
         if use_virustotal and vt_api_key:
             try:
@@ -38,7 +43,7 @@ class SignatureScanner(BaseScanner):
                 print(f"⚠️ Cannot initialize VirusTotal: {e}")
                 self.use_virustotal = False
 
-    def scan(self, path):
+    def scan(self, path, scan_id=None):
         """Scan files using signature-based detection"""
         self.threats_found = []
         files_scanned = 0
@@ -82,7 +87,7 @@ class SignatureScanner(BaseScanner):
                 # 1️⃣ Check EICAR test file
                 if self.scan_eicar(file_path):
                     print("    🔴 EICAR test file detected!")
-                    self.threats_found.append({
+                    self.record_detection(scan_id, {
                         'file_path': file_path,
                         'file_hash': 'EICAR_TEST',
                         'trojan_name': 'EICAR-Test-File',
@@ -92,12 +97,12 @@ class SignatureScanner(BaseScanner):
                     continue
 
                 # 2️⃣ Calculate MD5 hash
-                file_hash = calculate_file_hash(file_path)
+                file_hash = calculate_file_hash(file_path, algorithm=SIGNATURE_HASH_ALGO)
                 if not file_hash:
                     print("    ⚠️ Cannot calculate hash")
                     continue
 
-                print(f"    🔐 MD5 Hash: {file_hash}")
+                print(f"    🔐 {SIGNATURE_HASH_ALGO.upper()} Hash: {file_hash}")
 
                 # 3️⃣ Check whitelist
                 if self.db_manager.is_whitelisted(file_hash):
@@ -108,7 +113,7 @@ class SignatureScanner(BaseScanner):
                 signature = self.db_manager.check_signature(file_hash)
                 if signature:
                     print(f"    🔴 LOCAL DB: Threat detected - {signature.trojan_name}")
-                    self.threats_found.append({
+                    self.record_detection(scan_id, {
                         'file_path': file_path,
                         'file_hash': file_hash,
                         'trojan_name': signature.trojan_name,
@@ -136,7 +141,7 @@ class SignatureScanner(BaseScanner):
                             print(f"    🦠 Malware Name: {vt_result['trojan_name']}")
                             print(f"    ⚠️ Threat Level: {vt_result['threat_level'].upper()}")
 
-                            self.threats_found.append({
+                            self.record_detection(scan_id, {
                                 'file_path': file_path,
                                 'file_hash': vt_result['file_hash'],
                                 'trojan_name': f"[VT] {vt_result['trojan_name']}",
