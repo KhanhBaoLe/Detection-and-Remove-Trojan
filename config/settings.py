@@ -33,6 +33,7 @@ DYNAMIC_MONITOR_DIR = os.path.join(BASE_DIR, 'dynamic_analysis', 'monitors')
 DYNAMIC_SAMPLES_DIR = os.path.join(BASE_DIR, 'dynamic_analysis', 'samples')
 DYNAMIC_SANDBOX_DIR = os.path.join(BASE_DIR, 'temp', 'dynamic_sandbox')
 DYNAMIC_ENABLE_NETWORK = False  # Tắt mạng vì an toàn
+DYNAMIC_FIREWALL_GUARD_ENABLED = True  # Cho phép chặn mạng bằng firewall khi disable network
 
 # Tạo thư mục nếu chưa có
 for directory in [

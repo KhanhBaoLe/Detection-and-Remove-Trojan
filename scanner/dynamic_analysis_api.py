@@ -1,5 +1,9 @@
 from scanner.dynamic_runner import DynamicRunner
-from config.settings import DYNAMIC_TIMEOUT_SECONDS, DYNAMIC_ENABLE_NETWORK
+from config.settings import (
+    DYNAMIC_TIMEOUT_SECONDS,
+    DYNAMIC_ENABLE_NETWORK,
+    DYNAMIC_FIREWALL_GUARD_ENABLED,
+)
 import os
 import traceback
 
@@ -9,6 +13,7 @@ class DynamicAPI:
         self.db_manager = db_manager
         self.timeout = DYNAMIC_TIMEOUT_SECONDS
         self.enable_network = DYNAMIC_ENABLE_NETWORK
+        self.use_firewall_guard = DYNAMIC_FIREWALL_GUARD_ENABLED
 
     def analyze(self, sample_path, scan_id=None, timeout=None, capture_network=None):
         """
@@ -38,7 +43,8 @@ class DynamicAPI:
             # ===== 2. RUN SAMPLE =====
             runner = DynamicRunner(
                 timeout_seconds=timeout,
-                enable_network=capture_network
+                enable_network=capture_network,
+                use_firewall_guard=self.use_firewall_guard,
             )
 
             result = runner.run_sample(sample_path)
