@@ -5,35 +5,28 @@ from pathlib import Path
 logger = setup_logger("BaseScanner")
 
 
-class BaseScanner(ABC):
+class BaseScanner:
     def __init__(self, db_manager):
         self.db_manager = db_manager
         self.threats_found = []
-
-    @abstractmethod
-    def scan(self, path):
-        pass
-
+    
     def is_suspicious_extension(self, file_path):
-        """
-        Kiểm tra extension dựa trên cấu hình động (scan_extensions.txt)
-        """
+        """Kiểm tra file có extension đáng ngờ không"""
+        from config.settings import SCAN_EXTENSIONS
+        
         try:
-            from config.settings import load_scan_extensions
-
             ext = os.path.splitext(file_path)[1].lower()
-            allowed_exts = load_scan_extensions()
-
-            return ext in allowed_exts
-
-        except Exception:
-            logger.exception(f"Failed to check file extension: {file_path}")
+            return ext in SCAN_EXTENSIONS
+        except Exception as e:
             return False
-
+    
     def scan_eicar(self, file_path):
+        """Kiểm tra EICAR test string"""
+        eicar_string = b"X5O!P%@AP[4\\PZX54(P^)7CC)7}$EICAR-STANDARD-ANTIVIRUS-TEST-FILE!$H+H*"
+        
         try:
-            data = Path(file_path).read_bytes()
-            return b"EICAR-STANDARD-ANTIVIRUS-TEST-FILE" in data
-        except Exception:
-            logger.exception(f"Failed to scan EICAR file: {file_path}")
+            with open(file_path, "rb") as f:
+                content = f.read(1024)  # Chỉ đọc 1KB đầu
+                return eicar_string in content
+        except:
             return False

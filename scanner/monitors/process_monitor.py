@@ -27,7 +27,7 @@ class ProcessMonitor:
         
         while self.running:
             if time.time() - start_time > self.timeout:
-                self.running = False
+                self.stop()
                 break
             
             try:
@@ -75,15 +75,8 @@ class ProcessMonitor:
                 })
                 
             except psutil.NoSuchProcess:
-                # Process kết thúc - thoát vòng lặp
-                self.running = False
+                self.stop()
                 break
-            except psutil.AccessDenied:
-                # Không có quyền truy cập - log và tiếp tục
-                self.records.append({
-                    'timestamp': datetime.now().isoformat(),
-                    'error': 'Access denied'
-                })
             except Exception as e:
                 self.records.append({
                     'timestamp': datetime.now().isoformat(),
@@ -95,36 +88,47 @@ class ProcessMonitor:
     def stop(self):
         """Dừng monitoring"""
         self.running = False
-        # Không gọi join() từ trong thread
-        if self.monitor_thread and self.monitor_thread != threading.current_thread():
-            try:
-                self.monitor_thread.join(timeout=2)
-            except:
-                pass
+        if self.monitor_thread:
+            self.monitor_thread.join(timeout=2)
     
     def get_records(self):
         """Lấy danh sách records"""
         return self.records
     
     def get_summary(self):
-        """Tóm tắt quá trình"""
+        """
+        Tóm tắt quá trình (SAFE)
+        """
         if not self.records:
-            return {}
-        
-        first = self.records[0]
-        last = self.records[-1] if self.records else {}
-        
-        max_memory = max([r['memory_info']['rss'] for r in self.records if 'memory_info' in r], default=0)
-        max_cpu = max([r['cpu_percent'] for r in self.records if 'cpu_percent' in r], default=0)
-        
+            return {
+                "status": "no_runtime_activity",
+                "total_records": 0,
+                "max_memory_mb": 0,
+                "max_cpu_percent": 0,
+                "child_processes": []
+            }
+
+        max_memory = max(
+            (r.get('memory_info', {}).get('rss', 0) for r in self.records),
+            default=0
+        )
+
+        max_cpu = max(
+            (r.get('cpu_percent', 0) for r in self.records),
+            default=0
+        )
+
+        child_processes = list(set(
+            c.get('name')
+            for r in self.records
+            for c in r.get('children', [])
+            if isinstance(c, dict)
+        ))
+
         return {
-            'start_time': first.get('timestamp'),
-            'end_time': last.get('timestamp'),
-            'max_memory_mb': max_memory / (1024*1024),
-            'max_cpu_percent': max_cpu,
-            'child_processes': list(set([
-                c['name'] for r in self.records 
-                for c in r.get('children', [])
-            ])),
-            'total_records': len(self.records)
+            "status": "ok",
+            "total_records": len(self.records),
+            "max_memory_mb": max_memory / (1024 * 1024),
+            "max_cpu_percent": max_cpu,
+            "child_processes": child_processes
         }
