@@ -1,0 +1,73 @@
+[
+  {
+    "pattern_name": "Persistence_RunKey",
+    "pattern_type": "registry",
+    "pattern_value": "\\Software\\Microsoft\\Windows\\CurrentVersion\\Run",
+    "severity_score": 7.5,
+    "is_active": true
+  },
+  {
+    "pattern_name": "ScheduledTaskCreation",
+    "pattern_type": "task",
+    "pattern_value": "schtasks /create",
+    "severity_score": 6.5,
+    "is_active": true
+  },
+  {
+    "pattern_name": "Powershell_DownloadCradle",
+    "pattern_type": "powershell",
+    "pattern_value": "powershell -nop -w hidden -enc",
+    "severity_score": 6.5,
+    "is_active": true
+  },
+  {
+    "pattern_name": "ProcessHollowing_APIs",
+    "pattern_type": "api",
+    "pattern_value": "ZwUnmapViewOfSection",
+    "severity_score": 7.0,
+    "is_active": true
+  },
+  {
+    "pattern_name": "CredentialDump_ProcDumpLSASS",
+    "pattern_type": "process",
+    "pattern_value": "procdump64.exe -ma lsass.exe",
+    "severity_score": 7.0,
+    "is_active": true
+  },
+  {
+    "pattern_name": "AddFirewallRule",
+    "pattern_type": "network",
+    "pattern_value": "netsh advfirewall firewall add rule",
+    "severity_score": 4.5,
+    "is_active": true
+  },
+  {
+    "pattern_name": "AddPersistence_Service",
+    "pattern_type": "service",
+    "pattern_value": "sc create",
+    "severity_score": 6.0,
+    "is_active": true
+  },
+  {
+    "pattern_name": "Autorun_StartupFolder",
+    "pattern_type": "filesystem",
+    "pattern_value": "\\AppData\\Roaming\\Microsoft\\Windows\\Start Menu\\Programs\\Startup",
+    "severity_score": 5.0,
+    "is_active": true
+  },
+  {
+    "pattern_name": "DataExfil_Curl",
+    "pattern_type": "network",
+    "pattern_value": "curl -F",
+    "severity_score": 5.5,
+    "is_active": true
+  },
+  {
+    "pattern_name": "DisableSecurity_WindowsDefender",
+    "pattern_type": "powershell",
+    "pattern_value": "Add-MpPreference -ExclusionPath",
+    "severity_score": 7.0,
+    "is_active": true
+  }
+]
+

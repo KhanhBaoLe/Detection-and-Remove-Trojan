@@ -50,37 +50,18 @@ class TrojanScannerGUI:
             self.root.update_idletasks()
     
     def dynamic_analysis(self):
-        """Phân tích động một sample hoặc folder"""
-        choice = messagebox.askyesno(
-            "Dynamic Analysis",
-            "Chọn loại scan:\n\n"
-            "YES = Scan 1 file\n"
-            "NO = Scan cả folder (tất cả .exe/.bat/.py)"
+        """Phân tích động một sample"""
+        sample_path = filedialog.askopenfilename(
+            title="Select sample file for dynamic analysis",
+            filetypes=[("Executable files", "*.exe"), ("All files", "*.*")]
         )
-        
-        if choice is None:
-            return
-        
-        if choice:  # Scan file
-            sample_path = filedialog.askopenfilename(
-                title="Select sample file for dynamic analysis",
-                filetypes=[
-                    ("Executable files", "*.exe"),
-                    ("Batch files", "*.bat"),
-                    ("Python files", "*.py"),
-                    ("All files", "*.*")
-                ]
-            )
-        else:  # Scan folder
-            sample_path = filedialog.askdirectory(
-                title="Select folder for dynamic analysis"
-            )
         
         if not sample_path:
             return
         
         self.log_message(f"🔬 Starting dynamic analysis for: {sample_path}")
         
+        # Chạy trong thread nền
         threading.Thread(
             target=self._run_dynamic_analysis,
             args=(sample_path,),
@@ -91,69 +72,55 @@ class TrojanScannerGUI:
         """Chạy dynamic analysis trong background"""
         try:
             api = DynamicAPI(self.db)
-            
-            if os.path.isdir(sample_path):
-                self.log_message("📁 Scanning folder - analyzing all .exe/.bat/.py files...")
-                result = api.analyze(sample_path, timeout=10, capture_network=False)
-                self._display_folder_results(result)
+
+            self.log_message("⏱️ Starting sample execution (30s timeout)...")
+            result = api.analyze(sample_path, timeout=30, capture_network=False)
+
+            if not result.get('success'):
+                self.log_message(f"❌ Error: {result.get('error')}")
+                return
+
+            self.log_message("✅ Dynamic analysis completed")
+            self.log_message(f"📊 Exit code: {result.get('exit_code')}")
+            self.log_message(f"⏱️ Duration: {result.get('duration', 0):.2f}s")
+            self.log_message(f"🔴 Threat score: {result.get('threat_score', 0):.1f}/100")
+
+            summary = result.get('summary') or {}
+
+            # ================= PROCESS SUMMARY =================
+            process_summary = summary.get('process_summary')
+
+            if isinstance(process_summary, list) and len(process_summary) > 0:
+                proc = process_summary[0]
+                child_count = len(proc.get('child_processes', []))
+                peak_mem = proc.get('max_memory_mb', 0)
             else:
-                self.log_message("⏱️ Starting sample execution (10s timeout)...")
-                result = api.analyze(sample_path, timeout=10, capture_network=False)
-                self._display_file_results(result)
-                
+                child_count = 0
+                peak_mem = 0
+
+            self.log_message(f"📦 Child processes: {child_count}")
+            self.log_message(f"💾 Peak memory: {peak_mem:.1f} MB")
+
+            # ================= FILE SYSTEM SUMMARY =================
+            fs_summary = summary.get('fs_summary')
+
+            if isinstance(fs_summary, list) and len(fs_summary) > 0:
+                fs = fs_summary[0]
+                files_created = fs.get('files_created', 0)
+                files_modified = fs.get('files_modified', 0)
+            else:
+                files_created = 0
+                files_modified = 0
+
+            self.log_message(f"📄 Files created: {files_created}")
+            self.log_message(f"🔨 Files modified: {files_modified}")
+
         except Exception as e:
+            import traceback
             self.log_message(f"❌ Exception: {str(e)}")
+            self.log_message(traceback.format_exc())
+
     
-    def _display_file_results(self, result):
-        """Hiển thị kết quả phân tích file đơn"""
-        if result['success']:
-            self.log_message(f"✅ Dynamic analysis completed")
-            self.log_message(f"📊 Exit code: {result['exit_code']}")
-            self.log_message(f"⏱️ Duration: {result['duration']:.2f}s")
-            self.log_message(f"🔴 Threat score: {result['threat_score']:.1f}/100")
-            
-            summary = result['summary']
-            
-            if summary.get('process_summary'):
-                proc = summary['process_summary'][0]
-                self.log_message(f"📦 Child processes: {len(proc.get('child_processes', []))}")
-                self.log_message(f"💾 Peak memory: {proc.get('max_memory_mb', 0):.1f} MB")
-            
-            if summary.get('fs_summary'):
-                fs = summary['fs_summary'][0]
-                self.log_message(f"📄 Files created: {fs.get('files_created', 0)}")
-                self.log_message(f"🔨 Files modified: {fs.get('files_modified', 0)}")
-        else:
-            self.log_message(f"❌ Error: {result.get('error')}")
-    
-    def _display_folder_results(self, result):
-        """Hiển thị kết quả phân tích folder"""
-        if result.get('success'):
-            self.log_message(f"✅ Folder analysis completed")
-            self.log_message(f"📊 Total files found: {result['total_files']}")
-            self.log_message(f"✔️ Successfully analyzed: {result['successful']}")
-            self.log_message(f"❌ Failed: {result['failed']}")
-            
-            self.log_message("\n" + "━" * 70)
-            self.log_message("📋 DETAILED RESULTS:")
-            self.log_message("━" * 70)
-            
-            for file_result in result.get('files_results', []):
-                file_name = os.path.basename(file_result['file'])
-                
-                if file_result['status'] == 'success':
-                    threat_score = file_result.get('threat_score', 0)
-                    threat_icon = "🔴" if threat_score > 50 else "🟡" if threat_score > 20 else "🟢"
-                    self.log_message(
-                        f"{threat_icon} {file_name:<40} Score: {threat_score:>6.1f}/100"
-                    )
-                else:
-                    self.log_message(
-                        f"❌ {file_name:<40} Error: {file_result.get('error', 'Unknown')}"
-                    )
-        else:
-            self.log_message(f"❌ Error: {result.get('error')}")
-            
     def create_widgets(self):
         # Header
         header = tk.Frame(self.root, bg='#2c3e50', height=70)
@@ -220,11 +187,11 @@ class TrojanScannerGUI:
         
         # LOG FRAME
         log_frame = tk.LabelFrame(main_frame, text="📝 Activity Log (Proof of VirusTotal Integration)", 
-                                  font=('Arial', 10, 'bold'))
+                                font=('Arial', 10, 'bold'))
         log_frame.pack(fill='x', pady=(0, 8))
         
         self.log_text = scrolledtext.ScrolledText(log_frame, height=6, font=('Courier', 8),
-                                                   bg='#1e1e1e', fg='#00ff00', wrap=tk.WORD)
+                                                bg='#1e1e1e', fg='#00ff00', wrap=tk.WORD)
         self.log_text.pack(fill='both', expand=True, padx=5, pady=5)
         
         # Scan history frame
@@ -269,19 +236,19 @@ class TrojanScannerGUI:
         bottom_frame.pack(fill='x', pady=(8, 0))
         
         tk.Button(bottom_frame, text="📊 View Details", width=14,
-                 command=self.show_scan_details).pack(side='left', padx=4)
+                command=self.show_scan_details).pack(side='left', padx=4)
         
         tk.Button(bottom_frame, text="🔄 Refresh", width=14,
-                 command=self.refresh_all).pack(side='left', padx=4)
+                command=self.refresh_all).pack(side='left', padx=4)
         
         tk.Button(bottom_frame, text="📋 Export Report", width=14,
-                 command=self.export_report).pack(side='left', padx=4)
+                command=self.export_report).pack(side='left', padx=4)
         
         tk.Button(bottom_frame, text="🗑️ Clear Log", width=14,
-                 command=lambda: self.log_text.delete('1.0', 'end')).pack(side='left', padx=4)
+                command=lambda: self.log_text.delete('1.0', 'end')).pack(side='left', padx=4)
         
         tk.Button(bottom_frame, text="❌ Exit", width=14,
-                 command=self.root.quit).pack(side='right', padx=4)
+                command=self.root.quit).pack(side='right', padx=4)
     
     def virustotal_scan(self):
         """Scan PURE VirusTotal API"""
@@ -365,10 +332,10 @@ class TrojanScannerGUI:
                 )
             
             self.db.update_scan(scan_id, 
-                              end_time=datetime.now(),
-                              files_scanned=files_scanned,
-                              threats_found=threats_count,
-                              status='completed')
+                            end_time=datetime.now(),
+                            files_scanned=files_scanned,
+                            threats_found=threats_count,
+                            status='completed')
             
             self.root.after(0, self.refresh_all)
             
@@ -448,8 +415,8 @@ class TrojanScannerGUI:
         scrollbar.pack(side='right', fill='y')
         
         detail_tree = ttk.Treeview(tree_frame, yscrollcommand=scrollbar.set,
-                                  columns=('File', 'Trojan', 'Method', 'Level', 'Removed'),
-                                  show='headings')
+                                columns=('File', 'Trojan', 'Method', 'Level', 'Removed'),
+                                show='headings')
         
         detail_tree.heading('File', text='File Path')
         detail_tree.heading('Trojan', text='Trojan Name')
@@ -567,6 +534,73 @@ class TrojanScannerGUI:
         for key, value in stats.items():
             if key in self.stats_labels:
                 self.stats_labels[key].config(text=str(value))
-    
+    def show_behavior_details(self, run_id):
+        """Hiển thị chi tiết behavior sample"""
+        import json
+        from tkinter import Toplevel
+        
+        samples = self.db.get_behavior_samples(run_id)
+        
+        if not samples:
+            messagebox.showinfo("No Data", "Không có behavior sample cho run này")
+            return
+        
+        sample = samples[0]
+        
+        # Tạo window mới
+        details_window = Toplevel(self.root)
+        details_window.title("Behavior Details")
+        details_window.geometry("700x500")
+        
+        # Tạo text widget
+        text = scrolledtext.ScrolledText(details_window, height=25, width=80)
+        text.pack(fill='both', expand=True, padx=10, pady=10)
+        
+        # Nội dung chi tiết
+        details = f"""
+╔════════════════════════════════════════════════════════════════════════════╗
+║                        BEHAVIOR ANALYSIS DETAILS                           ║
+╚════════════════════════════════════════════════════════════════════════════╝
+
+📊 THREAT SCORE: {sample.threat_score:.1f}/100
+
+📦 PROCESS BEHAVIOR
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+"""
+        try:
+            processes = json.loads(sample.process_tree or "[]")
+            details += f"Child Processes Created: {len(processes)}\n"
+            for p in processes[:5]:
+                details += f"  • {p}\n"
+        except:
+            details += "Error parsing process data\n"
+        
+        details += "\n📄 FILE SYSTEM CHANGES\n"
+        details += "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n"
+        
+        try:
+            files_created = json.loads(sample.files_created or "[]")
+            files_modified = json.loads(sample.files_modified or "[]")
+            
+            details += f"Files Created: {len(files_created)}\n"
+            for f in files_created[:5]:
+                details += f"  ✓ {f}\n"
+            
+            details += f"\nFiles Modified: {len(files_modified)}\n"
+            for f in files_modified[:5]:
+                details += f"  ✎ {f}\n"
+        except:
+            details += "Error parsing file data\n"
+        
+        details += "\n🌐 NETWORK ACTIVITY\n"
+        details += "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n"
+        details += "Network monitoring disabled for safety\n"
+        
+        details += "\n" + "━" * 80
+        details += f"\nDetected at: {sample.detected_at}\n"
+        
+        text.insert('1.0', details)
+        text.config(state='disabled')
+        
     def run(self):
         self.root.mainloop()

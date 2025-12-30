@@ -44,3 +44,2046 @@ OSError: [Errno 22] Invalid argument: 'C:\\Users\\khanh\\AppData\\Local\\Temp\\t
 [2025-12-22 23:05:33,997] [INFO] [DB] New scan added | type=full path=D:/Detection-and-Remove-Trojan
 [2025-12-22 23:07:56,604] [INFO] [DB] New scan added | type=full path=D:/Detection-and-Remove-Trojan
 [2025-12-22 23:08:29,168] [INFO] [DB] New scan added | type=full path=D:/Detection-and-Remove-Trojan
+[2025-12-22 23:27:27,231] [INFO] [DB] New scan added | type=full path=D:/Detection-and-Remove-Trojan
+[2025-12-23 00:24:40,418] [INFO] [DB] New scan added | type=full path=D:/Detection-and-Remove-Trojan
+[2025-12-23 00:38:08,949] [INFO] [DB] New scan added | type=full path=D:/Detection-and-Remove-Trojan
+[2025-12-23 00:39:24,128] [INFO] [DB] New scan added | type=full path=D:/Detection-and-Remove-Trojan
+[2025-12-23 11:52:31,049] [ERROR] [BaseScanner] Failed to check file extension: D:/Detection-and-Remove-Trojan\.gitignore
+Traceback (most recent call last):
+  File "D:\Detection-and-Remove-Trojan\scanner\base_scanner.py", line 22, in is_suspicious_extension
+    from config.settings import load_scan_extensions
+ImportError: cannot import name 'load_scan_extensions' from 'config.settings' (D:\Detection-and-Remove-Trojan\config\settings.py)
+[2025-12-23 11:52:31,050] [ERROR] [BaseScanner] Failed to check file extension: D:/Detection-and-Remove-Trojan\create_test_executable.py
+Traceback (most recent call last):
+  File "D:\Detection-and-Remove-Trojan\scanner\base_scanner.py", line 22, in is_suspicious_extension
+    from config.settings import load_scan_extensions
+ImportError: cannot import name 'load_scan_extensions' from 'config.settings' (D:\Detection-and-Remove-Trojan\config\settings.py)
+[2025-12-23 11:52:31,050] [ERROR] [BaseScanner] Failed to check file extension: D:/Detection-and-Remove-Trojan\main.py
+Traceback (most recent call last):
+  File "D:\Detection-and-Remove-Trojan\scanner\base_scanner.py", line 22, in is_suspicious_extension
+    from config.settings import load_scan_extensions
+ImportError: cannot import name 'load_scan_extensions' from 'config.settings' (D:\Detection-and-Remove-Trojan\config\settings.py)
+[2025-12-23 11:52:31,050] [ERROR] [BaseScanner] Failed to check file extension: D:/Detection-and-Remove-Trojan\main.spec
+Traceback (most recent call last):
+  File "D:\Detection-and-Remove-Trojan\scanner\base_scanner.py", line 22, in is_suspicious_extension
+    from config.settings import load_scan_extensions
+ImportError: cannot import name 'load_scan_extensions' from 'config.settings' (D:\Detection-and-Remove-Trojan\config\settings.py)
+[2025-12-23 11:52:31,050] [ERROR] [BaseScanner] Failed to check file extension: D:/Detection-and-Remove-Trojan\requirements.txt
+Traceback (most recent call last):
+  File "D:\Detection-and-Remove-Trojan\scanner\base_scanner.py", line 22, in is_suspicious_extension
+    from config.settings import load_scan_extensions
+ImportError: cannot import name 'load_scan_extensions' from 'config.settings' (D:\Detection-and-Remove-Trojan\config\settings.py)
+[2025-12-23 11:52:31,050] [ERROR] [BaseScanner] Failed to check file extension: D:/Detection-and-Remove-Trojan\scanner.db
+Traceback (most recent call last):
+  File "D:\Detection-and-Remove-Trojan\scanner\base_scanner.py", line 22, in is_suspicious_extension
+    from config.settings import load_scan_extensions
+ImportError: cannot import name 'load_scan_extensions' from 'config.settings' (D:\Detection-and-Remove-Trojan\config\settings.py)
+[2025-12-23 11:52:31,050] [ERROR] [BaseScanner] Failed to check file extension: D:/Detection-and-Remove-Trojan\simple_test.py
+Traceback (most recent call last):
+  File "D:\Detection-and-Remove-Trojan\scanner\base_scanner.py", line 22, in is_suspicious_extension
+    from config.settings import load_scan_extensions
+ImportError: cannot import name 'load_scan_extensions' from 'config.settings' (D:\Detection-and-Remove-Trojan\config\settings.py)
+[2025-12-23 11:52:31,050] [ERROR] [BaseScanner] Failed to check file extension: D:/Detection-and-Remove-Trojan\simple_test.spec
+Traceback (most recent call last):
+  File "D:\Detection-and-Remove-Trojan\scanner\base_scanner.py", line 22, in is_suspicious_extension
+    from config.settings import load_scan_extensions
+ImportError: cannot import name 'load_scan_extensions' from 'config.settings' (D:\Detection-and-Remove-Trojan\config\settings.py)
+[2025-12-23 11:52:31,050] [ERROR] [BaseScanner] Failed to check file extension: D:/Detection-and-Remove-Trojan\test.exe
+Traceback (most recent call last):
+  File "D:\Detection-and-Remove-Trojan\scanner\base_scanner.py", line 22, in is_suspicious_extension
+    from config.settings import load_scan_extensions
+ImportError: cannot import name 'load_scan_extensions' from 'config.settings' (D:\Detection-and-Remove-Trojan\config\settings.py)
+[2025-12-23 11:52:31,050] [ERROR] [BaseScanner] Failed to check file extension: D:/Detection-and-Remove-Trojan\test_dynamic_analysis.py
+Traceback (most recent call last):
+  File "D:\Detection-and-Remove-Trojan\scanner\base_scanner.py", line 22, in is_suspicious_extension
+    from config.settings import load_scan_extensions
+ImportError: cannot import name 'load_scan_extensions' from 'config.settings' (D:\Detection-and-Remove-Trojan\config\settings.py)
+[2025-12-23 11:52:31,050] [ERROR] [BaseScanner] Failed to check file extension: D:/Detection-and-Remove-Trojan\test_sample.bat
+Traceback (most recent call last):
+  File "D:\Detection-and-Remove-Trojan\scanner\base_scanner.py", line 22, in is_suspicious_extension
+    from config.settings import load_scan_extensions
+ImportError: cannot import name 'load_scan_extensions' from 'config.settings' (D:\Detection-and-Remove-Trojan\config\settings.py)
+[2025-12-23 11:52:31,050] [ERROR] [BaseScanner] Failed to check file extension: D:/Detection-and-Remove-Trojan\test_sample.py
+Traceback (most recent call last):
+  File "D:\Detection-and-Remove-Trojan\scanner\base_scanner.py", line 22, in is_suspicious_extension
+    from config.settings import load_scan_extensions
+ImportError: cannot import name 'load_scan_extensions' from 'config.settings' (D:\Detection-and-Remove-Trojan\config\settings.py)
+[2025-12-23 11:52:31,050] [ERROR] [BaseScanner] Failed to check file extension: D:/Detection-and-Remove-Trojan\.git\COMMIT_EDITMSG
+Traceback (most recent call last):
+  File "D:\Detection-and-Remove-Trojan\scanner\base_scanner.py", line 22, in is_suspicious_extension
+    from config.settings import load_scan_extensions
+ImportError: cannot import name 'load_scan_extensions' from 'config.settings' (D:\Detection-and-Remove-Trojan\config\settings.py)
+[2025-12-23 11:52:31,050] [ERROR] [BaseScanner] Failed to check file extension: D:/Detection-and-Remove-Trojan\.git\config
+Traceback (most recent call last):
+  File "D:\Detection-and-Remove-Trojan\scanner\base_scanner.py", line 22, in is_suspicious_extension
+    from config.settings import load_scan_extensions
+ImportError: cannot import name 'load_scan_extensions' from 'config.settings' (D:\Detection-and-Remove-Trojan\config\settings.py)
+[2025-12-23 11:52:31,050] [ERROR] [BaseScanner] Failed to check file extension: D:/Detection-and-Remove-Trojan\.git\description
+Traceback (most recent call last):
+  File "D:\Detection-and-Remove-Trojan\scanner\base_scanner.py", line 22, in is_suspicious_extension
+    from config.settings import load_scan_extensions
+ImportError: cannot import name 'load_scan_extensions' from 'config.settings' (D:\Detection-and-Remove-Trojan\config\settings.py)
+[2025-12-23 11:52:31,050] [ERROR] [BaseScanner] Failed to check file extension: D:/Detection-and-Remove-Trojan\.git\FETCH_HEAD
+Traceback (most recent call last):
+  File "D:\Detection-and-Remove-Trojan\scanner\base_scanner.py", line 22, in is_suspicious_extension
+    from config.settings import load_scan_extensions
+ImportError: cannot import name 'load_scan_extensions' from 'config.settings' (D:\Detection-and-Remove-Trojan\config\settings.py)
+[2025-12-23 11:52:31,050] [ERROR] [BaseScanner] Failed to check file extension: D:/Detection-and-Remove-Trojan\.git\HEAD
+Traceback (most recent call last):
+  File "D:\Detection-and-Remove-Trojan\scanner\base_scanner.py", line 22, in is_suspicious_extension
+    from config.settings import load_scan_extensions
+ImportError: cannot import name 'load_scan_extensions' from 'config.settings' (D:\Detection-and-Remove-Trojan\config\settings.py)
+[2025-12-23 11:52:31,054] [ERROR] [BaseScanner] Failed to check file extension: D:/Detection-and-Remove-Trojan\.git\index
+Traceback (most recent call last):
+  File "D:\Detection-and-Remove-Trojan\scanner\base_scanner.py", line 22, in is_suspicious_extension
+    from config.settings import load_scan_extensions
+ImportError: cannot import name 'load_scan_extensions' from 'config.settings' (D:\Detection-and-Remove-Trojan\config\settings.py)
+[2025-12-23 11:52:31,054] [ERROR] [BaseScanner] Failed to check file extension: D:/Detection-and-Remove-Trojan\.git\ORIG_HEAD
+Traceback (most recent call last):
+  File "D:\Detection-and-Remove-Trojan\scanner\base_scanner.py", line 22, in is_suspicious_extension
+    from config.settings import load_scan_extensions
+ImportError: cannot import name 'load_scan_extensions' from 'config.settings' (D:\Detection-and-Remove-Trojan\config\settings.py)
+[2025-12-23 11:52:31,054] [ERROR] [BaseScanner] Failed to check file extension: D:/Detection-and-Remove-Trojan\.git\packed-refs
+Traceback (most recent call last):
+  File "D:\Detection-and-Remove-Trojan\scanner\base_scanner.py", line 22, in is_suspicious_extension
+    from config.settings import load_scan_extensions
+ImportError: cannot import name 'load_scan_extensions' from 'config.settings' (D:\Detection-and-Remove-Trojan\config\settings.py)
+[2025-12-23 11:52:31,054] [ERROR] [BaseScanner] Failed to check file extension: D:/Detection-and-Remove-Trojan\.git\hooks\applypatch-msg.sample
+Traceback (most recent call last):
+  File "D:\Detection-and-Remove-Trojan\scanner\base_scanner.py", line 22, in is_suspicious_extension
+    from config.settings import load_scan_extensions
+ImportError: cannot import name 'load_scan_extensions' from 'config.settings' (D:\Detection-and-Remove-Trojan\config\settings.py)
+[2025-12-23 11:52:31,054] [ERROR] [BaseScanner] Failed to check file extension: D:/Detection-and-Remove-Trojan\.git\hooks\commit-msg.sample
+Traceback (most recent call last):
+  File "D:\Detection-and-Remove-Trojan\scanner\base_scanner.py", line 22, in is_suspicious_extension
+    from config.settings import load_scan_extensions
+ImportError: cannot import name 'load_scan_extensions' from 'config.settings' (D:\Detection-and-Remove-Trojan\config\settings.py)
+[2025-12-23 11:52:31,054] [ERROR] [BaseScanner] Failed to check file extension: D:/Detection-and-Remove-Trojan\.git\hooks\fsmonitor-watchman.sample
+Traceback (most recent call last):
+  File "D:\Detection-and-Remove-Trojan\scanner\base_scanner.py", line 22, in is_suspicious_extension
+    from config.settings import load_scan_extensions
+ImportError: cannot import name 'load_scan_extensions' from 'config.settings' (D:\Detection-and-Remove-Trojan\config\settings.py)
+[2025-12-23 11:52:31,054] [ERROR] [BaseScanner] Failed to check file extension: D:/Detection-and-Remove-Trojan\.git\hooks\post-update.sample
+Traceback (most recent call last):
+  File "D:\Detection-and-Remove-Trojan\scanner\base_scanner.py", line 22, in is_suspicious_extension
+    from config.settings import load_scan_extensions
+ImportError: cannot import name 'load_scan_extensions' from 'config.settings' (D:\Detection-and-Remove-Trojan\config\settings.py)
+[2025-12-23 11:52:31,054] [ERROR] [BaseScanner] Failed to check file extension: D:/Detection-and-Remove-Trojan\.git\hooks\pre-applypatch.sample
+Traceback (most recent call last):
+  File "D:\Detection-and-Remove-Trojan\scanner\base_scanner.py", line 22, in is_suspicious_extension
+    from config.settings import load_scan_extensions
+ImportError: cannot import name 'load_scan_extensions' from 'config.settings' (D:\Detection-and-Remove-Trojan\config\settings.py)
+[2025-12-23 11:52:31,054] [ERROR] [BaseScanner] Failed to check file extension: D:/Detection-and-Remove-Trojan\.git\hooks\pre-commit.sample
+Traceback (most recent call last):
+  File "D:\Detection-and-Remove-Trojan\scanner\base_scanner.py", line 22, in is_suspicious_extension
+    from config.settings import load_scan_extensions
+ImportError: cannot import name 'load_scan_extensions' from 'config.settings' (D:\Detection-and-Remove-Trojan\config\settings.py)
+[2025-12-23 11:52:31,054] [ERROR] [BaseScanner] Failed to check file extension: D:/Detection-and-Remove-Trojan\.git\hooks\pre-merge-commit.sample
+Traceback (most recent call last):
+  File "D:\Detection-and-Remove-Trojan\scanner\base_scanner.py", line 22, in is_suspicious_extension
+    from config.settings import load_scan_extensions
+ImportError: cannot import name 'load_scan_extensions' from 'config.settings' (D:\Detection-and-Remove-Trojan\config\settings.py)
+[2025-12-23 11:52:31,054] [ERROR] [BaseScanner] Failed to check file extension: D:/Detection-and-Remove-Trojan\.git\hooks\pre-push.sample
+Traceback (most recent call last):
+  File "D:\Detection-and-Remove-Trojan\scanner\base_scanner.py", line 22, in is_suspicious_extension
+    from config.settings import load_scan_extensions
+ImportError: cannot import name 'load_scan_extensions' from 'config.settings' (D:\Detection-and-Remove-Trojan\config\settings.py)
+[2025-12-23 11:52:31,057] [ERROR] [BaseScanner] Failed to check file extension: D:/Detection-and-Remove-Trojan\.git\hooks\pre-rebase.sample
+Traceback (most recent call last):
+  File "D:\Detection-and-Remove-Trojan\scanner\base_scanner.py", line 22, in is_suspicious_extension
+    from config.settings import load_scan_extensions
+ImportError: cannot import name 'load_scan_extensions' from 'config.settings' (D:\Detection-and-Remove-Trojan\config\settings.py)
+[2025-12-23 11:52:31,057] [ERROR] [BaseScanner] Failed to check file extension: D:/Detection-and-Remove-Trojan\.git\hooks\pre-receive.sample
+Traceback (most recent call last):
+  File "D:\Detection-and-Remove-Trojan\scanner\base_scanner.py", line 22, in is_suspicious_extension
+    from config.settings import load_scan_extensions
+ImportError: cannot import name 'load_scan_extensions' from 'config.settings' (D:\Detection-and-Remove-Trojan\config\settings.py)
+[2025-12-23 11:52:31,057] [ERROR] [BaseScanner] Failed to check file extension: D:/Detection-and-Remove-Trojan\.git\hooks\prepare-commit-msg.sample
+Traceback (most recent call last):
+  File "D:\Detection-and-Remove-Trojan\scanner\base_scanner.py", line 22, in is_suspicious_extension
+    from config.settings import load_scan_extensions
+ImportError: cannot import name 'load_scan_extensions' from 'config.settings' (D:\Detection-and-Remove-Trojan\config\settings.py)
+[2025-12-23 11:52:31,058] [ERROR] [BaseScanner] Failed to check file extension: D:/Detection-and-Remove-Trojan\.git\hooks\push-to-checkout.sample
+Traceback (most recent call last):
+  File "D:\Detection-and-Remove-Trojan\scanner\base_scanner.py", line 22, in is_suspicious_extension
+    from config.settings import load_scan_extensions
+ImportError: cannot import name 'load_scan_extensions' from 'config.settings' (D:\Detection-and-Remove-Trojan\config\settings.py)
+[2025-12-23 11:52:31,058] [ERROR] [BaseScanner] Failed to check file extension: D:/Detection-and-Remove-Trojan\.git\hooks\sendemail-validate.sample
+Traceback (most recent call last):
+  File "D:\Detection-and-Remove-Trojan\scanner\base_scanner.py", line 22, in is_suspicious_extension
+    from config.settings import load_scan_extensions
+ImportError: cannot import name 'load_scan_extensions' from 'config.settings' (D:\Detection-and-Remove-Trojan\config\settings.py)
+[2025-12-23 11:52:31,058] [ERROR] [BaseScanner] Failed to check file extension: D:/Detection-and-Remove-Trojan\.git\hooks\update.sample
+Traceback (most recent call last):
+  File "D:\Detection-and-Remove-Trojan\scanner\base_scanner.py", line 22, in is_suspicious_extension
+    from config.settings import load_scan_extensions
+ImportError: cannot import name 'load_scan_extensions' from 'config.settings' (D:\Detection-and-Remove-Trojan\config\settings.py)
+[2025-12-23 11:52:31,059] [ERROR] [BaseScanner] Failed to check file extension: D:/Detection-and-Remove-Trojan\.git\info\exclude
+Traceback (most recent call last):
+  File "D:\Detection-and-Remove-Trojan\scanner\base_scanner.py", line 22, in is_suspicious_extension
+    from config.settings import load_scan_extensions
+ImportError: cannot import name 'load_scan_extensions' from 'config.settings' (D:\Detection-and-Remove-Trojan\config\settings.py)
+[2025-12-23 11:52:31,059] [ERROR] [BaseScanner] Failed to check file extension: D:/Detection-and-Remove-Trojan\.git\logs\HEAD
+Traceback (most recent call last):
+  File "D:\Detection-and-Remove-Trojan\scanner\base_scanner.py", line 22, in is_suspicious_extension
+    from config.settings import load_scan_extensions
+ImportError: cannot import name 'load_scan_extensions' from 'config.settings' (D:\Detection-and-Remove-Trojan\config\settings.py)
+[2025-12-23 11:52:31,060] [ERROR] [BaseScanner] Failed to check file extension: D:/Detection-and-Remove-Trojan\.git\logs\refs\heads\khanh-branch
+Traceback (most recent call last):
+  File "D:\Detection-and-Remove-Trojan\scanner\base_scanner.py", line 22, in is_suspicious_extension
+    from config.settings import load_scan_extensions
+ImportError: cannot import name 'load_scan_extensions' from 'config.settings' (D:\Detection-and-Remove-Trojan\config\settings.py)
+[2025-12-23 11:52:31,060] [ERROR] [BaseScanner] Failed to check file extension: D:/Detection-and-Remove-Trojan\.git\logs\refs\heads\main
+Traceback (most recent call last):
+  File "D:\Detection-and-Remove-Trojan\scanner\base_scanner.py", line 22, in is_suspicious_extension
+    from config.settings import load_scan_extensions
+ImportError: cannot import name 'load_scan_extensions' from 'config.settings' (D:\Detection-and-Remove-Trojan\config\settings.py)
+[2025-12-23 11:52:31,060] [ERROR] [BaseScanner] Failed to check file extension: D:/Detection-and-Remove-Trojan\.git\logs\refs\remotes\origin\dung-branch
+Traceback (most recent call last):
+  File "D:\Detection-and-Remove-Trojan\scanner\base_scanner.py", line 22, in is_suspicious_extension
+    from config.settings import load_scan_extensions
+ImportError: cannot import name 'load_scan_extensions' from 'config.settings' (D:\Detection-and-Remove-Trojan\config\settings.py)
+[2025-12-23 11:52:31,060] [ERROR] [BaseScanner] Failed to check file extension: D:/Detection-and-Remove-Trojan\.git\logs\refs\remotes\origin\HEAD
+Traceback (most recent call last):
+  File "D:\Detection-and-Remove-Trojan\scanner\base_scanner.py", line 22, in is_suspicious_extension
+    from config.settings import load_scan_extensions
+ImportError: cannot import name 'load_scan_extensions' from 'config.settings' (D:\Detection-and-Remove-Trojan\config\settings.py)
+[2025-12-23 11:52:31,061] [ERROR] [BaseScanner] Failed to check file extension: D:/Detection-and-Remove-Trojan\.git\logs\refs\remotes\origin\khanh-branch
+Traceback (most recent call last):
+  File "D:\Detection-and-Remove-Trojan\scanner\base_scanner.py", line 22, in is_suspicious_extension
+    from config.settings import load_scan_extensions
+ImportError: cannot import name 'load_scan_extensions' from 'config.settings' (D:\Detection-and-Remove-Trojan\config\settings.py)
+[2025-12-23 11:52:31,061] [ERROR] [BaseScanner] Failed to check file extension: D:/Detection-and-Remove-Trojan\.git\logs\refs\remotes\origin\main
+Traceback (most recent call last):
+  File "D:\Detection-and-Remove-Trojan\scanner\base_scanner.py", line 22, in is_suspicious_extension
+    from config.settings import load_scan_extensions
+ImportError: cannot import name 'load_scan_extensions' from 'config.settings' (D:\Detection-and-Remove-Trojan\config\settings.py)
+[2025-12-23 11:52:31,061] [ERROR] [BaseScanner] Failed to check file extension: D:/Detection-and-Remove-Trojan\.git\objects\00\9ca557acba327b4cdc240f2fed3e3674a638db
+Traceback (most recent call last):
+  File "D:\Detection-and-Remove-Trojan\scanner\base_scanner.py", line 22, in is_suspicious_extension
+    from config.settings import load_scan_extensions
+ImportError: cannot import name 'load_scan_extensions' from 'config.settings' (D:\Detection-and-Remove-Trojan\config\settings.py)
+[2025-12-23 11:52:31,062] [ERROR] [BaseScanner] Failed to check file extension: D:/Detection-and-Remove-Trojan\.git\objects\01\685f863d15779bb9116db3902cb8731608253d
+Traceback (most recent call last):
+  File "D:\Detection-and-Remove-Trojan\scanner\base_scanner.py", line 22, in is_suspicious_extension
+    from config.settings import load_scan_extensions
+ImportError: cannot import name 'load_scan_extensions' from 'config.settings' (D:\Detection-and-Remove-Trojan\config\settings.py)
+[2025-12-23 11:52:31,062] [ERROR] [BaseScanner] Failed to check file extension: D:/Detection-and-Remove-Trojan\.git\objects\03\b4f5ba9fa781caa4000b88d0c8ae1714a8f576
+Traceback (most recent call last):
+  File "D:\Detection-and-Remove-Trojan\scanner\base_scanner.py", line 22, in is_suspicious_extension
+    from config.settings import load_scan_extensions
+ImportError: cannot import name 'load_scan_extensions' from 'config.settings' (D:\Detection-and-Remove-Trojan\config\settings.py)
+[2025-12-23 11:52:31,062] [ERROR] [BaseScanner] Failed to check file extension: D:/Detection-and-Remove-Trojan\.git\objects\06\071965da74a6067538a5500470e26d4d7a9890
+Traceback (most recent call last):
+  File "D:\Detection-and-Remove-Trojan\scanner\base_scanner.py", line 22, in is_suspicious_extension
+    from config.settings import load_scan_extensions
+ImportError: cannot import name 'load_scan_extensions' from 'config.settings' (D:\Detection-and-Remove-Trojan\config\settings.py)
+[2025-12-23 11:52:31,064] [ERROR] [BaseScanner] Failed to check file extension: D:/Detection-and-Remove-Trojan\.git\objects\09\e4915258cb5979e4a793ca5b4b7c205d9299bd
+Traceback (most recent call last):
+  File "D:\Detection-and-Remove-Trojan\scanner\base_scanner.py", line 22, in is_suspicious_extension
+    from config.settings import load_scan_extensions
+ImportError: cannot import name 'load_scan_extensions' from 'config.settings' (D:\Detection-and-Remove-Trojan\config\settings.py)
+[2025-12-23 11:52:31,064] [ERROR] [BaseScanner] Failed to check file extension: D:/Detection-and-Remove-Trojan\.git\objects\0b\13b214ad343355fffd210db78c7fff449851a7
+Traceback (most recent call last):
+  File "D:\Detection-and-Remove-Trojan\scanner\base_scanner.py", line 22, in is_suspicious_extension
+    from config.settings import load_scan_extensions
+ImportError: cannot import name 'load_scan_extensions' from 'config.settings' (D:\Detection-and-Remove-Trojan\config\settings.py)
+[2025-12-23 11:52:31,064] [ERROR] [BaseScanner] Failed to check file extension: D:/Detection-and-Remove-Trojan\.git\objects\0c\bf79b0be48710bcb02d921f50a4d963ece77e0
+Traceback (most recent call last):
+  File "D:\Detection-and-Remove-Trojan\scanner\base_scanner.py", line 22, in is_suspicious_extension
+    from config.settings import load_scan_extensions
+ImportError: cannot import name 'load_scan_extensions' from 'config.settings' (D:\Detection-and-Remove-Trojan\config\settings.py)
+[2025-12-23 11:52:31,065] [ERROR] [BaseScanner] Failed to check file extension: D:/Detection-and-Remove-Trojan\.git\objects\17\2f5f868c7cd8909f9ad54077b809f27b8a592f
+Traceback (most recent call last):
+  File "D:\Detection-and-Remove-Trojan\scanner\base_scanner.py", line 22, in is_suspicious_extension
+    from config.settings import load_scan_extensions
+ImportError: cannot import name 'load_scan_extensions' from 'config.settings' (D:\Detection-and-Remove-Trojan\config\settings.py)
+[2025-12-23 11:52:31,065] [ERROR] [BaseScanner] Failed to check file extension: D:/Detection-and-Remove-Trojan\.git\objects\18\484be5eabe0daec65f79557829d0a0e13a1cc9
+Traceback (most recent call last):
+  File "D:\Detection-and-Remove-Trojan\scanner\base_scanner.py", line 22, in is_suspicious_extension
+    from config.settings import load_scan_extensions
+ImportError: cannot import name 'load_scan_extensions' from 'config.settings' (D:\Detection-and-Remove-Trojan\config\settings.py)
+[2025-12-23 11:52:31,065] [ERROR] [BaseScanner] Failed to check file extension: D:/Detection-and-Remove-Trojan\.git\objects\24\26f50ac5c49507c621a5a3f27b13abac4d7787
+Traceback (most recent call last):
+  File "D:\Detection-and-Remove-Trojan\scanner\base_scanner.py", line 22, in is_suspicious_extension
+    from config.settings import load_scan_extensions
+ImportError: cannot import name 'load_scan_extensions' from 'config.settings' (D:\Detection-and-Remove-Trojan\config\settings.py)
+[2025-12-23 11:52:31,065] [ERROR] [BaseScanner] Failed to check file extension: D:/Detection-and-Remove-Trojan\.git\objects\24\fce52eab65ea1572a74bf544c7cd34d9b8b086
+Traceback (most recent call last):
+  File "D:\Detection-and-Remove-Trojan\scanner\base_scanner.py", line 22, in is_suspicious_extension
+    from config.settings import load_scan_extensions
+ImportError: cannot import name 'load_scan_extensions' from 'config.settings' (D:\Detection-and-Remove-Trojan\config\settings.py)
+[2025-12-23 11:52:31,067] [ERROR] [BaseScanner] Failed to check file extension: D:/Detection-and-Remove-Trojan\.git\objects\2b\a8dd94ccf7f23375ae8abba61c84fe5c4d721a
+Traceback (most recent call last):
+  File "D:\Detection-and-Remove-Trojan\scanner\base_scanner.py", line 22, in is_suspicious_extension
+    from config.settings import load_scan_extensions
+ImportError: cannot import name 'load_scan_extensions' from 'config.settings' (D:\Detection-and-Remove-Trojan\config\settings.py)
+[2025-12-23 11:52:31,067] [ERROR] [BaseScanner] Failed to check file extension: D:/Detection-and-Remove-Trojan\.git\objects\2e\2ec223119995675f105cb44473fe60cdb025fc
+Traceback (most recent call last):
+  File "D:\Detection-and-Remove-Trojan\scanner\base_scanner.py", line 22, in is_suspicious_extension
+    from config.settings import load_scan_extensions
+ImportError: cannot import name 'load_scan_extensions' from 'config.settings' (D:\Detection-and-Remove-Trojan\config\settings.py)
+[2025-12-23 11:52:31,067] [ERROR] [BaseScanner] Failed to check file extension: D:/Detection-and-Remove-Trojan\.git\objects\33\e338df961559533ce1e5c5fbd40ac43a31821a
+Traceback (most recent call last):
+  File "D:\Detection-and-Remove-Trojan\scanner\base_scanner.py", line 22, in is_suspicious_extension
+    from config.settings import load_scan_extensions
+ImportError: cannot import name 'load_scan_extensions' from 'config.settings' (D:\Detection-and-Remove-Trojan\config\settings.py)
+[2025-12-23 11:52:31,069] [ERROR] [BaseScanner] Failed to check file extension: D:/Detection-and-Remove-Trojan\.git\objects\38\35ae9fd00063fd826b2984bd9f0292012b19c8
+Traceback (most recent call last):
+  File "D:\Detection-and-Remove-Trojan\scanner\base_scanner.py", line 22, in is_suspicious_extension
+    from config.settings import load_scan_extensions
+ImportError: cannot import name 'load_scan_extensions' from 'config.settings' (D:\Detection-and-Remove-Trojan\config\settings.py)
+[2025-12-23 11:52:31,069] [ERROR] [BaseScanner] Failed to check file extension: D:/Detection-and-Remove-Trojan\.git\objects\39\c1826acd13ae64f6db7e22daf05d31f2cf8ea6
+Traceback (most recent call last):
+  File "D:\Detection-and-Remove-Trojan\scanner\base_scanner.py", line 22, in is_suspicious_extension
+    from config.settings import load_scan_extensions
+ImportError: cannot import name 'load_scan_extensions' from 'config.settings' (D:\Detection-and-Remove-Trojan\config\settings.py)
+[2025-12-23 11:52:31,069] [ERROR] [BaseScanner] Failed to check file extension: D:/Detection-and-Remove-Trojan\.git\objects\3b\54b7e817024145285ccf06baa67c7f07a49f9d
+Traceback (most recent call last):
+  File "D:\Detection-and-Remove-Trojan\scanner\base_scanner.py", line 22, in is_suspicious_extension
+    from config.settings import load_scan_extensions
+ImportError: cannot import name 'load_scan_extensions' from 'config.settings' (D:\Detection-and-Remove-Trojan\config\settings.py)
+[2025-12-23 11:52:31,070] [ERROR] [BaseScanner] Failed to check file extension: D:/Detection-and-Remove-Trojan\.git\objects\3c\166905c37f0512018193e98fe4e61034c095bb
+Traceback (most recent call last):
+  File "D:\Detection-and-Remove-Trojan\scanner\base_scanner.py", line 22, in is_suspicious_extension
+    from config.settings import load_scan_extensions
+ImportError: cannot import name 'load_scan_extensions' from 'config.settings' (D:\Detection-and-Remove-Trojan\config\settings.py)
+[2025-12-23 11:52:31,070] [ERROR] [BaseScanner] Failed to check file extension: D:/Detection-and-Remove-Trojan\.git\objects\3c\8267b130642f80cea3c16a34952b12acb144d6
+Traceback (most recent call last):
+  File "D:\Detection-and-Remove-Trojan\scanner\base_scanner.py", line 22, in is_suspicious_extension
+    from config.settings import load_scan_extensions
+ImportError: cannot import name 'load_scan_extensions' from 'config.settings' (D:\Detection-and-Remove-Trojan\config\settings.py)
+[2025-12-23 11:52:31,070] [ERROR] [BaseScanner] Failed to check file extension: D:/Detection-and-Remove-Trojan\.git\objects\43\0b683aa5890a05c65d9110fc32971c390c210a
+Traceback (most recent call last):
+  File "D:\Detection-and-Remove-Trojan\scanner\base_scanner.py", line 22, in is_suspicious_extension
+    from config.settings import load_scan_extensions
+ImportError: cannot import name 'load_scan_extensions' from 'config.settings' (D:\Detection-and-Remove-Trojan\config\settings.py)
+[2025-12-23 11:52:31,070] [ERROR] [BaseScanner] Failed to check file extension: D:/Detection-and-Remove-Trojan\.git\objects\43\3fea968ce1156223abfda340c638af6f88e525
+Traceback (most recent call last):
+  File "D:\Detection-and-Remove-Trojan\scanner\base_scanner.py", line 22, in is_suspicious_extension
+    from config.settings import load_scan_extensions
+ImportError: cannot import name 'load_scan_extensions' from 'config.settings' (D:\Detection-and-Remove-Trojan\config\settings.py)
+[2025-12-23 11:52:31,071] [ERROR] [BaseScanner] Failed to check file extension: D:/Detection-and-Remove-Trojan\.git\objects\46\a0160f35cfae6032066d1221dd37e5b7cda666
+Traceback (most recent call last):
+  File "D:\Detection-and-Remove-Trojan\scanner\base_scanner.py", line 22, in is_suspicious_extension
+    from config.settings import load_scan_extensions
+ImportError: cannot import name 'load_scan_extensions' from 'config.settings' (D:\Detection-and-Remove-Trojan\config\settings.py)
+[2025-12-23 11:52:31,071] [ERROR] [BaseScanner] Failed to check file extension: D:/Detection-and-Remove-Trojan\.git\objects\4b\1e1c623be8f177815bfcc3e3c72f795654fe4b
+Traceback (most recent call last):
+  File "D:\Detection-and-Remove-Trojan\scanner\base_scanner.py", line 22, in is_suspicious_extension
+    from config.settings import load_scan_extensions
+ImportError: cannot import name 'load_scan_extensions' from 'config.settings' (D:\Detection-and-Remove-Trojan\config\settings.py)
+[2025-12-23 11:52:31,071] [ERROR] [BaseScanner] Failed to check file extension: D:/Detection-and-Remove-Trojan\.git\objects\4c\7060302bdb4ae32db2ca65cf95fbf9d9ca1c90
+Traceback (most recent call last):
+  File "D:\Detection-and-Remove-Trojan\scanner\base_scanner.py", line 22, in is_suspicious_extension
+    from config.settings import load_scan_extensions
+ImportError: cannot import name 'load_scan_extensions' from 'config.settings' (D:\Detection-and-Remove-Trojan\config\settings.py)
+[2025-12-23 11:52:31,071] [ERROR] [BaseScanner] Failed to check file extension: D:/Detection-and-Remove-Trojan\.git\objects\50\9cb8d7fe42d76c5d09e85c3c8bbd3efd90eea1
+Traceback (most recent call last):
+  File "D:\Detection-and-Remove-Trojan\scanner\base_scanner.py", line 22, in is_suspicious_extension
+    from config.settings import load_scan_extensions
+ImportError: cannot import name 'load_scan_extensions' from 'config.settings' (D:\Detection-and-Remove-Trojan\config\settings.py)
+[2025-12-23 11:52:31,071] [ERROR] [BaseScanner] Failed to check file extension: D:/Detection-and-Remove-Trojan\.git\objects\51\fafe14485f35aea9f742beb7a2f39ecaf9ea12
+Traceback (most recent call last):
+  File "D:\Detection-and-Remove-Trojan\scanner\base_scanner.py", line 22, in is_suspicious_extension
+    from config.settings import load_scan_extensions
+ImportError: cannot import name 'load_scan_extensions' from 'config.settings' (D:\Detection-and-Remove-Trojan\config\settings.py)
+[2025-12-23 11:52:31,074] [ERROR] [BaseScanner] Failed to check file extension: D:/Detection-and-Remove-Trojan\.git\objects\57\92789d74a8849a4ac74664d715110edce7aeab
+Traceback (most recent call last):
+  File "D:\Detection-and-Remove-Trojan\scanner\base_scanner.py", line 22, in is_suspicious_extension
+    from config.settings import load_scan_extensions
+ImportError: cannot import name 'load_scan_extensions' from 'config.settings' (D:\Detection-and-Remove-Trojan\config\settings.py)
+[2025-12-23 11:52:31,074] [ERROR] [BaseScanner] Failed to check file extension: D:/Detection-and-Remove-Trojan\.git\objects\5a\e6139863109188a29cb65c5529cb1c12cf7144
+Traceback (most recent call last):
+  File "D:\Detection-and-Remove-Trojan\scanner\base_scanner.py", line 22, in is_suspicious_extension
+    from config.settings import load_scan_extensions
+ImportError: cannot import name 'load_scan_extensions' from 'config.settings' (D:\Detection-and-Remove-Trojan\config\settings.py)
+[2025-12-23 11:52:31,074] [ERROR] [BaseScanner] Failed to check file extension: D:/Detection-and-Remove-Trojan\.git\objects\5d\d3f2722e9d2d06ec864fc122c19bd7158bc999
+Traceback (most recent call last):
+  File "D:\Detection-and-Remove-Trojan\scanner\base_scanner.py", line 22, in is_suspicious_extension
+    from config.settings import load_scan_extensions
+ImportError: cannot import name 'load_scan_extensions' from 'config.settings' (D:\Detection-and-Remove-Trojan\config\settings.py)
+[2025-12-23 11:52:31,075] [ERROR] [BaseScanner] Failed to check file extension: D:/Detection-and-Remove-Trojan\.git\objects\61\01a8939a96475bbe6f590857946831b09bab6a
+Traceback (most recent call last):
+  File "D:\Detection-and-Remove-Trojan\scanner\base_scanner.py", line 22, in is_suspicious_extension
+    from config.settings import load_scan_extensions
+ImportError: cannot import name 'load_scan_extensions' from 'config.settings' (D:\Detection-and-Remove-Trojan\config\settings.py)
+[2025-12-23 11:52:31,075] [ERROR] [BaseScanner] Failed to check file extension: D:/Detection-and-Remove-Trojan\.git\objects\67\714403c64fda1b09ce1c018274ea71334d18df
+Traceback (most recent call last):
+  File "D:\Detection-and-Remove-Trojan\scanner\base_scanner.py", line 22, in is_suspicious_extension
+    from config.settings import load_scan_extensions
+ImportError: cannot import name 'load_scan_extensions' from 'config.settings' (D:\Detection-and-Remove-Trojan\config\settings.py)
+[2025-12-23 11:52:31,076] [ERROR] [BaseScanner] Failed to check file extension: D:/Detection-and-Remove-Trojan\.git\objects\74\050a2e873b26d9d4c9413379e1216d859a7fde
+Traceback (most recent call last):
+  File "D:\Detection-and-Remove-Trojan\scanner\base_scanner.py", line 22, in is_suspicious_extension
+    from config.settings import load_scan_extensions
+ImportError: cannot import name 'load_scan_extensions' from 'config.settings' (D:\Detection-and-Remove-Trojan\config\settings.py)
+[2025-12-23 11:52:31,076] [ERROR] [BaseScanner] Failed to check file extension: D:/Detection-and-Remove-Trojan\.git\objects\79\9566f4b13303b6d4954c0d8d40aee0efcd2ec5
+Traceback (most recent call last):
+  File "D:\Detection-and-Remove-Trojan\scanner\base_scanner.py", line 22, in is_suspicious_extension
+    from config.settings import load_scan_extensions
+ImportError: cannot import name 'load_scan_extensions' from 'config.settings' (D:\Detection-and-Remove-Trojan\config\settings.py)
+[2025-12-23 11:52:31,077] [ERROR] [BaseScanner] Failed to check file extension: D:/Detection-and-Remove-Trojan\.git\objects\7a\2b758c77f88f1988adf366bb8134e4d0e0f0ad
+Traceback (most recent call last):
+  File "D:\Detection-and-Remove-Trojan\scanner\base_scanner.py", line 22, in is_suspicious_extension
+    from config.settings import load_scan_extensions
+ImportError: cannot import name 'load_scan_extensions' from 'config.settings' (D:\Detection-and-Remove-Trojan\config\settings.py)
+[2025-12-23 11:52:31,077] [ERROR] [BaseScanner] Failed to check file extension: D:/Detection-and-Remove-Trojan\.git\objects\85\f8ea3c1992e2eaebd3f5982f357c8ca64da6c4
+Traceback (most recent call last):
+  File "D:\Detection-and-Remove-Trojan\scanner\base_scanner.py", line 22, in is_suspicious_extension
+    from config.settings import load_scan_extensions
+ImportError: cannot import name 'load_scan_extensions' from 'config.settings' (D:\Detection-and-Remove-Trojan\config\settings.py)
+[2025-12-23 11:52:31,077] [ERROR] [BaseScanner] Failed to check file extension: D:/Detection-and-Remove-Trojan\.git\objects\89\75163f2fcae9049c60da6d0b93ac837cf98e42
+Traceback (most recent call last):
+  File "D:\Detection-and-Remove-Trojan\scanner\base_scanner.py", line 22, in is_suspicious_extension
+    from config.settings import load_scan_extensions
+ImportError: cannot import name 'load_scan_extensions' from 'config.settings' (D:\Detection-and-Remove-Trojan\config\settings.py)
+[2025-12-23 11:52:31,079] [ERROR] [BaseScanner] Failed to check file extension: D:/Detection-and-Remove-Trojan\.git\objects\8e\6d44bb2e2b2bd06773216f33f82697236673e4
+Traceback (most recent call last):
+  File "D:\Detection-and-Remove-Trojan\scanner\base_scanner.py", line 22, in is_suspicious_extension
+    from config.settings import load_scan_extensions
+ImportError: cannot import name 'load_scan_extensions' from 'config.settings' (D:\Detection-and-Remove-Trojan\config\settings.py)
+[2025-12-23 11:52:31,079] [ERROR] [BaseScanner] Failed to check file extension: D:/Detection-and-Remove-Trojan\.git\objects\8e\efbcd2d8546dbe4d8102b6c94baae227295af8
+Traceback (most recent call last):
+  File "D:\Detection-and-Remove-Trojan\scanner\base_scanner.py", line 22, in is_suspicious_extension
+    from config.settings import load_scan_extensions
+ImportError: cannot import name 'load_scan_extensions' from 'config.settings' (D:\Detection-and-Remove-Trojan\config\settings.py)
+[2025-12-23 11:52:31,080] [ERROR] [BaseScanner] Failed to check file extension: D:/Detection-and-Remove-Trojan\.git\objects\91\e3150dcd005eda0bc17c6e38dcce239281a6cd
+Traceback (most recent call last):
+  File "D:\Detection-and-Remove-Trojan\scanner\base_scanner.py", line 22, in is_suspicious_extension
+    from config.settings import load_scan_extensions
+ImportError: cannot import name 'load_scan_extensions' from 'config.settings' (D:\Detection-and-Remove-Trojan\config\settings.py)
+[2025-12-23 11:52:31,081] [ERROR] [BaseScanner] Failed to check file extension: D:/Detection-and-Remove-Trojan\.git\objects\98\281b2d2d0cfbb39963087281e99d7cdd63e9bb
+Traceback (most recent call last):
+  File "D:\Detection-and-Remove-Trojan\scanner\base_scanner.py", line 22, in is_suspicious_extension
+    from config.settings import load_scan_extensions
+ImportError: cannot import name 'load_scan_extensions' from 'config.settings' (D:\Detection-and-Remove-Trojan\config\settings.py)
+[2025-12-23 11:52:31,081] [ERROR] [BaseScanner] Failed to check file extension: D:/Detection-and-Remove-Trojan\.git\objects\98\e97a3dd27e1e117219489c9d1e1e2013b42795
+Traceback (most recent call last):
+  File "D:\Detection-and-Remove-Trojan\scanner\base_scanner.py", line 22, in is_suspicious_extension
+    from config.settings import load_scan_extensions
+ImportError: cannot import name 'load_scan_extensions' from 'config.settings' (D:\Detection-and-Remove-Trojan\config\settings.py)
+[2025-12-23 11:52:31,081] [ERROR] [BaseScanner] Failed to check file extension: D:/Detection-and-Remove-Trojan\.git\objects\9f\f13feabaef821cc6cca3059ecf60f25c20f99f
+Traceback (most recent call last):
+  File "D:\Detection-and-Remove-Trojan\scanner\base_scanner.py", line 22, in is_suspicious_extension
+    from config.settings import load_scan_extensions
+ImportError: cannot import name 'load_scan_extensions' from 'config.settings' (D:\Detection-and-Remove-Trojan\config\settings.py)
+[2025-12-23 11:52:31,081] [ERROR] [BaseScanner] Failed to check file extension: D:/Detection-and-Remove-Trojan\.git\objects\a0\848003d033cc3c17a1699b7d7b5cb5aee03bc4
+Traceback (most recent call last):
+  File "D:\Detection-and-Remove-Trojan\scanner\base_scanner.py", line 22, in is_suspicious_extension
+    from config.settings import load_scan_extensions
+ImportError: cannot import name 'load_scan_extensions' from 'config.settings' (D:\Detection-and-Remove-Trojan\config\settings.py)
+[2025-12-23 11:52:31,081] [ERROR] [BaseScanner] Failed to check file extension: D:/Detection-and-Remove-Trojan\.git\objects\a1\105671813c1d2a014482de2d25f54f09396e20
+Traceback (most recent call last):
+  File "D:\Detection-and-Remove-Trojan\scanner\base_scanner.py", line 22, in is_suspicious_extension
+    from config.settings import load_scan_extensions
+ImportError: cannot import name 'load_scan_extensions' from 'config.settings' (D:\Detection-and-Remove-Trojan\config\settings.py)
+[2025-12-23 11:52:31,084] [ERROR] [BaseScanner] Failed to check file extension: D:/Detection-and-Remove-Trojan\.git\objects\ab\605fced3b4ae5b2b1eb44d27ee5870c33e38a2
+Traceback (most recent call last):
+  File "D:\Detection-and-Remove-Trojan\scanner\base_scanner.py", line 22, in is_suspicious_extension
+    from config.settings import load_scan_extensions
+ImportError: cannot import name 'load_scan_extensions' from 'config.settings' (D:\Detection-and-Remove-Trojan\config\settings.py)
+[2025-12-23 11:52:31,084] [ERROR] [BaseScanner] Failed to check file extension: D:/Detection-and-Remove-Trojan\.git\objects\b1\2685d02220aafd053ff542710906987819ad5e
+Traceback (most recent call last):
+  File "D:\Detection-and-Remove-Trojan\scanner\base_scanner.py", line 22, in is_suspicious_extension
+    from config.settings import load_scan_extensions
+ImportError: cannot import name 'load_scan_extensions' from 'config.settings' (D:\Detection-and-Remove-Trojan\config\settings.py)
+[2025-12-23 11:52:31,084] [ERROR] [BaseScanner] Failed to check file extension: D:/Detection-and-Remove-Trojan\.git\objects\b4\6a38e81d8f14704979e11af6ad6f45f01d1038
+Traceback (most recent call last):
+  File "D:\Detection-and-Remove-Trojan\scanner\base_scanner.py", line 22, in is_suspicious_extension
+    from config.settings import load_scan_extensions
+ImportError: cannot import name 'load_scan_extensions' from 'config.settings' (D:\Detection-and-Remove-Trojan\config\settings.py)
+[2025-12-23 11:52:31,084] [ERROR] [BaseScanner] Failed to check file extension: D:/Detection-and-Remove-Trojan\.git\objects\b4\9b3e66c37a8db7fe99e82df845cd2df15a8483
+Traceback (most recent call last):
+  File "D:\Detection-and-Remove-Trojan\scanner\base_scanner.py", line 22, in is_suspicious_extension
+    from config.settings import load_scan_extensions
+ImportError: cannot import name 'load_scan_extensions' from 'config.settings' (D:\Detection-and-Remove-Trojan\config\settings.py)
+[2025-12-23 11:52:31,084] [ERROR] [BaseScanner] Failed to check file extension: D:/Detection-and-Remove-Trojan\.git\objects\b5\cac1f9c83563e17db9b47cc0d0658f10472a8c
+Traceback (most recent call last):
+  File "D:\Detection-and-Remove-Trojan\scanner\base_scanner.py", line 22, in is_suspicious_extension
+    from config.settings import load_scan_extensions
+ImportError: cannot import name 'load_scan_extensions' from 'config.settings' (D:\Detection-and-Remove-Trojan\config\settings.py)
+[2025-12-23 11:52:31,084] [ERROR] [BaseScanner] Failed to check file extension: D:/Detection-and-Remove-Trojan\.git\objects\ba\287c8a6a95d3d0ef8e3528a06f5f0225ca5e05
+Traceback (most recent call last):
+  File "D:\Detection-and-Remove-Trojan\scanner\base_scanner.py", line 22, in is_suspicious_extension
+    from config.settings import load_scan_extensions
+ImportError: cannot import name 'load_scan_extensions' from 'config.settings' (D:\Detection-and-Remove-Trojan\config\settings.py)
+[2025-12-23 11:52:31,084] [ERROR] [BaseScanner] Failed to check file extension: D:/Detection-and-Remove-Trojan\.git\objects\bf\ef9704696d7db703eddc527b6b8a714e1ccd55
+Traceback (most recent call last):
+  File "D:\Detection-and-Remove-Trojan\scanner\base_scanner.py", line 22, in is_suspicious_extension
+    from config.settings import load_scan_extensions
+ImportError: cannot import name 'load_scan_extensions' from 'config.settings' (D:\Detection-and-Remove-Trojan\config\settings.py)
+[2025-12-23 11:52:31,084] [ERROR] [BaseScanner] Failed to check file extension: D:/Detection-and-Remove-Trojan\.git\objects\c9\70572a6b53f4c67ed749d57218e6ac0ddba998
+Traceback (most recent call last):
+  File "D:\Detection-and-Remove-Trojan\scanner\base_scanner.py", line 22, in is_suspicious_extension
+    from config.settings import load_scan_extensions
+ImportError: cannot import name 'load_scan_extensions' from 'config.settings' (D:\Detection-and-Remove-Trojan\config\settings.py)
+[2025-12-23 11:52:31,084] [ERROR] [BaseScanner] Failed to check file extension: D:/Detection-and-Remove-Trojan\.git\objects\c9\802dd788876a327de86f1ea669da36d2edcb70
+Traceback (most recent call last):
+  File "D:\Detection-and-Remove-Trojan\scanner\base_scanner.py", line 22, in is_suspicious_extension
+    from config.settings import load_scan_extensions
+ImportError: cannot import name 'load_scan_extensions' from 'config.settings' (D:\Detection-and-Remove-Trojan\config\settings.py)
+[2025-12-23 11:52:31,084] [ERROR] [BaseScanner] Failed to check file extension: D:/Detection-and-Remove-Trojan\.git\objects\cb\8d16c973db75e540838a1c3e2b3d974124deb9
+Traceback (most recent call last):
+  File "D:\Detection-and-Remove-Trojan\scanner\base_scanner.py", line 22, in is_suspicious_extension
+    from config.settings import load_scan_extensions
+ImportError: cannot import name 'load_scan_extensions' from 'config.settings' (D:\Detection-and-Remove-Trojan\config\settings.py)
+[2025-12-23 11:52:31,084] [ERROR] [BaseScanner] Failed to check file extension: D:/Detection-and-Remove-Trojan\.git\objects\cf\394cdc27d073e5cc69eeec06e955d4b3130224
+Traceback (most recent call last):
+  File "D:\Detection-and-Remove-Trojan\scanner\base_scanner.py", line 22, in is_suspicious_extension
+    from config.settings import load_scan_extensions
+ImportError: cannot import name 'load_scan_extensions' from 'config.settings' (D:\Detection-and-Remove-Trojan\config\settings.py)
+[2025-12-23 11:52:31,088] [ERROR] [BaseScanner] Failed to check file extension: D:/Detection-and-Remove-Trojan\.git\objects\d0\472648fe1b39e2b078233916d71b44554311a4
+Traceback (most recent call last):
+  File "D:\Detection-and-Remove-Trojan\scanner\base_scanner.py", line 22, in is_suspicious_extension
+    from config.settings import load_scan_extensions
+ImportError: cannot import name 'load_scan_extensions' from 'config.settings' (D:\Detection-and-Remove-Trojan\config\settings.py)
+[2025-12-23 11:52:31,088] [ERROR] [BaseScanner] Failed to check file extension: D:/Detection-and-Remove-Trojan\.git\objects\d1\225d85ab03edf540c5dc7c269e3050b33cb776
+Traceback (most recent call last):
+  File "D:\Detection-and-Remove-Trojan\scanner\base_scanner.py", line 22, in is_suspicious_extension
+    from config.settings import load_scan_extensions
+ImportError: cannot import name 'load_scan_extensions' from 'config.settings' (D:\Detection-and-Remove-Trojan\config\settings.py)
+[2025-12-23 11:52:31,088] [ERROR] [BaseScanner] Failed to check file extension: D:/Detection-and-Remove-Trojan\.git\objects\d1\6aac54a39471b655e8b2857a54821b9ff90f0a
+Traceback (most recent call last):
+  File "D:\Detection-and-Remove-Trojan\scanner\base_scanner.py", line 22, in is_suspicious_extension
+    from config.settings import load_scan_extensions
+ImportError: cannot import name 'load_scan_extensions' from 'config.settings' (D:\Detection-and-Remove-Trojan\config\settings.py)
+[2025-12-23 11:52:31,089] [ERROR] [BaseScanner] Failed to check file extension: D:/Detection-and-Remove-Trojan\.git\objects\e0\b1ae9f3a6467501afbbf66cb135f034c82a1ab
+Traceback (most recent call last):
+  File "D:\Detection-and-Remove-Trojan\scanner\base_scanner.py", line 22, in is_suspicious_extension
+    from config.settings import load_scan_extensions
+ImportError: cannot import name 'load_scan_extensions' from 'config.settings' (D:\Detection-and-Remove-Trojan\config\settings.py)
+[2025-12-23 11:52:31,090] [ERROR] [BaseScanner] Failed to check file extension: D:/Detection-and-Remove-Trojan\.git\objects\e3\7ee107910411679674760f7725250034b5ab9d
+Traceback (most recent call last):
+  File "D:\Detection-and-Remove-Trojan\scanner\base_scanner.py", line 22, in is_suspicious_extension
+    from config.settings import load_scan_extensions
+ImportError: cannot import name 'load_scan_extensions' from 'config.settings' (D:\Detection-and-Remove-Trojan\config\settings.py)
+[2025-12-23 11:52:31,090] [ERROR] [BaseScanner] Failed to check file extension: D:/Detection-and-Remove-Trojan\.git\objects\e9\d8fb95d4d04ffd99b85325c0df92c755482e6a
+Traceback (most recent call last):
+  File "D:\Detection-and-Remove-Trojan\scanner\base_scanner.py", line 22, in is_suspicious_extension
+    from config.settings import load_scan_extensions
+ImportError: cannot import name 'load_scan_extensions' from 'config.settings' (D:\Detection-and-Remove-Trojan\config\settings.py)
+[2025-12-23 11:52:31,090] [ERROR] [BaseScanner] Failed to check file extension: D:/Detection-and-Remove-Trojan\.git\objects\eb\192ea1b5c43c97d99f71dd03dd0c22fb795a62
+Traceback (most recent call last):
+  File "D:\Detection-and-Remove-Trojan\scanner\base_scanner.py", line 22, in is_suspicious_extension
+    from config.settings import load_scan_extensions
+ImportError: cannot import name 'load_scan_extensions' from 'config.settings' (D:\Detection-and-Remove-Trojan\config\settings.py)
+[2025-12-23 11:52:31,090] [ERROR] [BaseScanner] Failed to check file extension: D:/Detection-and-Remove-Trojan\.git\objects\eb\1d37d4565131d5e8a16345c7029638d91cbeb1
+Traceback (most recent call last):
+  File "D:\Detection-and-Remove-Trojan\scanner\base_scanner.py", line 22, in is_suspicious_extension
+    from config.settings import load_scan_extensions
+ImportError: cannot import name 'load_scan_extensions' from 'config.settings' (D:\Detection-and-Remove-Trojan\config\settings.py)
+[2025-12-23 11:52:31,090] [ERROR] [BaseScanner] Failed to check file extension: D:/Detection-and-Remove-Trojan\.git\objects\ed\78b046c4cb097d00542def4f5d4eabb795a3c7
+Traceback (most recent call last):
+  File "D:\Detection-and-Remove-Trojan\scanner\base_scanner.py", line 22, in is_suspicious_extension
+    from config.settings import load_scan_extensions
+ImportError: cannot import name 'load_scan_extensions' from 'config.settings' (D:\Detection-and-Remove-Trojan\config\settings.py)
+[2025-12-23 11:52:31,090] [ERROR] [BaseScanner] Failed to check file extension: D:/Detection-and-Remove-Trojan\.git\objects\ee\425f507bfca7ea2b65129c2a1776af8a38bfb0
+Traceback (most recent call last):
+  File "D:\Detection-and-Remove-Trojan\scanner\base_scanner.py", line 22, in is_suspicious_extension
+    from config.settings import load_scan_extensions
+ImportError: cannot import name 'load_scan_extensions' from 'config.settings' (D:\Detection-and-Remove-Trojan\config\settings.py)
+[2025-12-23 11:52:31,090] [ERROR] [BaseScanner] Failed to check file extension: D:/Detection-and-Remove-Trojan\.git\objects\f3\e83eba7ed262601d14b09d97eff20c9e9ec079
+Traceback (most recent call last):
+  File "D:\Detection-and-Remove-Trojan\scanner\base_scanner.py", line 22, in is_suspicious_extension
+    from config.settings import load_scan_extensions
+ImportError: cannot import name 'load_scan_extensions' from 'config.settings' (D:\Detection-and-Remove-Trojan\config\settings.py)
+[2025-12-23 11:52:31,090] [ERROR] [BaseScanner] Failed to check file extension: D:/Detection-and-Remove-Trojan\.git\objects\f5\893a4608120eb5d6b1ede126fb4edc45c6312d
+Traceback (most recent call last):
+  File "D:\Detection-and-Remove-Trojan\scanner\base_scanner.py", line 22, in is_suspicious_extension
+    from config.settings import load_scan_extensions
+ImportError: cannot import name 'load_scan_extensions' from 'config.settings' (D:\Detection-and-Remove-Trojan\config\settings.py)
+[2025-12-23 11:52:31,094] [ERROR] [BaseScanner] Failed to check file extension: D:/Detection-and-Remove-Trojan\.git\objects\pack\pack-b6a607745aa4b504a999e696049524a039487e8e.idx
+Traceback (most recent call last):
+  File "D:\Detection-and-Remove-Trojan\scanner\base_scanner.py", line 22, in is_suspicious_extension
+    from config.settings import load_scan_extensions
+ImportError: cannot import name 'load_scan_extensions' from 'config.settings' (D:\Detection-and-Remove-Trojan\config\settings.py)
+[2025-12-23 11:52:31,094] [ERROR] [BaseScanner] Failed to check file extension: D:/Detection-and-Remove-Trojan\.git\objects\pack\pack-b6a607745aa4b504a999e696049524a039487e8e.pack
+Traceback (most recent call last):
+  File "D:\Detection-and-Remove-Trojan\scanner\base_scanner.py", line 22, in is_suspicious_extension
+    from config.settings import load_scan_extensions
+ImportError: cannot import name 'load_scan_extensions' from 'config.settings' (D:\Detection-and-Remove-Trojan\config\settings.py)
+[2025-12-23 11:52:31,094] [ERROR] [BaseScanner] Failed to check file extension: D:/Detection-and-Remove-Trojan\.git\objects\pack\pack-b6a607745aa4b504a999e696049524a039487e8e.rev
+Traceback (most recent call last):
+  File "D:\Detection-and-Remove-Trojan\scanner\base_scanner.py", line 22, in is_suspicious_extension
+    from config.settings import load_scan_extensions
+ImportError: cannot import name 'load_scan_extensions' from 'config.settings' (D:\Detection-and-Remove-Trojan\config\settings.py)
+[2025-12-23 11:52:31,095] [ERROR] [BaseScanner] Failed to check file extension: D:/Detection-and-Remove-Trojan\.git\refs\heads\khanh-branch
+Traceback (most recent call last):
+  File "D:\Detection-and-Remove-Trojan\scanner\base_scanner.py", line 22, in is_suspicious_extension
+    from config.settings import load_scan_extensions
+ImportError: cannot import name 'load_scan_extensions' from 'config.settings' (D:\Detection-and-Remove-Trojan\config\settings.py)
+[2025-12-23 11:52:31,095] [ERROR] [BaseScanner] Failed to check file extension: D:/Detection-and-Remove-Trojan\.git\refs\heads\main
+Traceback (most recent call last):
+  File "D:\Detection-and-Remove-Trojan\scanner\base_scanner.py", line 22, in is_suspicious_extension
+    from config.settings import load_scan_extensions
+ImportError: cannot import name 'load_scan_extensions' from 'config.settings' (D:\Detection-and-Remove-Trojan\config\settings.py)
+[2025-12-23 11:52:31,095] [ERROR] [BaseScanner] Failed to check file extension: D:/Detection-and-Remove-Trojan\.git\refs\remotes\origin\dung-branch
+Traceback (most recent call last):
+  File "D:\Detection-and-Remove-Trojan\scanner\base_scanner.py", line 22, in is_suspicious_extension
+    from config.settings import load_scan_extensions
+ImportError: cannot import name 'load_scan_extensions' from 'config.settings' (D:\Detection-and-Remove-Trojan\config\settings.py)
+[2025-12-23 11:52:31,095] [ERROR] [BaseScanner] Failed to check file extension: D:/Detection-and-Remove-Trojan\.git\refs\remotes\origin\HEAD
+Traceback (most recent call last):
+  File "D:\Detection-and-Remove-Trojan\scanner\base_scanner.py", line 22, in is_suspicious_extension
+    from config.settings import load_scan_extensions
+ImportError: cannot import name 'load_scan_extensions' from 'config.settings' (D:\Detection-and-Remove-Trojan\config\settings.py)
+[2025-12-23 11:52:31,095] [ERROR] [BaseScanner] Failed to check file extension: D:/Detection-and-Remove-Trojan\.git\refs\remotes\origin\khanh-branch
+Traceback (most recent call last):
+  File "D:\Detection-and-Remove-Trojan\scanner\base_scanner.py", line 22, in is_suspicious_extension
+    from config.settings import load_scan_extensions
+ImportError: cannot import name 'load_scan_extensions' from 'config.settings' (D:\Detection-and-Remove-Trojan\config\settings.py)
+[2025-12-23 11:52:31,095] [ERROR] [BaseScanner] Failed to check file extension: D:/Detection-and-Remove-Trojan\.git\refs\remotes\origin\main
+Traceback (most recent call last):
+  File "D:\Detection-and-Remove-Trojan\scanner\base_scanner.py", line 22, in is_suspicious_extension
+    from config.settings import load_scan_extensions
+ImportError: cannot import name 'load_scan_extensions' from 'config.settings' (D:\Detection-and-Remove-Trojan\config\settings.py)
+[2025-12-23 11:52:31,095] [ERROR] [BaseScanner] Failed to check file extension: D:/Detection-and-Remove-Trojan\build\main\Analysis-00.toc
+Traceback (most recent call last):
+  File "D:\Detection-and-Remove-Trojan\scanner\base_scanner.py", line 22, in is_suspicious_extension
+    from config.settings import load_scan_extensions
+ImportError: cannot import name 'load_scan_extensions' from 'config.settings' (D:\Detection-and-Remove-Trojan\config\settings.py)
+[2025-12-23 11:52:31,095] [ERROR] [BaseScanner] Failed to check file extension: D:/Detection-and-Remove-Trojan\build\main\base_library.zip
+Traceback (most recent call last):
+  File "D:\Detection-and-Remove-Trojan\scanner\base_scanner.py", line 22, in is_suspicious_extension
+    from config.settings import load_scan_extensions
+ImportError: cannot import name 'load_scan_extensions' from 'config.settings' (D:\Detection-and-Remove-Trojan\config\settings.py)
+[2025-12-23 11:52:31,095] [ERROR] [BaseScanner] Failed to check file extension: D:/Detection-and-Remove-Trojan\build\main\EXE-00.toc
+Traceback (most recent call last):
+  File "D:\Detection-and-Remove-Trojan\scanner\base_scanner.py", line 22, in is_suspicious_extension
+    from config.settings import load_scan_extensions
+ImportError: cannot import name 'load_scan_extensions' from 'config.settings' (D:\Detection-and-Remove-Trojan\config\settings.py)
+[2025-12-23 11:52:31,095] [ERROR] [BaseScanner] Failed to check file extension: D:/Detection-and-Remove-Trojan\build\main\main.pkg
+Traceback (most recent call last):
+  File "D:\Detection-and-Remove-Trojan\scanner\base_scanner.py", line 22, in is_suspicious_extension
+    from config.settings import load_scan_extensions
+ImportError: cannot import name 'load_scan_extensions' from 'config.settings' (D:\Detection-and-Remove-Trojan\config\settings.py)
+[2025-12-23 11:52:31,095] [ERROR] [BaseScanner] Failed to check file extension: D:/Detection-and-Remove-Trojan\build\main\PKG-00.toc
+Traceback (most recent call last):
+  File "D:\Detection-and-Remove-Trojan\scanner\base_scanner.py", line 22, in is_suspicious_extension
+    from config.settings import load_scan_extensions
+ImportError: cannot import name 'load_scan_extensions' from 'config.settings' (D:\Detection-and-Remove-Trojan\config\settings.py)
+[2025-12-23 11:52:31,095] [ERROR] [BaseScanner] Failed to check file extension: D:/Detection-and-Remove-Trojan\build\main\PYZ-00.pyz
+Traceback (most recent call last):
+  File "D:\Detection-and-Remove-Trojan\scanner\base_scanner.py", line 22, in is_suspicious_extension
+    from config.settings import load_scan_extensions
+ImportError: cannot import name 'load_scan_extensions' from 'config.settings' (D:\Detection-and-Remove-Trojan\config\settings.py)
+[2025-12-23 11:52:31,095] [ERROR] [BaseScanner] Failed to check file extension: D:/Detection-and-Remove-Trojan\build\main\PYZ-00.toc
+Traceback (most recent call last):
+  File "D:\Detection-and-Remove-Trojan\scanner\base_scanner.py", line 22, in is_suspicious_extension
+    from config.settings import load_scan_extensions
+ImportError: cannot import name 'load_scan_extensions' from 'config.settings' (D:\Detection-and-Remove-Trojan\config\settings.py)
+[2025-12-23 11:52:31,095] [ERROR] [BaseScanner] Failed to check file extension: D:/Detection-and-Remove-Trojan\build\main\warn-main.txt
+Traceback (most recent call last):
+  File "D:\Detection-and-Remove-Trojan\scanner\base_scanner.py", line 22, in is_suspicious_extension
+    from config.settings import load_scan_extensions
+ImportError: cannot import name 'load_scan_extensions' from 'config.settings' (D:\Detection-and-Remove-Trojan\config\settings.py)
+[2025-12-23 11:52:31,095] [ERROR] [BaseScanner] Failed to check file extension: D:/Detection-and-Remove-Trojan\build\main\xref-main.html
+Traceback (most recent call last):
+  File "D:\Detection-and-Remove-Trojan\scanner\base_scanner.py", line 22, in is_suspicious_extension
+    from config.settings import load_scan_extensions
+ImportError: cannot import name 'load_scan_extensions' from 'config.settings' (D:\Detection-and-Remove-Trojan\config\settings.py)
+[2025-12-23 11:52:31,095] [ERROR] [BaseScanner] Failed to check file extension: D:/Detection-and-Remove-Trojan\build\main\localpycs\pyimod01_archive.pyc
+Traceback (most recent call last):
+  File "D:\Detection-and-Remove-Trojan\scanner\base_scanner.py", line 22, in is_suspicious_extension
+    from config.settings import load_scan_extensions
+ImportError: cannot import name 'load_scan_extensions' from 'config.settings' (D:\Detection-and-Remove-Trojan\config\settings.py)
+[2025-12-23 11:52:31,095] [ERROR] [BaseScanner] Failed to check file extension: D:/Detection-and-Remove-Trojan\build\main\localpycs\pyimod02_importers.pyc
+Traceback (most recent call last):
+  File "D:\Detection-and-Remove-Trojan\scanner\base_scanner.py", line 22, in is_suspicious_extension
+    from config.settings import load_scan_extensions
+ImportError: cannot import name 'load_scan_extensions' from 'config.settings' (D:\Detection-and-Remove-Trojan\config\settings.py)
+[2025-12-23 11:52:31,095] [ERROR] [BaseScanner] Failed to check file extension: D:/Detection-and-Remove-Trojan\build\main\localpycs\pyimod03_ctypes.pyc
+Traceback (most recent call last):
+  File "D:\Detection-and-Remove-Trojan\scanner\base_scanner.py", line 22, in is_suspicious_extension
+    from config.settings import load_scan_extensions
+ImportError: cannot import name 'load_scan_extensions' from 'config.settings' (D:\Detection-and-Remove-Trojan\config\settings.py)
+[2025-12-23 11:52:31,095] [ERROR] [BaseScanner] Failed to check file extension: D:/Detection-and-Remove-Trojan\build\main\localpycs\pyimod04_pywin32.pyc
+Traceback (most recent call last):
+  File "D:\Detection-and-Remove-Trojan\scanner\base_scanner.py", line 22, in is_suspicious_extension
+    from config.settings import load_scan_extensions
+ImportError: cannot import name 'load_scan_extensions' from 'config.settings' (D:\Detection-and-Remove-Trojan\config\settings.py)
+[2025-12-23 11:52:31,095] [ERROR] [BaseScanner] Failed to check file extension: D:/Detection-and-Remove-Trojan\build\main\localpycs\struct.pyc
+Traceback (most recent call last):
+  File "D:\Detection-and-Remove-Trojan\scanner\base_scanner.py", line 22, in is_suspicious_extension
+    from config.settings import load_scan_extensions
+ImportError: cannot import name 'load_scan_extensions' from 'config.settings' (D:\Detection-and-Remove-Trojan\config\settings.py)
+[2025-12-23 11:52:31,095] [ERROR] [BaseScanner] Failed to check file extension: D:/Detection-and-Remove-Trojan\build\simple_test\Analysis-00.toc
+Traceback (most recent call last):
+  File "D:\Detection-and-Remove-Trojan\scanner\base_scanner.py", line 22, in is_suspicious_extension
+    from config.settings import load_scan_extensions
+ImportError: cannot import name 'load_scan_extensions' from 'config.settings' (D:\Detection-and-Remove-Trojan\config\settings.py)
+[2025-12-23 11:52:31,095] [ERROR] [BaseScanner] Failed to check file extension: D:/Detection-and-Remove-Trojan\build\simple_test\base_library.zip
+Traceback (most recent call last):
+  File "D:\Detection-and-Remove-Trojan\scanner\base_scanner.py", line 22, in is_suspicious_extension
+    from config.settings import load_scan_extensions
+ImportError: cannot import name 'load_scan_extensions' from 'config.settings' (D:\Detection-and-Remove-Trojan\config\settings.py)
+[2025-12-23 11:52:31,095] [ERROR] [BaseScanner] Failed to check file extension: D:/Detection-and-Remove-Trojan\build\simple_test\EXE-00.toc
+Traceback (most recent call last):
+  File "D:\Detection-and-Remove-Trojan\scanner\base_scanner.py", line 22, in is_suspicious_extension
+    from config.settings import load_scan_extensions
+ImportError: cannot import name 'load_scan_extensions' from 'config.settings' (D:\Detection-and-Remove-Trojan\config\settings.py)
+[2025-12-23 11:52:31,095] [ERROR] [BaseScanner] Failed to check file extension: D:/Detection-and-Remove-Trojan\build\simple_test\PKG-00.toc
+Traceback (most recent call last):
+  File "D:\Detection-and-Remove-Trojan\scanner\base_scanner.py", line 22, in is_suspicious_extension
+    from config.settings import load_scan_extensions
+ImportError: cannot import name 'load_scan_extensions' from 'config.settings' (D:\Detection-and-Remove-Trojan\config\settings.py)
+[2025-12-23 11:52:31,095] [ERROR] [BaseScanner] Failed to check file extension: D:/Detection-and-Remove-Trojan\build\simple_test\PYZ-00.pyz
+Traceback (most recent call last):
+  File "D:\Detection-and-Remove-Trojan\scanner\base_scanner.py", line 22, in is_suspicious_extension
+    from config.settings import load_scan_extensions
+ImportError: cannot import name 'load_scan_extensions' from 'config.settings' (D:\Detection-and-Remove-Trojan\config\settings.py)
+[2025-12-23 11:52:31,095] [ERROR] [BaseScanner] Failed to check file extension: D:/Detection-and-Remove-Trojan\build\simple_test\PYZ-00.toc
+Traceback (most recent call last):
+  File "D:\Detection-and-Remove-Trojan\scanner\base_scanner.py", line 22, in is_suspicious_extension
+    from config.settings import load_scan_extensions
+ImportError: cannot import name 'load_scan_extensions' from 'config.settings' (D:\Detection-and-Remove-Trojan\config\settings.py)
+[2025-12-23 11:52:31,102] [ERROR] [BaseScanner] Failed to check file extension: D:/Detection-and-Remove-Trojan\build\simple_test\simple_test.pkg
+Traceback (most recent call last):
+  File "D:\Detection-and-Remove-Trojan\scanner\base_scanner.py", line 22, in is_suspicious_extension
+    from config.settings import load_scan_extensions
+ImportError: cannot import name 'load_scan_extensions' from 'config.settings' (D:\Detection-and-Remove-Trojan\config\settings.py)
+[2025-12-23 11:52:31,102] [ERROR] [BaseScanner] Failed to check file extension: D:/Detection-and-Remove-Trojan\build\simple_test\warn-simple_test.txt
+Traceback (most recent call last):
+  File "D:\Detection-and-Remove-Trojan\scanner\base_scanner.py", line 22, in is_suspicious_extension
+    from config.settings import load_scan_extensions
+ImportError: cannot import name 'load_scan_extensions' from 'config.settings' (D:\Detection-and-Remove-Trojan\config\settings.py)
+[2025-12-23 11:52:31,102] [ERROR] [BaseScanner] Failed to check file extension: D:/Detection-and-Remove-Trojan\build\simple_test\xref-simple_test.html
+Traceback (most recent call last):
+  File "D:\Detection-and-Remove-Trojan\scanner\base_scanner.py", line 22, in is_suspicious_extension
+    from config.settings import load_scan_extensions
+ImportError: cannot import name 'load_scan_extensions' from 'config.settings' (D:\Detection-and-Remove-Trojan\config\settings.py)
+[2025-12-23 11:52:31,102] [ERROR] [BaseScanner] Failed to check file extension: D:/Detection-and-Remove-Trojan\build\simple_test\localpycs\pyimod01_archive.pyc
+Traceback (most recent call last):
+  File "D:\Detection-and-Remove-Trojan\scanner\base_scanner.py", line 22, in is_suspicious_extension
+    from config.settings import load_scan_extensions
+ImportError: cannot import name 'load_scan_extensions' from 'config.settings' (D:\Detection-and-Remove-Trojan\config\settings.py)
+[2025-12-23 11:52:31,102] [ERROR] [BaseScanner] Failed to check file extension: D:/Detection-and-Remove-Trojan\build\simple_test\localpycs\pyimod02_importers.pyc
+Traceback (most recent call last):
+  File "D:\Detection-and-Remove-Trojan\scanner\base_scanner.py", line 22, in is_suspicious_extension
+    from config.settings import load_scan_extensions
+ImportError: cannot import name 'load_scan_extensions' from 'config.settings' (D:\Detection-and-Remove-Trojan\config\settings.py)
+[2025-12-23 11:52:31,104] [ERROR] [BaseScanner] Failed to check file extension: D:/Detection-and-Remove-Trojan\build\simple_test\localpycs\pyimod03_ctypes.pyc
+Traceback (most recent call last):
+  File "D:\Detection-and-Remove-Trojan\scanner\base_scanner.py", line 22, in is_suspicious_extension
+    from config.settings import load_scan_extensions
+ImportError: cannot import name 'load_scan_extensions' from 'config.settings' (D:\Detection-and-Remove-Trojan\config\settings.py)
+[2025-12-23 11:52:31,104] [ERROR] [BaseScanner] Failed to check file extension: D:/Detection-and-Remove-Trojan\build\simple_test\localpycs\pyimod04_pywin32.pyc
+Traceback (most recent call last):
+  File "D:\Detection-and-Remove-Trojan\scanner\base_scanner.py", line 22, in is_suspicious_extension
+    from config.settings import load_scan_extensions
+ImportError: cannot import name 'load_scan_extensions' from 'config.settings' (D:\Detection-and-Remove-Trojan\config\settings.py)
+[2025-12-23 11:52:31,104] [ERROR] [BaseScanner] Failed to check file extension: D:/Detection-and-Remove-Trojan\build\simple_test\localpycs\struct.pyc
+Traceback (most recent call last):
+  File "D:\Detection-and-Remove-Trojan\scanner\base_scanner.py", line 22, in is_suspicious_extension
+    from config.settings import load_scan_extensions
+ImportError: cannot import name 'load_scan_extensions' from 'config.settings' (D:\Detection-and-Remove-Trojan\config\settings.py)
+[2025-12-23 11:52:31,104] [ERROR] [BaseScanner] Failed to check file extension: D:/Detection-and-Remove-Trojan\config\api_keys.py
+Traceback (most recent call last):
+  File "D:\Detection-and-Remove-Trojan\scanner\base_scanner.py", line 22, in is_suspicious_extension
+    from config.settings import load_scan_extensions
+ImportError: cannot import name 'load_scan_extensions' from 'config.settings' (D:\Detection-and-Remove-Trojan\config\settings.py)
+[2025-12-23 11:52:31,104] [ERROR] [BaseScanner] Failed to check file extension: D:/Detection-and-Remove-Trojan\config\settings.py
+Traceback (most recent call last):
+  File "D:\Detection-and-Remove-Trojan\scanner\base_scanner.py", line 22, in is_suspicious_extension
+    from config.settings import load_scan_extensions
+ImportError: cannot import name 'load_scan_extensions' from 'config.settings' (D:\Detection-and-Remove-Trojan\config\settings.py)
+[2025-12-23 11:52:31,104] [ERROR] [BaseScanner] Failed to check file extension: D:/Detection-and-Remove-Trojan\config\__init__.py
+Traceback (most recent call last):
+  File "D:\Detection-and-Remove-Trojan\scanner\base_scanner.py", line 22, in is_suspicious_extension
+    from config.settings import load_scan_extensions
+ImportError: cannot import name 'load_scan_extensions' from 'config.settings' (D:\Detection-and-Remove-Trojan\config\settings.py)
+[2025-12-23 11:52:31,106] [ERROR] [BaseScanner] Failed to check file extension: D:/Detection-and-Remove-Trojan\config\__pycache__\api_keys.cpython-310.pyc
+Traceback (most recent call last):
+  File "D:\Detection-and-Remove-Trojan\scanner\base_scanner.py", line 22, in is_suspicious_extension
+    from config.settings import load_scan_extensions
+ImportError: cannot import name 'load_scan_extensions' from 'config.settings' (D:\Detection-and-Remove-Trojan\config\settings.py)
+[2025-12-23 11:52:31,106] [ERROR] [BaseScanner] Failed to check file extension: D:/Detection-and-Remove-Trojan\config\__pycache__\settings.cpython-310.pyc
+Traceback (most recent call last):
+  File "D:\Detection-and-Remove-Trojan\scanner\base_scanner.py", line 22, in is_suspicious_extension
+    from config.settings import load_scan_extensions
+ImportError: cannot import name 'load_scan_extensions' from 'config.settings' (D:\Detection-and-Remove-Trojan\config\settings.py)
+[2025-12-23 11:52:31,106] [ERROR] [BaseScanner] Failed to check file extension: D:/Detection-and-Remove-Trojan\config\__pycache__\__init__.cpython-310.pyc
+Traceback (most recent call last):
+  File "D:\Detection-and-Remove-Trojan\scanner\base_scanner.py", line 22, in is_suspicious_extension
+    from config.settings import load_scan_extensions
+ImportError: cannot import name 'load_scan_extensions' from 'config.settings' (D:\Detection-and-Remove-Trojan\config\settings.py)
+[2025-12-23 11:52:31,107] [ERROR] [BaseScanner] Failed to check file extension: D:/Detection-and-Remove-Trojan\database\db_manager.py
+Traceback (most recent call last):
+  File "D:\Detection-and-Remove-Trojan\scanner\base_scanner.py", line 22, in is_suspicious_extension
+    from config.settings import load_scan_extensions
+ImportError: cannot import name 'load_scan_extensions' from 'config.settings' (D:\Detection-and-Remove-Trojan\config\settings.py)
+[2025-12-23 11:52:31,107] [ERROR] [BaseScanner] Failed to check file extension: D:/Detection-and-Remove-Trojan\database\models.py
+Traceback (most recent call last):
+  File "D:\Detection-and-Remove-Trojan\scanner\base_scanner.py", line 22, in is_suspicious_extension
+    from config.settings import load_scan_extensions
+ImportError: cannot import name 'load_scan_extensions' from 'config.settings' (D:\Detection-and-Remove-Trojan\config\settings.py)
+[2025-12-23 11:52:31,107] [ERROR] [BaseScanner] Failed to check file extension: D:/Detection-and-Remove-Trojan\database\scanner.db
+Traceback (most recent call last):
+  File "D:\Detection-and-Remove-Trojan\scanner\base_scanner.py", line 22, in is_suspicious_extension
+    from config.settings import load_scan_extensions
+ImportError: cannot import name 'load_scan_extensions' from 'config.settings' (D:\Detection-and-Remove-Trojan\config\settings.py)
+[2025-12-23 11:52:31,107] [ERROR] [BaseScanner] Failed to check file extension: D:/Detection-and-Remove-Trojan\database\__init__.py
+Traceback (most recent call last):
+  File "D:\Detection-and-Remove-Trojan\scanner\base_scanner.py", line 22, in is_suspicious_extension
+    from config.settings import load_scan_extensions
+ImportError: cannot import name 'load_scan_extensions' from 'config.settings' (D:\Detection-and-Remove-Trojan\config\settings.py)
+[2025-12-23 11:52:31,108] [ERROR] [BaseScanner] Failed to check file extension: D:/Detection-and-Remove-Trojan\database\__pycache__\db_manager.cpython-310.pyc
+Traceback (most recent call last):
+  File "D:\Detection-and-Remove-Trojan\scanner\base_scanner.py", line 22, in is_suspicious_extension
+    from config.settings import load_scan_extensions
+ImportError: cannot import name 'load_scan_extensions' from 'config.settings' (D:\Detection-and-Remove-Trojan\config\settings.py)
+[2025-12-23 11:52:31,108] [ERROR] [BaseScanner] Failed to check file extension: D:/Detection-and-Remove-Trojan\database\__pycache__\models.cpython-310.pyc
+Traceback (most recent call last):
+  File "D:\Detection-and-Remove-Trojan\scanner\base_scanner.py", line 22, in is_suspicious_extension
+    from config.settings import load_scan_extensions
+ImportError: cannot import name 'load_scan_extensions' from 'config.settings' (D:\Detection-and-Remove-Trojan\config\settings.py)
+[2025-12-23 11:52:31,108] [ERROR] [BaseScanner] Failed to check file extension: D:/Detection-and-Remove-Trojan\database\__pycache__\__init__.cpython-310.pyc
+Traceback (most recent call last):
+  File "D:\Detection-and-Remove-Trojan\scanner\base_scanner.py", line 22, in is_suspicious_extension
+    from config.settings import load_scan_extensions
+ImportError: cannot import name 'load_scan_extensions' from 'config.settings' (D:\Detection-and-Remove-Trojan\config\settings.py)
+[2025-12-23 11:52:31,108] [ERROR] [BaseScanner] Failed to check file extension: D:/Detection-and-Remove-Trojan\dist\main.exe
+Traceback (most recent call last):
+  File "D:\Detection-and-Remove-Trojan\scanner\base_scanner.py", line 22, in is_suspicious_extension
+    from config.settings import load_scan_extensions
+ImportError: cannot import name 'load_scan_extensions' from 'config.settings' (D:\Detection-and-Remove-Trojan\config\settings.py)
+[2025-12-23 11:52:31,109] [ERROR] [BaseScanner] Failed to check file extension: D:/Detection-and-Remove-Trojan\dist\simple_test.exe
+Traceback (most recent call last):
+  File "D:\Detection-and-Remove-Trojan\scanner\base_scanner.py", line 22, in is_suspicious_extension
+    from config.settings import load_scan_extensions
+ImportError: cannot import name 'load_scan_extensions' from 'config.settings' (D:\Detection-and-Remove-Trojan\config\settings.py)
+[2025-12-23 11:52:31,110] [ERROR] [BaseScanner] Failed to check file extension: D:/Detection-and-Remove-Trojan\gui\gui.py
+Traceback (most recent call last):
+  File "D:\Detection-and-Remove-Trojan\scanner\base_scanner.py", line 22, in is_suspicious_extension
+    from config.settings import load_scan_extensions
+ImportError: cannot import name 'load_scan_extensions' from 'config.settings' (D:\Detection-and-Remove-Trojan\config\settings.py)
+[2025-12-23 11:52:31,110] [ERROR] [BaseScanner] Failed to check file extension: D:/Detection-and-Remove-Trojan\gui\main_window.py
+Traceback (most recent call last):
+  File "D:\Detection-and-Remove-Trojan\scanner\base_scanner.py", line 22, in is_suspicious_extension
+    from config.settings import load_scan_extensions
+ImportError: cannot import name 'load_scan_extensions' from 'config.settings' (D:\Detection-and-Remove-Trojan\config\settings.py)
+[2025-12-23 11:52:31,110] [ERROR] [BaseScanner] Failed to check file extension: D:/Detection-and-Remove-Trojan\gui\__init__.py
+Traceback (most recent call last):
+  File "D:\Detection-and-Remove-Trojan\scanner\base_scanner.py", line 22, in is_suspicious_extension
+    from config.settings import load_scan_extensions
+ImportError: cannot import name 'load_scan_extensions' from 'config.settings' (D:\Detection-and-Remove-Trojan\config\settings.py)
+[2025-12-23 11:52:31,111] [ERROR] [BaseScanner] Failed to check file extension: D:/Detection-and-Remove-Trojan\gui\__pycache__\main_window.cpython-310.pyc
+Traceback (most recent call last):
+  File "D:\Detection-and-Remove-Trojan\scanner\base_scanner.py", line 22, in is_suspicious_extension
+    from config.settings import load_scan_extensions
+ImportError: cannot import name 'load_scan_extensions' from 'config.settings' (D:\Detection-and-Remove-Trojan\config\settings.py)
+[2025-12-23 11:52:31,111] [ERROR] [BaseScanner] Failed to check file extension: D:/Detection-and-Remove-Trojan\gui\__pycache__\__init__.cpython-310.pyc
+Traceback (most recent call last):
+  File "D:\Detection-and-Remove-Trojan\scanner\base_scanner.py", line 22, in is_suspicious_extension
+    from config.settings import load_scan_extensions
+ImportError: cannot import name 'load_scan_extensions' from 'config.settings' (D:\Detection-and-Remove-Trojan\config\settings.py)
+[2025-12-23 11:52:31,111] [ERROR] [BaseScanner] Failed to check file extension: D:/Detection-and-Remove-Trojan\logs\app.log
+Traceback (most recent call last):
+  File "D:\Detection-and-Remove-Trojan\scanner\base_scanner.py", line 22, in is_suspicious_extension
+    from config.settings import load_scan_extensions
+ImportError: cannot import name 'load_scan_extensions' from 'config.settings' (D:\Detection-and-Remove-Trojan\config\settings.py)
+[2025-12-23 11:52:31,111] [ERROR] [BaseScanner] Failed to check file extension: D:/Detection-and-Remove-Trojan\logs\error.log
+Traceback (most recent call last):
+  File "D:\Detection-and-Remove-Trojan\scanner\base_scanner.py", line 22, in is_suspicious_extension
+    from config.settings import load_scan_extensions
+ImportError: cannot import name 'load_scan_extensions' from 'config.settings' (D:\Detection-and-Remove-Trojan\config\settings.py)
+[2025-12-23 11:52:31,111] [ERROR] [BaseScanner] Failed to check file extension: D:/Detection-and-Remove-Trojan\quarantine\quarantined\1_test.exe
+Traceback (most recent call last):
+  File "D:\Detection-and-Remove-Trojan\scanner\base_scanner.py", line 22, in is_suspicious_extension
+    from config.settings import load_scan_extensions
+ImportError: cannot import name 'load_scan_extensions' from 'config.settings' (D:\Detection-and-Remove-Trojan\config\settings.py)
+[2025-12-23 11:52:31,112] [ERROR] [BaseScanner] Failed to check file extension: D:/Detection-and-Remove-Trojan\quarantine\quarantined\4_eicar.exe
+Traceback (most recent call last):
+  File "D:\Detection-and-Remove-Trojan\scanner\base_scanner.py", line 22, in is_suspicious_extension
+    from config.settings import load_scan_extensions
+ImportError: cannot import name 'load_scan_extensions' from 'config.settings' (D:\Detection-and-Remove-Trojan\config\settings.py)
+[2025-12-23 11:52:31,112] [ERROR] [BaseScanner] Failed to check file extension: D:/Detection-and-Remove-Trojan\quarantine\quarantined\9_eicar.exe
+Traceback (most recent call last):
+  File "D:\Detection-and-Remove-Trojan\scanner\base_scanner.py", line 22, in is_suspicious_extension
+    from config.settings import load_scan_extensions
+ImportError: cannot import name 'load_scan_extensions' from 'config.settings' (D:\Detection-and-Remove-Trojan\config\settings.py)
+[2025-12-23 11:52:31,112] [ERROR] [BaseScanner] Failed to check file extension: D:/Detection-and-Remove-Trojan\scanner\base_scanner.py
+Traceback (most recent call last):
+  File "D:\Detection-and-Remove-Trojan\scanner\base_scanner.py", line 22, in is_suspicious_extension
+    from config.settings import load_scan_extensions
+ImportError: cannot import name 'load_scan_extensions' from 'config.settings' (D:\Detection-and-Remove-Trojan\config\settings.py)
+[2025-12-23 11:52:31,112] [ERROR] [BaseScanner] Failed to check file extension: D:/Detection-and-Remove-Trojan\scanner\behaviour_scanner.py
+Traceback (most recent call last):
+  File "D:\Detection-and-Remove-Trojan\scanner\base_scanner.py", line 22, in is_suspicious_extension
+    from config.settings import load_scan_extensions
+ImportError: cannot import name 'load_scan_extensions' from 'config.settings' (D:\Detection-and-Remove-Trojan\config\settings.py)
+[2025-12-23 11:52:31,112] [ERROR] [BaseScanner] Failed to check file extension: D:/Detection-and-Remove-Trojan\scanner\dynamic_analysis_api.py
+Traceback (most recent call last):
+  File "D:\Detection-and-Remove-Trojan\scanner\base_scanner.py", line 22, in is_suspicious_extension
+    from config.settings import load_scan_extensions
+ImportError: cannot import name 'load_scan_extensions' from 'config.settings' (D:\Detection-and-Remove-Trojan\config\settings.py)
+[2025-12-23 11:52:31,112] [ERROR] [BaseScanner] Failed to check file extension: D:/Detection-and-Remove-Trojan\scanner\dynamic_runner.py
+Traceback (most recent call last):
+  File "D:\Detection-and-Remove-Trojan\scanner\base_scanner.py", line 22, in is_suspicious_extension
+    from config.settings import load_scan_extensions
+ImportError: cannot import name 'load_scan_extensions' from 'config.settings' (D:\Detection-and-Remove-Trojan\config\settings.py)
+[2025-12-23 11:52:31,112] [ERROR] [BaseScanner] Failed to check file extension: D:/Detection-and-Remove-Trojan\scanner\full_scan.py
+Traceback (most recent call last):
+  File "D:\Detection-and-Remove-Trojan\scanner\base_scanner.py", line 22, in is_suspicious_extension
+    from config.settings import load_scan_extensions
+ImportError: cannot import name 'load_scan_extensions' from 'config.settings' (D:\Detection-and-Remove-Trojan\config\settings.py)
+[2025-12-23 11:52:31,112] [ERROR] [BaseScanner] Failed to check file extension: D:/Detection-and-Remove-Trojan\scanner\signature_scanner.py
+Traceback (most recent call last):
+  File "D:\Detection-and-Remove-Trojan\scanner\base_scanner.py", line 22, in is_suspicious_extension
+    from config.settings import load_scan_extensions
+ImportError: cannot import name 'load_scan_extensions' from 'config.settings' (D:\Detection-and-Remove-Trojan\config\settings.py)
+[2025-12-23 11:52:31,114] [ERROR] [BaseScanner] Failed to check file extension: D:/Detection-and-Remove-Trojan\scanner\virustotal_scanner.py
+Traceback (most recent call last):
+  File "D:\Detection-and-Remove-Trojan\scanner\base_scanner.py", line 22, in is_suspicious_extension
+    from config.settings import load_scan_extensions
+ImportError: cannot import name 'load_scan_extensions' from 'config.settings' (D:\Detection-and-Remove-Trojan\config\settings.py)
+[2025-12-23 11:52:31,114] [ERROR] [BaseScanner] Failed to check file extension: D:/Detection-and-Remove-Trojan\scanner\__init__.py
+Traceback (most recent call last):
+  File "D:\Detection-and-Remove-Trojan\scanner\base_scanner.py", line 22, in is_suspicious_extension
+    from config.settings import load_scan_extensions
+ImportError: cannot import name 'load_scan_extensions' from 'config.settings' (D:\Detection-and-Remove-Trojan\config\settings.py)
+[2025-12-23 11:52:31,114] [ERROR] [BaseScanner] Failed to check file extension: D:/Detection-and-Remove-Trojan\scanner\monitors\fs_monitor.py
+Traceback (most recent call last):
+  File "D:\Detection-and-Remove-Trojan\scanner\base_scanner.py", line 22, in is_suspicious_extension
+    from config.settings import load_scan_extensions
+ImportError: cannot import name 'load_scan_extensions' from 'config.settings' (D:\Detection-and-Remove-Trojan\config\settings.py)
+[2025-12-23 11:52:31,114] [ERROR] [BaseScanner] Failed to check file extension: D:/Detection-and-Remove-Trojan\scanner\monitors\init.py
+Traceback (most recent call last):
+  File "D:\Detection-and-Remove-Trojan\scanner\base_scanner.py", line 22, in is_suspicious_extension
+    from config.settings import load_scan_extensions
+ImportError: cannot import name 'load_scan_extensions' from 'config.settings' (D:\Detection-and-Remove-Trojan\config\settings.py)
+[2025-12-23 11:52:31,114] [ERROR] [BaseScanner] Failed to check file extension: D:/Detection-and-Remove-Trojan\scanner\monitors\network_monitor.py
+Traceback (most recent call last):
+  File "D:\Detection-and-Remove-Trojan\scanner\base_scanner.py", line 22, in is_suspicious_extension
+    from config.settings import load_scan_extensions
+ImportError: cannot import name 'load_scan_extensions' from 'config.settings' (D:\Detection-and-Remove-Trojan\config\settings.py)
+[2025-12-23 11:52:31,115] [ERROR] [BaseScanner] Failed to check file extension: D:/Detection-and-Remove-Trojan\scanner\monitors\process_monitor.py
+Traceback (most recent call last):
+  File "D:\Detection-and-Remove-Trojan\scanner\base_scanner.py", line 22, in is_suspicious_extension
+    from config.settings import load_scan_extensions
+ImportError: cannot import name 'load_scan_extensions' from 'config.settings' (D:\Detection-and-Remove-Trojan\config\settings.py)
+[2025-12-23 11:52:31,115] [ERROR] [BaseScanner] Failed to check file extension: D:/Detection-and-Remove-Trojan\scanner\monitors\__pycache__\fs_monitor.cpython-310.pyc
+Traceback (most recent call last):
+  File "D:\Detection-and-Remove-Trojan\scanner\base_scanner.py", line 22, in is_suspicious_extension
+    from config.settings import load_scan_extensions
+ImportError: cannot import name 'load_scan_extensions' from 'config.settings' (D:\Detection-and-Remove-Trojan\config\settings.py)
+[2025-12-23 11:52:31,115] [ERROR] [BaseScanner] Failed to check file extension: D:/Detection-and-Remove-Trojan\scanner\monitors\__pycache__\network_monitor.cpython-310.pyc
+Traceback (most recent call last):
+  File "D:\Detection-and-Remove-Trojan\scanner\base_scanner.py", line 22, in is_suspicious_extension
+    from config.settings import load_scan_extensions
+ImportError: cannot import name 'load_scan_extensions' from 'config.settings' (D:\Detection-and-Remove-Trojan\config\settings.py)
+[2025-12-23 11:52:31,116] [ERROR] [BaseScanner] Failed to check file extension: D:/Detection-and-Remove-Trojan\scanner\monitors\__pycache__\process_monitor.cpython-310.pyc
+Traceback (most recent call last):
+  File "D:\Detection-and-Remove-Trojan\scanner\base_scanner.py", line 22, in is_suspicious_extension
+    from config.settings import load_scan_extensions
+ImportError: cannot import name 'load_scan_extensions' from 'config.settings' (D:\Detection-and-Remove-Trojan\config\settings.py)
+[2025-12-23 11:52:31,116] [ERROR] [BaseScanner] Failed to check file extension: D:/Detection-and-Remove-Trojan\scanner\__pycache__\base_scanner.cpython-310.pyc
+Traceback (most recent call last):
+  File "D:\Detection-and-Remove-Trojan\scanner\base_scanner.py", line 22, in is_suspicious_extension
+    from config.settings import load_scan_extensions
+ImportError: cannot import name 'load_scan_extensions' from 'config.settings' (D:\Detection-and-Remove-Trojan\config\settings.py)
+[2025-12-23 11:52:31,117] [ERROR] [BaseScanner] Failed to check file extension: D:/Detection-and-Remove-Trojan\scanner\__pycache__\behaviour_scanner.cpython-310.pyc
+Traceback (most recent call last):
+  File "D:\Detection-and-Remove-Trojan\scanner\base_scanner.py", line 22, in is_suspicious_extension
+    from config.settings import load_scan_extensions
+ImportError: cannot import name 'load_scan_extensions' from 'config.settings' (D:\Detection-and-Remove-Trojan\config\settings.py)
+[2025-12-23 11:52:31,117] [ERROR] [BaseScanner] Failed to check file extension: D:/Detection-and-Remove-Trojan\scanner\__pycache__\dynamic_analysis_api.cpython-310.pyc
+Traceback (most recent call last):
+  File "D:\Detection-and-Remove-Trojan\scanner\base_scanner.py", line 22, in is_suspicious_extension
+    from config.settings import load_scan_extensions
+ImportError: cannot import name 'load_scan_extensions' from 'config.settings' (D:\Detection-and-Remove-Trojan\config\settings.py)
+[2025-12-23 11:52:31,117] [ERROR] [BaseScanner] Failed to check file extension: D:/Detection-and-Remove-Trojan\scanner\__pycache__\dynamic_runner.cpython-310.pyc
+Traceback (most recent call last):
+  File "D:\Detection-and-Remove-Trojan\scanner\base_scanner.py", line 22, in is_suspicious_extension
+    from config.settings import load_scan_extensions
+ImportError: cannot import name 'load_scan_extensions' from 'config.settings' (D:\Detection-and-Remove-Trojan\config\settings.py)
+[2025-12-23 11:52:31,117] [ERROR] [BaseScanner] Failed to check file extension: D:/Detection-and-Remove-Trojan\scanner\__pycache__\full_scan.cpython-310.pyc
+Traceback (most recent call last):
+  File "D:\Detection-and-Remove-Trojan\scanner\base_scanner.py", line 22, in is_suspicious_extension
+    from config.settings import load_scan_extensions
+ImportError: cannot import name 'load_scan_extensions' from 'config.settings' (D:\Detection-and-Remove-Trojan\config\settings.py)
+[2025-12-23 11:52:31,117] [ERROR] [BaseScanner] Failed to check file extension: D:/Detection-and-Remove-Trojan\scanner\__pycache__\signature_scanner.cpython-310.pyc
+Traceback (most recent call last):
+  File "D:\Detection-and-Remove-Trojan\scanner\base_scanner.py", line 22, in is_suspicious_extension
+    from config.settings import load_scan_extensions
+ImportError: cannot import name 'load_scan_extensions' from 'config.settings' (D:\Detection-and-Remove-Trojan\config\settings.py)
+[2025-12-23 11:52:31,117] [ERROR] [BaseScanner] Failed to check file extension: D:/Detection-and-Remove-Trojan\scanner\__pycache__\virustotal_scanner.cpython-310.pyc
+Traceback (most recent call last):
+  File "D:\Detection-and-Remove-Trojan\scanner\base_scanner.py", line 22, in is_suspicious_extension
+    from config.settings import load_scan_extensions
+ImportError: cannot import name 'load_scan_extensions' from 'config.settings' (D:\Detection-and-Remove-Trojan\config\settings.py)
+[2025-12-23 11:52:31,117] [ERROR] [BaseScanner] Failed to check file extension: D:/Detection-and-Remove-Trojan\scanner\__pycache__\__init__.cpython-310.pyc
+Traceback (most recent call last):
+  File "D:\Detection-and-Remove-Trojan\scanner\base_scanner.py", line 22, in is_suspicious_extension
+    from config.settings import load_scan_extensions
+ImportError: cannot import name 'load_scan_extensions' from 'config.settings' (D:\Detection-and-Remove-Trojan\config\settings.py)
+[2025-12-23 11:52:31,117] [ERROR] [BaseScanner] Failed to check file extension: D:/Detection-and-Remove-Trojan\tests\test_eicar.py
+Traceback (most recent call last):
+  File "D:\Detection-and-Remove-Trojan\scanner\base_scanner.py", line 22, in is_suspicious_extension
+    from config.settings import load_scan_extensions
+ImportError: cannot import name 'load_scan_extensions' from 'config.settings' (D:\Detection-and-Remove-Trojan\config\settings.py)
+[2025-12-23 11:52:31,117] [ERROR] [BaseScanner] Failed to check file extension: D:/Detection-and-Remove-Trojan\tests\test_file_hash.py
+Traceback (most recent call last):
+  File "D:\Detection-and-Remove-Trojan\scanner\base_scanner.py", line 22, in is_suspicious_extension
+    from config.settings import load_scan_extensions
+ImportError: cannot import name 'load_scan_extensions' from 'config.settings' (D:\Detection-and-Remove-Trojan\config\settings.py)
+[2025-12-23 11:52:31,117] [ERROR] [BaseScanner] Failed to check file extension: D:/Detection-and-Remove-Trojan\tests\__init__.py
+Traceback (most recent call last):
+  File "D:\Detection-and-Remove-Trojan\scanner\base_scanner.py", line 22, in is_suspicious_extension
+    from config.settings import load_scan_extensions
+ImportError: cannot import name 'load_scan_extensions' from 'config.settings' (D:\Detection-and-Remove-Trojan\config\settings.py)
+[2025-12-23 11:52:31,117] [ERROR] [BaseScanner] Failed to check file extension: D:/Detection-and-Remove-Trojan\utils\file_hash.py
+Traceback (most recent call last):
+  File "D:\Detection-and-Remove-Trojan\scanner\base_scanner.py", line 22, in is_suspicious_extension
+    from config.settings import load_scan_extensions
+ImportError: cannot import name 'load_scan_extensions' from 'config.settings' (D:\Detection-and-Remove-Trojan\config\settings.py)
+[2025-12-23 11:52:31,117] [ERROR] [BaseScanner] Failed to check file extension: D:/Detection-and-Remove-Trojan\utils\logger.py
+Traceback (most recent call last):
+  File "D:\Detection-and-Remove-Trojan\scanner\base_scanner.py", line 22, in is_suspicious_extension
+    from config.settings import load_scan_extensions
+ImportError: cannot import name 'load_scan_extensions' from 'config.settings' (D:\Detection-and-Remove-Trojan\config\settings.py)
+[2025-12-23 11:52:31,117] [ERROR] [BaseScanner] Failed to check file extension: D:/Detection-and-Remove-Trojan\utils\__init__.py
+Traceback (most recent call last):
+  File "D:\Detection-and-Remove-Trojan\scanner\base_scanner.py", line 22, in is_suspicious_extension
+    from config.settings import load_scan_extensions
+ImportError: cannot import name 'load_scan_extensions' from 'config.settings' (D:\Detection-and-Remove-Trojan\config\settings.py)
+[2025-12-23 11:52:31,117] [ERROR] [BaseScanner] Failed to check file extension: D:/Detection-and-Remove-Trojan\utils\__pycache__\file_hash.cpython-310.pyc
+Traceback (most recent call last):
+  File "D:\Detection-and-Remove-Trojan\scanner\base_scanner.py", line 22, in is_suspicious_extension
+    from config.settings import load_scan_extensions
+ImportError: cannot import name 'load_scan_extensions' from 'config.settings' (D:\Detection-and-Remove-Trojan\config\settings.py)
+[2025-12-23 11:52:31,117] [ERROR] [BaseScanner] Failed to check file extension: D:/Detection-and-Remove-Trojan\utils\__pycache__\logger.cpython-310.pyc
+Traceback (most recent call last):
+  File "D:\Detection-and-Remove-Trojan\scanner\base_scanner.py", line 22, in is_suspicious_extension
+    from config.settings import load_scan_extensions
+ImportError: cannot import name 'load_scan_extensions' from 'config.settings' (D:\Detection-and-Remove-Trojan\config\settings.py)
+[2025-12-23 11:52:31,117] [ERROR] [BaseScanner] Failed to check file extension: D:/Detection-and-Remove-Trojan\utils\__pycache__\__init__.cpython-310.pyc
+Traceback (most recent call last):
+  File "D:\Detection-and-Remove-Trojan\scanner\base_scanner.py", line 22, in is_suspicious_extension
+    from config.settings import load_scan_extensions
+ImportError: cannot import name 'load_scan_extensions' from 'config.settings' (D:\Detection-and-Remove-Trojan\config\settings.py)
+[2025-12-23 11:52:31,123] [ERROR] [BaseScanner] Failed to check file extension: D:/Detection-and-Remove-Trojan\.gitignore
+Traceback (most recent call last):
+  File "D:\Detection-and-Remove-Trojan\scanner\base_scanner.py", line 22, in is_suspicious_extension
+    from config.settings import load_scan_extensions
+ImportError: cannot import name 'load_scan_extensions' from 'config.settings' (D:\Detection-and-Remove-Trojan\config\settings.py)
+[2025-12-23 11:52:31,123] [ERROR] [BaseScanner] Failed to check file extension: D:/Detection-and-Remove-Trojan\create_test_executable.py
+Traceback (most recent call last):
+  File "D:\Detection-and-Remove-Trojan\scanner\base_scanner.py", line 22, in is_suspicious_extension
+    from config.settings import load_scan_extensions
+ImportError: cannot import name 'load_scan_extensions' from 'config.settings' (D:\Detection-and-Remove-Trojan\config\settings.py)
+[2025-12-23 11:52:31,124] [ERROR] [BaseScanner] Failed to check file extension: D:/Detection-and-Remove-Trojan\main.py
+Traceback (most recent call last):
+  File "D:\Detection-and-Remove-Trojan\scanner\base_scanner.py", line 22, in is_suspicious_extension
+    from config.settings import load_scan_extensions
+ImportError: cannot import name 'load_scan_extensions' from 'config.settings' (D:\Detection-and-Remove-Trojan\config\settings.py)
+[2025-12-23 11:52:31,124] [ERROR] [BaseScanner] Failed to check file extension: D:/Detection-and-Remove-Trojan\main.spec
+Traceback (most recent call last):
+  File "D:\Detection-and-Remove-Trojan\scanner\base_scanner.py", line 22, in is_suspicious_extension
+    from config.settings import load_scan_extensions
+ImportError: cannot import name 'load_scan_extensions' from 'config.settings' (D:\Detection-and-Remove-Trojan\config\settings.py)
+[2025-12-23 11:52:31,124] [ERROR] [BaseScanner] Failed to check file extension: D:/Detection-and-Remove-Trojan\requirements.txt
+Traceback (most recent call last):
+  File "D:\Detection-and-Remove-Trojan\scanner\base_scanner.py", line 22, in is_suspicious_extension
+    from config.settings import load_scan_extensions
+ImportError: cannot import name 'load_scan_extensions' from 'config.settings' (D:\Detection-and-Remove-Trojan\config\settings.py)
+[2025-12-23 11:52:31,124] [ERROR] [BaseScanner] Failed to check file extension: D:/Detection-and-Remove-Trojan\scanner.db
+Traceback (most recent call last):
+  File "D:\Detection-and-Remove-Trojan\scanner\base_scanner.py", line 22, in is_suspicious_extension
+    from config.settings import load_scan_extensions
+ImportError: cannot import name 'load_scan_extensions' from 'config.settings' (D:\Detection-and-Remove-Trojan\config\settings.py)
+[2025-12-23 11:52:31,124] [ERROR] [BaseScanner] Failed to check file extension: D:/Detection-and-Remove-Trojan\simple_test.py
+Traceback (most recent call last):
+  File "D:\Detection-and-Remove-Trojan\scanner\base_scanner.py", line 22, in is_suspicious_extension
+    from config.settings import load_scan_extensions
+ImportError: cannot import name 'load_scan_extensions' from 'config.settings' (D:\Detection-and-Remove-Trojan\config\settings.py)
+[2025-12-23 11:52:31,124] [ERROR] [BaseScanner] Failed to check file extension: D:/Detection-and-Remove-Trojan\simple_test.spec
+Traceback (most recent call last):
+  File "D:\Detection-and-Remove-Trojan\scanner\base_scanner.py", line 22, in is_suspicious_extension
+    from config.settings import load_scan_extensions
+ImportError: cannot import name 'load_scan_extensions' from 'config.settings' (D:\Detection-and-Remove-Trojan\config\settings.py)
+[2025-12-23 11:52:31,124] [ERROR] [BaseScanner] Failed to check file extension: D:/Detection-and-Remove-Trojan\test.exe
+Traceback (most recent call last):
+  File "D:\Detection-and-Remove-Trojan\scanner\base_scanner.py", line 22, in is_suspicious_extension
+    from config.settings import load_scan_extensions
+ImportError: cannot import name 'load_scan_extensions' from 'config.settings' (D:\Detection-and-Remove-Trojan\config\settings.py)
+[2025-12-23 11:52:31,124] [ERROR] [BaseScanner] Failed to check file extension: D:/Detection-and-Remove-Trojan\test_dynamic_analysis.py
+Traceback (most recent call last):
+  File "D:\Detection-and-Remove-Trojan\scanner\base_scanner.py", line 22, in is_suspicious_extension
+    from config.settings import load_scan_extensions
+ImportError: cannot import name 'load_scan_extensions' from 'config.settings' (D:\Detection-and-Remove-Trojan\config\settings.py)
+[2025-12-23 11:52:31,124] [ERROR] [BaseScanner] Failed to check file extension: D:/Detection-and-Remove-Trojan\test_sample.bat
+Traceback (most recent call last):
+  File "D:\Detection-and-Remove-Trojan\scanner\base_scanner.py", line 22, in is_suspicious_extension
+    from config.settings import load_scan_extensions
+ImportError: cannot import name 'load_scan_extensions' from 'config.settings' (D:\Detection-and-Remove-Trojan\config\settings.py)
+[2025-12-23 11:52:31,124] [ERROR] [BaseScanner] Failed to check file extension: D:/Detection-and-Remove-Trojan\test_sample.py
+Traceback (most recent call last):
+  File "D:\Detection-and-Remove-Trojan\scanner\base_scanner.py", line 22, in is_suspicious_extension
+    from config.settings import load_scan_extensions
+ImportError: cannot import name 'load_scan_extensions' from 'config.settings' (D:\Detection-and-Remove-Trojan\config\settings.py)
+[2025-12-23 11:52:31,124] [ERROR] [BaseScanner] Failed to check file extension: D:/Detection-and-Remove-Trojan\.git\COMMIT_EDITMSG
+Traceback (most recent call last):
+  File "D:\Detection-and-Remove-Trojan\scanner\base_scanner.py", line 22, in is_suspicious_extension
+    from config.settings import load_scan_extensions
+ImportError: cannot import name 'load_scan_extensions' from 'config.settings' (D:\Detection-and-Remove-Trojan\config\settings.py)
+[2025-12-23 11:52:31,124] [ERROR] [BaseScanner] Failed to check file extension: D:/Detection-and-Remove-Trojan\.git\config
+Traceback (most recent call last):
+  File "D:\Detection-and-Remove-Trojan\scanner\base_scanner.py", line 22, in is_suspicious_extension
+    from config.settings import load_scan_extensions
+ImportError: cannot import name 'load_scan_extensions' from 'config.settings' (D:\Detection-and-Remove-Trojan\config\settings.py)
+[2025-12-23 11:52:31,124] [ERROR] [BaseScanner] Failed to check file extension: D:/Detection-and-Remove-Trojan\.git\description
+Traceback (most recent call last):
+  File "D:\Detection-and-Remove-Trojan\scanner\base_scanner.py", line 22, in is_suspicious_extension
+    from config.settings import load_scan_extensions
+ImportError: cannot import name 'load_scan_extensions' from 'config.settings' (D:\Detection-and-Remove-Trojan\config\settings.py)
+[2025-12-23 11:52:31,124] [ERROR] [BaseScanner] Failed to check file extension: D:/Detection-and-Remove-Trojan\.git\FETCH_HEAD
+Traceback (most recent call last):
+  File "D:\Detection-and-Remove-Trojan\scanner\base_scanner.py", line 22, in is_suspicious_extension
+    from config.settings import load_scan_extensions
+ImportError: cannot import name 'load_scan_extensions' from 'config.settings' (D:\Detection-and-Remove-Trojan\config\settings.py)
+[2025-12-23 11:52:31,124] [ERROR] [BaseScanner] Failed to check file extension: D:/Detection-and-Remove-Trojan\.git\HEAD
+Traceback (most recent call last):
+  File "D:\Detection-and-Remove-Trojan\scanner\base_scanner.py", line 22, in is_suspicious_extension
+    from config.settings import load_scan_extensions
+ImportError: cannot import name 'load_scan_extensions' from 'config.settings' (D:\Detection-and-Remove-Trojan\config\settings.py)
+[2025-12-23 11:52:31,124] [ERROR] [BaseScanner] Failed to check file extension: D:/Detection-and-Remove-Trojan\.git\index
+Traceback (most recent call last):
+  File "D:\Detection-and-Remove-Trojan\scanner\base_scanner.py", line 22, in is_suspicious_extension
+    from config.settings import load_scan_extensions
+ImportError: cannot import name 'load_scan_extensions' from 'config.settings' (D:\Detection-and-Remove-Trojan\config\settings.py)
+[2025-12-23 11:52:31,124] [ERROR] [BaseScanner] Failed to check file extension: D:/Detection-and-Remove-Trojan\.git\ORIG_HEAD
+Traceback (most recent call last):
+  File "D:\Detection-and-Remove-Trojan\scanner\base_scanner.py", line 22, in is_suspicious_extension
+    from config.settings import load_scan_extensions
+ImportError: cannot import name 'load_scan_extensions' from 'config.settings' (D:\Detection-and-Remove-Trojan\config\settings.py)
+[2025-12-23 11:52:31,124] [ERROR] [BaseScanner] Failed to check file extension: D:/Detection-and-Remove-Trojan\.git\packed-refs
+Traceback (most recent call last):
+  File "D:\Detection-and-Remove-Trojan\scanner\base_scanner.py", line 22, in is_suspicious_extension
+    from config.settings import load_scan_extensions
+ImportError: cannot import name 'load_scan_extensions' from 'config.settings' (D:\Detection-and-Remove-Trojan\config\settings.py)
+[2025-12-23 11:52:31,130] [ERROR] [BaseScanner] Failed to check file extension: D:/Detection-and-Remove-Trojan\.git\hooks\applypatch-msg.sample
+Traceback (most recent call last):
+  File "D:\Detection-and-Remove-Trojan\scanner\base_scanner.py", line 22, in is_suspicious_extension
+    from config.settings import load_scan_extensions
+ImportError: cannot import name 'load_scan_extensions' from 'config.settings' (D:\Detection-and-Remove-Trojan\config\settings.py)
+[2025-12-23 11:52:31,130] [ERROR] [BaseScanner] Failed to check file extension: D:/Detection-and-Remove-Trojan\.git\hooks\commit-msg.sample
+Traceback (most recent call last):
+  File "D:\Detection-and-Remove-Trojan\scanner\base_scanner.py", line 22, in is_suspicious_extension
+    from config.settings import load_scan_extensions
+ImportError: cannot import name 'load_scan_extensions' from 'config.settings' (D:\Detection-and-Remove-Trojan\config\settings.py)
+[2025-12-23 11:52:31,130] [ERROR] [BaseScanner] Failed to check file extension: D:/Detection-and-Remove-Trojan\.git\hooks\fsmonitor-watchman.sample
+Traceback (most recent call last):
+  File "D:\Detection-and-Remove-Trojan\scanner\base_scanner.py", line 22, in is_suspicious_extension
+    from config.settings import load_scan_extensions
+ImportError: cannot import name 'load_scan_extensions' from 'config.settings' (D:\Detection-and-Remove-Trojan\config\settings.py)
+[2025-12-23 11:52:31,130] [ERROR] [BaseScanner] Failed to check file extension: D:/Detection-and-Remove-Trojan\.git\hooks\post-update.sample
+Traceback (most recent call last):
+  File "D:\Detection-and-Remove-Trojan\scanner\base_scanner.py", line 22, in is_suspicious_extension
+    from config.settings import load_scan_extensions
+ImportError: cannot import name 'load_scan_extensions' from 'config.settings' (D:\Detection-and-Remove-Trojan\config\settings.py)
+[2025-12-23 11:52:31,130] [ERROR] [BaseScanner] Failed to check file extension: D:/Detection-and-Remove-Trojan\.git\hooks\pre-applypatch.sample
+Traceback (most recent call last):
+  File "D:\Detection-and-Remove-Trojan\scanner\base_scanner.py", line 22, in is_suspicious_extension
+    from config.settings import load_scan_extensions
+ImportError: cannot import name 'load_scan_extensions' from 'config.settings' (D:\Detection-and-Remove-Trojan\config\settings.py)
+[2025-12-23 11:52:31,130] [ERROR] [BaseScanner] Failed to check file extension: D:/Detection-and-Remove-Trojan\.git\hooks\pre-commit.sample
+Traceback (most recent call last):
+  File "D:\Detection-and-Remove-Trojan\scanner\base_scanner.py", line 22, in is_suspicious_extension
+    from config.settings import load_scan_extensions
+ImportError: cannot import name 'load_scan_extensions' from 'config.settings' (D:\Detection-and-Remove-Trojan\config\settings.py)
+[2025-12-23 11:52:31,130] [ERROR] [BaseScanner] Failed to check file extension: D:/Detection-and-Remove-Trojan\.git\hooks\pre-merge-commit.sample
+Traceback (most recent call last):
+  File "D:\Detection-and-Remove-Trojan\scanner\base_scanner.py", line 22, in is_suspicious_extension
+    from config.settings import load_scan_extensions
+ImportError: cannot import name 'load_scan_extensions' from 'config.settings' (D:\Detection-and-Remove-Trojan\config\settings.py)
+[2025-12-23 11:52:31,130] [ERROR] [BaseScanner] Failed to check file extension: D:/Detection-and-Remove-Trojan\.git\hooks\pre-push.sample
+Traceback (most recent call last):
+  File "D:\Detection-and-Remove-Trojan\scanner\base_scanner.py", line 22, in is_suspicious_extension
+    from config.settings import load_scan_extensions
+ImportError: cannot import name 'load_scan_extensions' from 'config.settings' (D:\Detection-and-Remove-Trojan\config\settings.py)
+[2025-12-23 11:52:31,130] [ERROR] [BaseScanner] Failed to check file extension: D:/Detection-and-Remove-Trojan\.git\hooks\pre-rebase.sample
+Traceback (most recent call last):
+  File "D:\Detection-and-Remove-Trojan\scanner\base_scanner.py", line 22, in is_suspicious_extension
+    from config.settings import load_scan_extensions
+ImportError: cannot import name 'load_scan_extensions' from 'config.settings' (D:\Detection-and-Remove-Trojan\config\settings.py)
+[2025-12-23 11:52:31,130] [ERROR] [BaseScanner] Failed to check file extension: D:/Detection-and-Remove-Trojan\.git\hooks\pre-receive.sample
+Traceback (most recent call last):
+  File "D:\Detection-and-Remove-Trojan\scanner\base_scanner.py", line 22, in is_suspicious_extension
+    from config.settings import load_scan_extensions
+ImportError: cannot import name 'load_scan_extensions' from 'config.settings' (D:\Detection-and-Remove-Trojan\config\settings.py)
+[2025-12-23 11:52:31,130] [ERROR] [BaseScanner] Failed to check file extension: D:/Detection-and-Remove-Trojan\.git\hooks\prepare-commit-msg.sample
+Traceback (most recent call last):
+  File "D:\Detection-and-Remove-Trojan\scanner\base_scanner.py", line 22, in is_suspicious_extension
+    from config.settings import load_scan_extensions
+ImportError: cannot import name 'load_scan_extensions' from 'config.settings' (D:\Detection-and-Remove-Trojan\config\settings.py)
+[2025-12-23 11:52:31,130] [ERROR] [BaseScanner] Failed to check file extension: D:/Detection-and-Remove-Trojan\.git\hooks\push-to-checkout.sample
+Traceback (most recent call last):
+  File "D:\Detection-and-Remove-Trojan\scanner\base_scanner.py", line 22, in is_suspicious_extension
+    from config.settings import load_scan_extensions
+ImportError: cannot import name 'load_scan_extensions' from 'config.settings' (D:\Detection-and-Remove-Trojan\config\settings.py)
+[2025-12-23 11:52:31,134] [ERROR] [BaseScanner] Failed to check file extension: D:/Detection-and-Remove-Trojan\.git\hooks\sendemail-validate.sample
+Traceback (most recent call last):
+  File "D:\Detection-and-Remove-Trojan\scanner\base_scanner.py", line 22, in is_suspicious_extension
+    from config.settings import load_scan_extensions
+ImportError: cannot import name 'load_scan_extensions' from 'config.settings' (D:\Detection-and-Remove-Trojan\config\settings.py)
+[2025-12-23 11:52:31,134] [ERROR] [BaseScanner] Failed to check file extension: D:/Detection-and-Remove-Trojan\.git\hooks\update.sample
+Traceback (most recent call last):
+  File "D:\Detection-and-Remove-Trojan\scanner\base_scanner.py", line 22, in is_suspicious_extension
+    from config.settings import load_scan_extensions
+ImportError: cannot import name 'load_scan_extensions' from 'config.settings' (D:\Detection-and-Remove-Trojan\config\settings.py)
+[2025-12-23 11:52:31,134] [ERROR] [BaseScanner] Failed to check file extension: D:/Detection-and-Remove-Trojan\.git\info\exclude
+Traceback (most recent call last):
+  File "D:\Detection-and-Remove-Trojan\scanner\base_scanner.py", line 22, in is_suspicious_extension
+    from config.settings import load_scan_extensions
+ImportError: cannot import name 'load_scan_extensions' from 'config.settings' (D:\Detection-and-Remove-Trojan\config\settings.py)
+[2025-12-23 11:52:31,134] [ERROR] [BaseScanner] Failed to check file extension: D:/Detection-and-Remove-Trojan\.git\logs\HEAD
+Traceback (most recent call last):
+  File "D:\Detection-and-Remove-Trojan\scanner\base_scanner.py", line 22, in is_suspicious_extension
+    from config.settings import load_scan_extensions
+ImportError: cannot import name 'load_scan_extensions' from 'config.settings' (D:\Detection-and-Remove-Trojan\config\settings.py)
+[2025-12-23 11:52:31,134] [ERROR] [BaseScanner] Failed to check file extension: D:/Detection-and-Remove-Trojan\.git\logs\refs\heads\khanh-branch
+Traceback (most recent call last):
+  File "D:\Detection-and-Remove-Trojan\scanner\base_scanner.py", line 22, in is_suspicious_extension
+    from config.settings import load_scan_extensions
+ImportError: cannot import name 'load_scan_extensions' from 'config.settings' (D:\Detection-and-Remove-Trojan\config\settings.py)
+[2025-12-23 11:52:31,135] [ERROR] [BaseScanner] Failed to check file extension: D:/Detection-and-Remove-Trojan\.git\logs\refs\heads\main
+Traceback (most recent call last):
+  File "D:\Detection-and-Remove-Trojan\scanner\base_scanner.py", line 22, in is_suspicious_extension
+    from config.settings import load_scan_extensions
+ImportError: cannot import name 'load_scan_extensions' from 'config.settings' (D:\Detection-and-Remove-Trojan\config\settings.py)
+[2025-12-23 11:52:31,135] [ERROR] [BaseScanner] Failed to check file extension: D:/Detection-and-Remove-Trojan\.git\logs\refs\remotes\origin\dung-branch
+Traceback (most recent call last):
+  File "D:\Detection-and-Remove-Trojan\scanner\base_scanner.py", line 22, in is_suspicious_extension
+    from config.settings import load_scan_extensions
+ImportError: cannot import name 'load_scan_extensions' from 'config.settings' (D:\Detection-and-Remove-Trojan\config\settings.py)
+[2025-12-23 11:52:31,135] [ERROR] [BaseScanner] Failed to check file extension: D:/Detection-and-Remove-Trojan\.git\logs\refs\remotes\origin\HEAD
+Traceback (most recent call last):
+  File "D:\Detection-and-Remove-Trojan\scanner\base_scanner.py", line 22, in is_suspicious_extension
+    from config.settings import load_scan_extensions
+ImportError: cannot import name 'load_scan_extensions' from 'config.settings' (D:\Detection-and-Remove-Trojan\config\settings.py)
+[2025-12-23 11:52:31,135] [ERROR] [BaseScanner] Failed to check file extension: D:/Detection-and-Remove-Trojan\.git\logs\refs\remotes\origin\khanh-branch
+Traceback (most recent call last):
+  File "D:\Detection-and-Remove-Trojan\scanner\base_scanner.py", line 22, in is_suspicious_extension
+    from config.settings import load_scan_extensions
+ImportError: cannot import name 'load_scan_extensions' from 'config.settings' (D:\Detection-and-Remove-Trojan\config\settings.py)
+[2025-12-23 11:52:31,135] [ERROR] [BaseScanner] Failed to check file extension: D:/Detection-and-Remove-Trojan\.git\logs\refs\remotes\origin\main
+Traceback (most recent call last):
+  File "D:\Detection-and-Remove-Trojan\scanner\base_scanner.py", line 22, in is_suspicious_extension
+    from config.settings import load_scan_extensions
+ImportError: cannot import name 'load_scan_extensions' from 'config.settings' (D:\Detection-and-Remove-Trojan\config\settings.py)
+[2025-12-23 11:52:31,135] [ERROR] [BaseScanner] Failed to check file extension: D:/Detection-and-Remove-Trojan\.git\objects\00\9ca557acba327b4cdc240f2fed3e3674a638db
+Traceback (most recent call last):
+  File "D:\Detection-and-Remove-Trojan\scanner\base_scanner.py", line 22, in is_suspicious_extension
+    from config.settings import load_scan_extensions
+ImportError: cannot import name 'load_scan_extensions' from 'config.settings' (D:\Detection-and-Remove-Trojan\config\settings.py)
+[2025-12-23 11:52:31,137] [ERROR] [BaseScanner] Failed to check file extension: D:/Detection-and-Remove-Trojan\.git\objects\01\685f863d15779bb9116db3902cb8731608253d
+Traceback (most recent call last):
+  File "D:\Detection-and-Remove-Trojan\scanner\base_scanner.py", line 22, in is_suspicious_extension
+    from config.settings import load_scan_extensions
+ImportError: cannot import name 'load_scan_extensions' from 'config.settings' (D:\Detection-and-Remove-Trojan\config\settings.py)
+[2025-12-23 11:52:31,137] [ERROR] [BaseScanner] Failed to check file extension: D:/Detection-and-Remove-Trojan\.git\objects\03\b4f5ba9fa781caa4000b88d0c8ae1714a8f576
+Traceback (most recent call last):
+  File "D:\Detection-and-Remove-Trojan\scanner\base_scanner.py", line 22, in is_suspicious_extension
+    from config.settings import load_scan_extensions
+ImportError: cannot import name 'load_scan_extensions' from 'config.settings' (D:\Detection-and-Remove-Trojan\config\settings.py)
+[2025-12-23 11:52:31,137] [ERROR] [BaseScanner] Failed to check file extension: D:/Detection-and-Remove-Trojan\.git\objects\06\071965da74a6067538a5500470e26d4d7a9890
+Traceback (most recent call last):
+  File "D:\Detection-and-Remove-Trojan\scanner\base_scanner.py", line 22, in is_suspicious_extension
+    from config.settings import load_scan_extensions
+ImportError: cannot import name 'load_scan_extensions' from 'config.settings' (D:\Detection-and-Remove-Trojan\config\settings.py)
+[2025-12-23 11:52:31,137] [ERROR] [BaseScanner] Failed to check file extension: D:/Detection-and-Remove-Trojan\.git\objects\09\e4915258cb5979e4a793ca5b4b7c205d9299bd
+Traceback (most recent call last):
+  File "D:\Detection-and-Remove-Trojan\scanner\base_scanner.py", line 22, in is_suspicious_extension
+    from config.settings import load_scan_extensions
+ImportError: cannot import name 'load_scan_extensions' from 'config.settings' (D:\Detection-and-Remove-Trojan\config\settings.py)
+[2025-12-23 11:52:31,139] [ERROR] [BaseScanner] Failed to check file extension: D:/Detection-and-Remove-Trojan\.git\objects\0b\13b214ad343355fffd210db78c7fff449851a7
+Traceback (most recent call last):
+  File "D:\Detection-and-Remove-Trojan\scanner\base_scanner.py", line 22, in is_suspicious_extension
+    from config.settings import load_scan_extensions
+ImportError: cannot import name 'load_scan_extensions' from 'config.settings' (D:\Detection-and-Remove-Trojan\config\settings.py)
+[2025-12-23 11:52:31,139] [ERROR] [BaseScanner] Failed to check file extension: D:/Detection-and-Remove-Trojan\.git\objects\0c\bf79b0be48710bcb02d921f50a4d963ece77e0
+Traceback (most recent call last):
+  File "D:\Detection-and-Remove-Trojan\scanner\base_scanner.py", line 22, in is_suspicious_extension
+    from config.settings import load_scan_extensions
+ImportError: cannot import name 'load_scan_extensions' from 'config.settings' (D:\Detection-and-Remove-Trojan\config\settings.py)
+[2025-12-23 11:52:31,140] [ERROR] [BaseScanner] Failed to check file extension: D:/Detection-and-Remove-Trojan\.git\objects\17\2f5f868c7cd8909f9ad54077b809f27b8a592f
+Traceback (most recent call last):
+  File "D:\Detection-and-Remove-Trojan\scanner\base_scanner.py", line 22, in is_suspicious_extension
+    from config.settings import load_scan_extensions
+ImportError: cannot import name 'load_scan_extensions' from 'config.settings' (D:\Detection-and-Remove-Trojan\config\settings.py)
+[2025-12-23 11:52:31,140] [ERROR] [BaseScanner] Failed to check file extension: D:/Detection-and-Remove-Trojan\.git\objects\18\484be5eabe0daec65f79557829d0a0e13a1cc9
+Traceback (most recent call last):
+  File "D:\Detection-and-Remove-Trojan\scanner\base_scanner.py", line 22, in is_suspicious_extension
+    from config.settings import load_scan_extensions
+ImportError: cannot import name 'load_scan_extensions' from 'config.settings' (D:\Detection-and-Remove-Trojan\config\settings.py)
+[2025-12-23 11:52:31,140] [ERROR] [BaseScanner] Failed to check file extension: D:/Detection-and-Remove-Trojan\.git\objects\24\26f50ac5c49507c621a5a3f27b13abac4d7787
+Traceback (most recent call last):
+  File "D:\Detection-and-Remove-Trojan\scanner\base_scanner.py", line 22, in is_suspicious_extension
+    from config.settings import load_scan_extensions
+ImportError: cannot import name 'load_scan_extensions' from 'config.settings' (D:\Detection-and-Remove-Trojan\config\settings.py)
+[2025-12-23 11:52:31,141] [ERROR] [BaseScanner] Failed to check file extension: D:/Detection-and-Remove-Trojan\.git\objects\24\fce52eab65ea1572a74bf544c7cd34d9b8b086
+Traceback (most recent call last):
+  File "D:\Detection-and-Remove-Trojan\scanner\base_scanner.py", line 22, in is_suspicious_extension
+    from config.settings import load_scan_extensions
+ImportError: cannot import name 'load_scan_extensions' from 'config.settings' (D:\Detection-and-Remove-Trojan\config\settings.py)
+[2025-12-23 11:52:31,141] [ERROR] [BaseScanner] Failed to check file extension: D:/Detection-and-Remove-Trojan\.git\objects\2b\a8dd94ccf7f23375ae8abba61c84fe5c4d721a
+Traceback (most recent call last):
+  File "D:\Detection-and-Remove-Trojan\scanner\base_scanner.py", line 22, in is_suspicious_extension
+    from config.settings import load_scan_extensions
+ImportError: cannot import name 'load_scan_extensions' from 'config.settings' (D:\Detection-and-Remove-Trojan\config\settings.py)
+[2025-12-23 11:52:31,141] [ERROR] [BaseScanner] Failed to check file extension: D:/Detection-and-Remove-Trojan\.git\objects\2e\2ec223119995675f105cb44473fe60cdb025fc
+Traceback (most recent call last):
+  File "D:\Detection-and-Remove-Trojan\scanner\base_scanner.py", line 22, in is_suspicious_extension
+    from config.settings import load_scan_extensions
+ImportError: cannot import name 'load_scan_extensions' from 'config.settings' (D:\Detection-and-Remove-Trojan\config\settings.py)
+[2025-12-23 11:52:31,142] [ERROR] [BaseScanner] Failed to check file extension: D:/Detection-and-Remove-Trojan\.git\objects\33\e338df961559533ce1e5c5fbd40ac43a31821a
+Traceback (most recent call last):
+  File "D:\Detection-and-Remove-Trojan\scanner\base_scanner.py", line 22, in is_suspicious_extension
+    from config.settings import load_scan_extensions
+ImportError: cannot import name 'load_scan_extensions' from 'config.settings' (D:\Detection-and-Remove-Trojan\config\settings.py)
+[2025-12-23 11:52:31,142] [ERROR] [BaseScanner] Failed to check file extension: D:/Detection-and-Remove-Trojan\.git\objects\38\35ae9fd00063fd826b2984bd9f0292012b19c8
+Traceback (most recent call last):
+  File "D:\Detection-and-Remove-Trojan\scanner\base_scanner.py", line 22, in is_suspicious_extension
+    from config.settings import load_scan_extensions
+ImportError: cannot import name 'load_scan_extensions' from 'config.settings' (D:\Detection-and-Remove-Trojan\config\settings.py)
+[2025-12-23 11:52:31,143] [ERROR] [BaseScanner] Failed to check file extension: D:/Detection-and-Remove-Trojan\.git\objects\39\c1826acd13ae64f6db7e22daf05d31f2cf8ea6
+Traceback (most recent call last):
+  File "D:\Detection-and-Remove-Trojan\scanner\base_scanner.py", line 22, in is_suspicious_extension
+    from config.settings import load_scan_extensions
+ImportError: cannot import name 'load_scan_extensions' from 'config.settings' (D:\Detection-and-Remove-Trojan\config\settings.py)
+[2025-12-23 11:52:31,143] [ERROR] [BaseScanner] Failed to check file extension: D:/Detection-and-Remove-Trojan\.git\objects\3b\54b7e817024145285ccf06baa67c7f07a49f9d
+Traceback (most recent call last):
+  File "D:\Detection-and-Remove-Trojan\scanner\base_scanner.py", line 22, in is_suspicious_extension
+    from config.settings import load_scan_extensions
+ImportError: cannot import name 'load_scan_extensions' from 'config.settings' (D:\Detection-and-Remove-Trojan\config\settings.py)
+[2025-12-23 11:52:31,143] [ERROR] [BaseScanner] Failed to check file extension: D:/Detection-and-Remove-Trojan\.git\objects\3c\166905c37f0512018193e98fe4e61034c095bb
+Traceback (most recent call last):
+  File "D:\Detection-and-Remove-Trojan\scanner\base_scanner.py", line 22, in is_suspicious_extension
+    from config.settings import load_scan_extensions
+ImportError: cannot import name 'load_scan_extensions' from 'config.settings' (D:\Detection-and-Remove-Trojan\config\settings.py)
+[2025-12-23 11:52:31,143] [ERROR] [BaseScanner] Failed to check file extension: D:/Detection-and-Remove-Trojan\.git\objects\3c\8267b130642f80cea3c16a34952b12acb144d6
+Traceback (most recent call last):
+  File "D:\Detection-and-Remove-Trojan\scanner\base_scanner.py", line 22, in is_suspicious_extension
+    from config.settings import load_scan_extensions
+ImportError: cannot import name 'load_scan_extensions' from 'config.settings' (D:\Detection-and-Remove-Trojan\config\settings.py)
+[2025-12-23 11:52:31,144] [ERROR] [BaseScanner] Failed to check file extension: D:/Detection-and-Remove-Trojan\.git\objects\43\0b683aa5890a05c65d9110fc32971c390c210a
+Traceback (most recent call last):
+  File "D:\Detection-and-Remove-Trojan\scanner\base_scanner.py", line 22, in is_suspicious_extension
+    from config.settings import load_scan_extensions
+ImportError: cannot import name 'load_scan_extensions' from 'config.settings' (D:\Detection-and-Remove-Trojan\config\settings.py)
+[2025-12-23 11:52:31,144] [ERROR] [BaseScanner] Failed to check file extension: D:/Detection-and-Remove-Trojan\.git\objects\43\3fea968ce1156223abfda340c638af6f88e525
+Traceback (most recent call last):
+  File "D:\Detection-and-Remove-Trojan\scanner\base_scanner.py", line 22, in is_suspicious_extension
+    from config.settings import load_scan_extensions
+ImportError: cannot import name 'load_scan_extensions' from 'config.settings' (D:\Detection-and-Remove-Trojan\config\settings.py)
+[2025-12-23 11:52:31,144] [ERROR] [BaseScanner] Failed to check file extension: D:/Detection-and-Remove-Trojan\.git\objects\46\a0160f35cfae6032066d1221dd37e5b7cda666
+Traceback (most recent call last):
+  File "D:\Detection-and-Remove-Trojan\scanner\base_scanner.py", line 22, in is_suspicious_extension
+    from config.settings import load_scan_extensions
+ImportError: cannot import name 'load_scan_extensions' from 'config.settings' (D:\Detection-and-Remove-Trojan\config\settings.py)
+[2025-12-23 11:52:31,144] [ERROR] [BaseScanner] Failed to check file extension: D:/Detection-and-Remove-Trojan\.git\objects\4b\1e1c623be8f177815bfcc3e3c72f795654fe4b
+Traceback (most recent call last):
+  File "D:\Detection-and-Remove-Trojan\scanner\base_scanner.py", line 22, in is_suspicious_extension
+    from config.settings import load_scan_extensions
+ImportError: cannot import name 'load_scan_extensions' from 'config.settings' (D:\Detection-and-Remove-Trojan\config\settings.py)
+[2025-12-23 11:52:31,144] [ERROR] [BaseScanner] Failed to check file extension: D:/Detection-and-Remove-Trojan\.git\objects\4c\7060302bdb4ae32db2ca65cf95fbf9d9ca1c90
+Traceback (most recent call last):
+  File "D:\Detection-and-Remove-Trojan\scanner\base_scanner.py", line 22, in is_suspicious_extension
+    from config.settings import load_scan_extensions
+ImportError: cannot import name 'load_scan_extensions' from 'config.settings' (D:\Detection-and-Remove-Trojan\config\settings.py)
+[2025-12-23 11:52:31,144] [ERROR] [BaseScanner] Failed to check file extension: D:/Detection-and-Remove-Trojan\.git\objects\50\9cb8d7fe42d76c5d09e85c3c8bbd3efd90eea1
+Traceback (most recent call last):
+  File "D:\Detection-and-Remove-Trojan\scanner\base_scanner.py", line 22, in is_suspicious_extension
+    from config.settings import load_scan_extensions
+ImportError: cannot import name 'load_scan_extensions' from 'config.settings' (D:\Detection-and-Remove-Trojan\config\settings.py)
+[2025-12-23 11:52:31,144] [ERROR] [BaseScanner] Failed to check file extension: D:/Detection-and-Remove-Trojan\.git\objects\51\fafe14485f35aea9f742beb7a2f39ecaf9ea12
+Traceback (most recent call last):
+  File "D:\Detection-and-Remove-Trojan\scanner\base_scanner.py", line 22, in is_suspicious_extension
+    from config.settings import load_scan_extensions
+ImportError: cannot import name 'load_scan_extensions' from 'config.settings' (D:\Detection-and-Remove-Trojan\config\settings.py)
+[2025-12-23 11:52:31,144] [ERROR] [BaseScanner] Failed to check file extension: D:/Detection-and-Remove-Trojan\.git\objects\57\92789d74a8849a4ac74664d715110edce7aeab
+Traceback (most recent call last):
+  File "D:\Detection-and-Remove-Trojan\scanner\base_scanner.py", line 22, in is_suspicious_extension
+    from config.settings import load_scan_extensions
+ImportError: cannot import name 'load_scan_extensions' from 'config.settings' (D:\Detection-and-Remove-Trojan\config\settings.py)
+[2025-12-23 11:52:31,144] [ERROR] [BaseScanner] Failed to check file extension: D:/Detection-and-Remove-Trojan\.git\objects\5a\e6139863109188a29cb65c5529cb1c12cf7144
+Traceback (most recent call last):
+  File "D:\Detection-and-Remove-Trojan\scanner\base_scanner.py", line 22, in is_suspicious_extension
+    from config.settings import load_scan_extensions
+ImportError: cannot import name 'load_scan_extensions' from 'config.settings' (D:\Detection-and-Remove-Trojan\config\settings.py)
+[2025-12-23 11:52:31,144] [ERROR] [BaseScanner] Failed to check file extension: D:/Detection-and-Remove-Trojan\.git\objects\5d\d3f2722e9d2d06ec864fc122c19bd7158bc999
+Traceback (most recent call last):
+  File "D:\Detection-and-Remove-Trojan\scanner\base_scanner.py", line 22, in is_suspicious_extension
+    from config.settings import load_scan_extensions
+ImportError: cannot import name 'load_scan_extensions' from 'config.settings' (D:\Detection-and-Remove-Trojan\config\settings.py)
+[2025-12-23 11:52:31,148] [ERROR] [BaseScanner] Failed to check file extension: D:/Detection-and-Remove-Trojan\.git\objects\61\01a8939a96475bbe6f590857946831b09bab6a
+Traceback (most recent call last):
+  File "D:\Detection-and-Remove-Trojan\scanner\base_scanner.py", line 22, in is_suspicious_extension
+    from config.settings import load_scan_extensions
+ImportError: cannot import name 'load_scan_extensions' from 'config.settings' (D:\Detection-and-Remove-Trojan\config\settings.py)
+[2025-12-23 11:52:31,148] [ERROR] [BaseScanner] Failed to check file extension: D:/Detection-and-Remove-Trojan\.git\objects\67\714403c64fda1b09ce1c018274ea71334d18df
+Traceback (most recent call last):
+  File "D:\Detection-and-Remove-Trojan\scanner\base_scanner.py", line 22, in is_suspicious_extension
+    from config.settings import load_scan_extensions
+ImportError: cannot import name 'load_scan_extensions' from 'config.settings' (D:\Detection-and-Remove-Trojan\config\settings.py)
+[2025-12-23 11:52:31,148] [ERROR] [BaseScanner] Failed to check file extension: D:/Detection-and-Remove-Trojan\.git\objects\74\050a2e873b26d9d4c9413379e1216d859a7fde
+Traceback (most recent call last):
+  File "D:\Detection-and-Remove-Trojan\scanner\base_scanner.py", line 22, in is_suspicious_extension
+    from config.settings import load_scan_extensions
+ImportError: cannot import name 'load_scan_extensions' from 'config.settings' (D:\Detection-and-Remove-Trojan\config\settings.py)
+[2025-12-23 11:52:31,148] [ERROR] [BaseScanner] Failed to check file extension: D:/Detection-and-Remove-Trojan\.git\objects\79\9566f4b13303b6d4954c0d8d40aee0efcd2ec5
+Traceback (most recent call last):
+  File "D:\Detection-and-Remove-Trojan\scanner\base_scanner.py", line 22, in is_suspicious_extension
+    from config.settings import load_scan_extensions
+ImportError: cannot import name 'load_scan_extensions' from 'config.settings' (D:\Detection-and-Remove-Trojan\config\settings.py)
+[2025-12-23 11:52:31,148] [ERROR] [BaseScanner] Failed to check file extension: D:/Detection-and-Remove-Trojan\.git\objects\7a\2b758c77f88f1988adf366bb8134e4d0e0f0ad
+Traceback (most recent call last):
+  File "D:\Detection-and-Remove-Trojan\scanner\base_scanner.py", line 22, in is_suspicious_extension
+    from config.settings import load_scan_extensions
+ImportError: cannot import name 'load_scan_extensions' from 'config.settings' (D:\Detection-and-Remove-Trojan\config\settings.py)
+[2025-12-23 11:52:31,149] [ERROR] [BaseScanner] Failed to check file extension: D:/Detection-and-Remove-Trojan\.git\objects\85\f8ea3c1992e2eaebd3f5982f357c8ca64da6c4
+Traceback (most recent call last):
+  File "D:\Detection-and-Remove-Trojan\scanner\base_scanner.py", line 22, in is_suspicious_extension
+    from config.settings import load_scan_extensions
+ImportError: cannot import name 'load_scan_extensions' from 'config.settings' (D:\Detection-and-Remove-Trojan\config\settings.py)
+[2025-12-23 11:52:31,149] [ERROR] [BaseScanner] Failed to check file extension: D:/Detection-and-Remove-Trojan\.git\objects\89\75163f2fcae9049c60da6d0b93ac837cf98e42
+Traceback (most recent call last):
+  File "D:\Detection-and-Remove-Trojan\scanner\base_scanner.py", line 22, in is_suspicious_extension
+    from config.settings import load_scan_extensions
+ImportError: cannot import name 'load_scan_extensions' from 'config.settings' (D:\Detection-and-Remove-Trojan\config\settings.py)
+[2025-12-23 11:52:31,149] [ERROR] [BaseScanner] Failed to check file extension: D:/Detection-and-Remove-Trojan\.git\objects\8e\6d44bb2e2b2bd06773216f33f82697236673e4
+Traceback (most recent call last):
+  File "D:\Detection-and-Remove-Trojan\scanner\base_scanner.py", line 22, in is_suspicious_extension
+    from config.settings import load_scan_extensions
+ImportError: cannot import name 'load_scan_extensions' from 'config.settings' (D:\Detection-and-Remove-Trojan\config\settings.py)
+[2025-12-23 11:52:31,149] [ERROR] [BaseScanner] Failed to check file extension: D:/Detection-and-Remove-Trojan\.git\objects\8e\efbcd2d8546dbe4d8102b6c94baae227295af8
+Traceback (most recent call last):
+  File "D:\Detection-and-Remove-Trojan\scanner\base_scanner.py", line 22, in is_suspicious_extension
+    from config.settings import load_scan_extensions
+ImportError: cannot import name 'load_scan_extensions' from 'config.settings' (D:\Detection-and-Remove-Trojan\config\settings.py)
+[2025-12-23 11:52:31,150] [ERROR] [BaseScanner] Failed to check file extension: D:/Detection-and-Remove-Trojan\.git\objects\91\e3150dcd005eda0bc17c6e38dcce239281a6cd
+Traceback (most recent call last):
+  File "D:\Detection-and-Remove-Trojan\scanner\base_scanner.py", line 22, in is_suspicious_extension
+    from config.settings import load_scan_extensions
+ImportError: cannot import name 'load_scan_extensions' from 'config.settings' (D:\Detection-and-Remove-Trojan\config\settings.py)
+[2025-12-23 11:52:31,151] [ERROR] [BaseScanner] Failed to check file extension: D:/Detection-and-Remove-Trojan\.git\objects\98\281b2d2d0cfbb39963087281e99d7cdd63e9bb
+Traceback (most recent call last):
+  File "D:\Detection-and-Remove-Trojan\scanner\base_scanner.py", line 22, in is_suspicious_extension
+    from config.settings import load_scan_extensions
+ImportError: cannot import name 'load_scan_extensions' from 'config.settings' (D:\Detection-and-Remove-Trojan\config\settings.py)
+[2025-12-23 11:52:31,151] [ERROR] [BaseScanner] Failed to check file extension: D:/Detection-and-Remove-Trojan\.git\objects\98\e97a3dd27e1e117219489c9d1e1e2013b42795
+Traceback (most recent call last):
+  File "D:\Detection-and-Remove-Trojan\scanner\base_scanner.py", line 22, in is_suspicious_extension
+    from config.settings import load_scan_extensions
+ImportError: cannot import name 'load_scan_extensions' from 'config.settings' (D:\Detection-and-Remove-Trojan\config\settings.py)
+[2025-12-23 11:52:31,151] [ERROR] [BaseScanner] Failed to check file extension: D:/Detection-and-Remove-Trojan\.git\objects\9f\f13feabaef821cc6cca3059ecf60f25c20f99f
+Traceback (most recent call last):
+  File "D:\Detection-and-Remove-Trojan\scanner\base_scanner.py", line 22, in is_suspicious_extension
+    from config.settings import load_scan_extensions
+ImportError: cannot import name 'load_scan_extensions' from 'config.settings' (D:\Detection-and-Remove-Trojan\config\settings.py)
+[2025-12-23 11:52:31,151] [ERROR] [BaseScanner] Failed to check file extension: D:/Detection-and-Remove-Trojan\.git\objects\a0\848003d033cc3c17a1699b7d7b5cb5aee03bc4
+Traceback (most recent call last):
+  File "D:\Detection-and-Remove-Trojan\scanner\base_scanner.py", line 22, in is_suspicious_extension
+    from config.settings import load_scan_extensions
+ImportError: cannot import name 'load_scan_extensions' from 'config.settings' (D:\Detection-and-Remove-Trojan\config\settings.py)
+[2025-12-23 11:52:31,152] [ERROR] [BaseScanner] Failed to check file extension: D:/Detection-and-Remove-Trojan\.git\objects\a1\105671813c1d2a014482de2d25f54f09396e20
+Traceback (most recent call last):
+  File "D:\Detection-and-Remove-Trojan\scanner\base_scanner.py", line 22, in is_suspicious_extension
+    from config.settings import load_scan_extensions
+ImportError: cannot import name 'load_scan_extensions' from 'config.settings' (D:\Detection-and-Remove-Trojan\config\settings.py)
+[2025-12-23 11:52:31,152] [ERROR] [BaseScanner] Failed to check file extension: D:/Detection-and-Remove-Trojan\.git\objects\ab\605fced3b4ae5b2b1eb44d27ee5870c33e38a2
+Traceback (most recent call last):
+  File "D:\Detection-and-Remove-Trojan\scanner\base_scanner.py", line 22, in is_suspicious_extension
+    from config.settings import load_scan_extensions
+ImportError: cannot import name 'load_scan_extensions' from 'config.settings' (D:\Detection-and-Remove-Trojan\config\settings.py)
+[2025-12-23 11:52:31,152] [ERROR] [BaseScanner] Failed to check file extension: D:/Detection-and-Remove-Trojan\.git\objects\b1\2685d02220aafd053ff542710906987819ad5e
+Traceback (most recent call last):
+  File "D:\Detection-and-Remove-Trojan\scanner\base_scanner.py", line 22, in is_suspicious_extension
+    from config.settings import load_scan_extensions
+ImportError: cannot import name 'load_scan_extensions' from 'config.settings' (D:\Detection-and-Remove-Trojan\config\settings.py)
+[2025-12-23 11:52:31,154] [ERROR] [BaseScanner] Failed to check file extension: D:/Detection-and-Remove-Trojan\.git\objects\b4\6a38e81d8f14704979e11af6ad6f45f01d1038
+Traceback (most recent call last):
+  File "D:\Detection-and-Remove-Trojan\scanner\base_scanner.py", line 22, in is_suspicious_extension
+    from config.settings import load_scan_extensions
+ImportError: cannot import name 'load_scan_extensions' from 'config.settings' (D:\Detection-and-Remove-Trojan\config\settings.py)
+[2025-12-23 11:52:31,154] [ERROR] [BaseScanner] Failed to check file extension: D:/Detection-and-Remove-Trojan\.git\objects\b4\9b3e66c37a8db7fe99e82df845cd2df15a8483
+Traceback (most recent call last):
+  File "D:\Detection-and-Remove-Trojan\scanner\base_scanner.py", line 22, in is_suspicious_extension
+    from config.settings import load_scan_extensions
+ImportError: cannot import name 'load_scan_extensions' from 'config.settings' (D:\Detection-and-Remove-Trojan\config\settings.py)
+[2025-12-23 11:52:31,154] [ERROR] [BaseScanner] Failed to check file extension: D:/Detection-and-Remove-Trojan\.git\objects\b5\cac1f9c83563e17db9b47cc0d0658f10472a8c
+Traceback (most recent call last):
+  File "D:\Detection-and-Remove-Trojan\scanner\base_scanner.py", line 22, in is_suspicious_extension
+    from config.settings import load_scan_extensions
+ImportError: cannot import name 'load_scan_extensions' from 'config.settings' (D:\Detection-and-Remove-Trojan\config\settings.py)
+[2025-12-23 11:52:31,154] [ERROR] [BaseScanner] Failed to check file extension: D:/Detection-and-Remove-Trojan\.git\objects\ba\287c8a6a95d3d0ef8e3528a06f5f0225ca5e05
+Traceback (most recent call last):
+  File "D:\Detection-and-Remove-Trojan\scanner\base_scanner.py", line 22, in is_suspicious_extension
+    from config.settings import load_scan_extensions
+ImportError: cannot import name 'load_scan_extensions' from 'config.settings' (D:\Detection-and-Remove-Trojan\config\settings.py)
+[2025-12-23 11:52:31,154] [ERROR] [BaseScanner] Failed to check file extension: D:/Detection-and-Remove-Trojan\.git\objects\bf\ef9704696d7db703eddc527b6b8a714e1ccd55
+Traceback (most recent call last):
+  File "D:\Detection-and-Remove-Trojan\scanner\base_scanner.py", line 22, in is_suspicious_extension
+    from config.settings import load_scan_extensions
+ImportError: cannot import name 'load_scan_extensions' from 'config.settings' (D:\Detection-and-Remove-Trojan\config\settings.py)
+[2025-12-23 11:52:31,154] [ERROR] [BaseScanner] Failed to check file extension: D:/Detection-and-Remove-Trojan\.git\objects\c9\70572a6b53f4c67ed749d57218e6ac0ddba998
+Traceback (most recent call last):
+  File "D:\Detection-and-Remove-Trojan\scanner\base_scanner.py", line 22, in is_suspicious_extension
+    from config.settings import load_scan_extensions
+ImportError: cannot import name 'load_scan_extensions' from 'config.settings' (D:\Detection-and-Remove-Trojan\config\settings.py)
+[2025-12-23 11:52:31,154] [ERROR] [BaseScanner] Failed to check file extension: D:/Detection-and-Remove-Trojan\.git\objects\c9\802dd788876a327de86f1ea669da36d2edcb70
+Traceback (most recent call last):
+  File "D:\Detection-and-Remove-Trojan\scanner\base_scanner.py", line 22, in is_suspicious_extension
+    from config.settings import load_scan_extensions
+ImportError: cannot import name 'load_scan_extensions' from 'config.settings' (D:\Detection-and-Remove-Trojan\config\settings.py)
+[2025-12-23 11:52:31,154] [ERROR] [BaseScanner] Failed to check file extension: D:/Detection-and-Remove-Trojan\.git\objects\cb\8d16c973db75e540838a1c3e2b3d974124deb9
+Traceback (most recent call last):
+  File "D:\Detection-and-Remove-Trojan\scanner\base_scanner.py", line 22, in is_suspicious_extension
+    from config.settings import load_scan_extensions
+ImportError: cannot import name 'load_scan_extensions' from 'config.settings' (D:\Detection-and-Remove-Trojan\config\settings.py)
+[2025-12-23 11:52:31,154] [ERROR] [BaseScanner] Failed to check file extension: D:/Detection-and-Remove-Trojan\.git\objects\cf\394cdc27d073e5cc69eeec06e955d4b3130224
+Traceback (most recent call last):
+  File "D:\Detection-and-Remove-Trojan\scanner\base_scanner.py", line 22, in is_suspicious_extension
+    from config.settings import load_scan_extensions
+ImportError: cannot import name 'load_scan_extensions' from 'config.settings' (D:\Detection-and-Remove-Trojan\config\settings.py)
+[2025-12-23 11:52:31,154] [ERROR] [BaseScanner] Failed to check file extension: D:/Detection-and-Remove-Trojan\.git\objects\d0\472648fe1b39e2b078233916d71b44554311a4
+Traceback (most recent call last):
+  File "D:\Detection-and-Remove-Trojan\scanner\base_scanner.py", line 22, in is_suspicious_extension
+    from config.settings import load_scan_extensions
+ImportError: cannot import name 'load_scan_extensions' from 'config.settings' (D:\Detection-and-Remove-Trojan\config\settings.py)
+[2025-12-23 11:52:31,154] [ERROR] [BaseScanner] Failed to check file extension: D:/Detection-and-Remove-Trojan\.git\objects\d1\225d85ab03edf540c5dc7c269e3050b33cb776
+Traceback (most recent call last):
+  File "D:\Detection-and-Remove-Trojan\scanner\base_scanner.py", line 22, in is_suspicious_extension
+    from config.settings import load_scan_extensions
+ImportError: cannot import name 'load_scan_extensions' from 'config.settings' (D:\Detection-and-Remove-Trojan\config\settings.py)
+[2025-12-23 11:52:31,154] [ERROR] [BaseScanner] Failed to check file extension: D:/Detection-and-Remove-Trojan\.git\objects\d1\6aac54a39471b655e8b2857a54821b9ff90f0a
+Traceback (most recent call last):
+  File "D:\Detection-and-Remove-Trojan\scanner\base_scanner.py", line 22, in is_suspicious_extension
+    from config.settings import load_scan_extensions
+ImportError: cannot import name 'load_scan_extensions' from 'config.settings' (D:\Detection-and-Remove-Trojan\config\settings.py)
+[2025-12-23 11:52:31,157] [ERROR] [BaseScanner] Failed to check file extension: D:/Detection-and-Remove-Trojan\.git\objects\e0\b1ae9f3a6467501afbbf66cb135f034c82a1ab
+Traceback (most recent call last):
+  File "D:\Detection-and-Remove-Trojan\scanner\base_scanner.py", line 22, in is_suspicious_extension
+    from config.settings import load_scan_extensions
+ImportError: cannot import name 'load_scan_extensions' from 'config.settings' (D:\Detection-and-Remove-Trojan\config\settings.py)
+[2025-12-23 11:52:31,158] [ERROR] [BaseScanner] Failed to check file extension: D:/Detection-and-Remove-Trojan\.git\objects\e3\7ee107910411679674760f7725250034b5ab9d
+Traceback (most recent call last):
+  File "D:\Detection-and-Remove-Trojan\scanner\base_scanner.py", line 22, in is_suspicious_extension
+    from config.settings import load_scan_extensions
+ImportError: cannot import name 'load_scan_extensions' from 'config.settings' (D:\Detection-and-Remove-Trojan\config\settings.py)
+[2025-12-23 11:52:31,158] [ERROR] [BaseScanner] Failed to check file extension: D:/Detection-and-Remove-Trojan\.git\objects\e9\d8fb95d4d04ffd99b85325c0df92c755482e6a
+Traceback (most recent call last):
+  File "D:\Detection-and-Remove-Trojan\scanner\base_scanner.py", line 22, in is_suspicious_extension
+    from config.settings import load_scan_extensions
+ImportError: cannot import name 'load_scan_extensions' from 'config.settings' (D:\Detection-and-Remove-Trojan\config\settings.py)
+[2025-12-23 11:52:31,159] [ERROR] [BaseScanner] Failed to check file extension: D:/Detection-and-Remove-Trojan\.git\objects\eb\192ea1b5c43c97d99f71dd03dd0c22fb795a62
+Traceback (most recent call last):
+  File "D:\Detection-and-Remove-Trojan\scanner\base_scanner.py", line 22, in is_suspicious_extension
+    from config.settings import load_scan_extensions
+ImportError: cannot import name 'load_scan_extensions' from 'config.settings' (D:\Detection-and-Remove-Trojan\config\settings.py)
+[2025-12-23 11:52:31,159] [ERROR] [BaseScanner] Failed to check file extension: D:/Detection-and-Remove-Trojan\.git\objects\eb\1d37d4565131d5e8a16345c7029638d91cbeb1
+Traceback (most recent call last):
+  File "D:\Detection-and-Remove-Trojan\scanner\base_scanner.py", line 22, in is_suspicious_extension
+    from config.settings import load_scan_extensions
+ImportError: cannot import name 'load_scan_extensions' from 'config.settings' (D:\Detection-and-Remove-Trojan\config\settings.py)
+[2025-12-23 11:52:31,160] [ERROR] [BaseScanner] Failed to check file extension: D:/Detection-and-Remove-Trojan\.git\objects\ed\78b046c4cb097d00542def4f5d4eabb795a3c7
+Traceback (most recent call last):
+  File "D:\Detection-and-Remove-Trojan\scanner\base_scanner.py", line 22, in is_suspicious_extension
+    from config.settings import load_scan_extensions
+ImportError: cannot import name 'load_scan_extensions' from 'config.settings' (D:\Detection-and-Remove-Trojan\config\settings.py)
+[2025-12-23 11:52:31,160] [ERROR] [BaseScanner] Failed to check file extension: D:/Detection-and-Remove-Trojan\.git\objects\ee\425f507bfca7ea2b65129c2a1776af8a38bfb0
+Traceback (most recent call last):
+  File "D:\Detection-and-Remove-Trojan\scanner\base_scanner.py", line 22, in is_suspicious_extension
+    from config.settings import load_scan_extensions
+ImportError: cannot import name 'load_scan_extensions' from 'config.settings' (D:\Detection-and-Remove-Trojan\config\settings.py)
+[2025-12-23 11:52:31,160] [ERROR] [BaseScanner] Failed to check file extension: D:/Detection-and-Remove-Trojan\.git\objects\f3\e83eba7ed262601d14b09d97eff20c9e9ec079
+Traceback (most recent call last):
+  File "D:\Detection-and-Remove-Trojan\scanner\base_scanner.py", line 22, in is_suspicious_extension
+    from config.settings import load_scan_extensions
+ImportError: cannot import name 'load_scan_extensions' from 'config.settings' (D:\Detection-and-Remove-Trojan\config\settings.py)
+[2025-12-23 11:52:31,160] [ERROR] [BaseScanner] Failed to check file extension: D:/Detection-and-Remove-Trojan\.git\objects\f5\893a4608120eb5d6b1ede126fb4edc45c6312d
+Traceback (most recent call last):
+  File "D:\Detection-and-Remove-Trojan\scanner\base_scanner.py", line 22, in is_suspicious_extension
+    from config.settings import load_scan_extensions
+ImportError: cannot import name 'load_scan_extensions' from 'config.settings' (D:\Detection-and-Remove-Trojan\config\settings.py)
+[2025-12-23 11:52:31,161] [ERROR] [BaseScanner] Failed to check file extension: D:/Detection-and-Remove-Trojan\.git\objects\pack\pack-b6a607745aa4b504a999e696049524a039487e8e.idx
+Traceback (most recent call last):
+  File "D:\Detection-and-Remove-Trojan\scanner\base_scanner.py", line 22, in is_suspicious_extension
+    from config.settings import load_scan_extensions
+ImportError: cannot import name 'load_scan_extensions' from 'config.settings' (D:\Detection-and-Remove-Trojan\config\settings.py)
+[2025-12-23 11:52:31,161] [ERROR] [BaseScanner] Failed to check file extension: D:/Detection-and-Remove-Trojan\.git\objects\pack\pack-b6a607745aa4b504a999e696049524a039487e8e.pack
+Traceback (most recent call last):
+  File "D:\Detection-and-Remove-Trojan\scanner\base_scanner.py", line 22, in is_suspicious_extension
+    from config.settings import load_scan_extensions
+ImportError: cannot import name 'load_scan_extensions' from 'config.settings' (D:\Detection-and-Remove-Trojan\config\settings.py)
+[2025-12-23 11:52:31,161] [ERROR] [BaseScanner] Failed to check file extension: D:/Detection-and-Remove-Trojan\.git\objects\pack\pack-b6a607745aa4b504a999e696049524a039487e8e.rev
+Traceback (most recent call last):
+  File "D:\Detection-and-Remove-Trojan\scanner\base_scanner.py", line 22, in is_suspicious_extension
+    from config.settings import load_scan_extensions
+ImportError: cannot import name 'load_scan_extensions' from 'config.settings' (D:\Detection-and-Remove-Trojan\config\settings.py)
+[2025-12-23 11:52:31,162] [ERROR] [BaseScanner] Failed to check file extension: D:/Detection-and-Remove-Trojan\.git\refs\heads\khanh-branch
+Traceback (most recent call last):
+  File "D:\Detection-and-Remove-Trojan\scanner\base_scanner.py", line 22, in is_suspicious_extension
+    from config.settings import load_scan_extensions
+ImportError: cannot import name 'load_scan_extensions' from 'config.settings' (D:\Detection-and-Remove-Trojan\config\settings.py)
+[2025-12-23 11:52:31,162] [ERROR] [BaseScanner] Failed to check file extension: D:/Detection-and-Remove-Trojan\.git\refs\heads\main
+Traceback (most recent call last):
+  File "D:\Detection-and-Remove-Trojan\scanner\base_scanner.py", line 22, in is_suspicious_extension
+    from config.settings import load_scan_extensions
+ImportError: cannot import name 'load_scan_extensions' from 'config.settings' (D:\Detection-and-Remove-Trojan\config\settings.py)
+[2025-12-23 11:52:31,162] [ERROR] [BaseScanner] Failed to check file extension: D:/Detection-and-Remove-Trojan\.git\refs\remotes\origin\dung-branch
+Traceback (most recent call last):
+  File "D:\Detection-and-Remove-Trojan\scanner\base_scanner.py", line 22, in is_suspicious_extension
+    from config.settings import load_scan_extensions
+ImportError: cannot import name 'load_scan_extensions' from 'config.settings' (D:\Detection-and-Remove-Trojan\config\settings.py)
+[2025-12-23 11:52:31,162] [ERROR] [BaseScanner] Failed to check file extension: D:/Detection-and-Remove-Trojan\.git\refs\remotes\origin\HEAD
+Traceback (most recent call last):
+  File "D:\Detection-and-Remove-Trojan\scanner\base_scanner.py", line 22, in is_suspicious_extension
+    from config.settings import load_scan_extensions
+ImportError: cannot import name 'load_scan_extensions' from 'config.settings' (D:\Detection-and-Remove-Trojan\config\settings.py)
+[2025-12-23 11:52:31,162] [ERROR] [BaseScanner] Failed to check file extension: D:/Detection-and-Remove-Trojan\.git\refs\remotes\origin\khanh-branch
+Traceback (most recent call last):
+  File "D:\Detection-and-Remove-Trojan\scanner\base_scanner.py", line 22, in is_suspicious_extension
+    from config.settings import load_scan_extensions
+ImportError: cannot import name 'load_scan_extensions' from 'config.settings' (D:\Detection-and-Remove-Trojan\config\settings.py)
+[2025-12-23 11:52:31,162] [ERROR] [BaseScanner] Failed to check file extension: D:/Detection-and-Remove-Trojan\.git\refs\remotes\origin\main
+Traceback (most recent call last):
+  File "D:\Detection-and-Remove-Trojan\scanner\base_scanner.py", line 22, in is_suspicious_extension
+    from config.settings import load_scan_extensions
+ImportError: cannot import name 'load_scan_extensions' from 'config.settings' (D:\Detection-and-Remove-Trojan\config\settings.py)
+[2025-12-23 11:52:31,164] [ERROR] [BaseScanner] Failed to check file extension: D:/Detection-and-Remove-Trojan\build\main\Analysis-00.toc
+Traceback (most recent call last):
+  File "D:\Detection-and-Remove-Trojan\scanner\base_scanner.py", line 22, in is_suspicious_extension
+    from config.settings import load_scan_extensions
+ImportError: cannot import name 'load_scan_extensions' from 'config.settings' (D:\Detection-and-Remove-Trojan\config\settings.py)
+[2025-12-23 11:52:31,164] [ERROR] [BaseScanner] Failed to check file extension: D:/Detection-and-Remove-Trojan\build\main\base_library.zip
+Traceback (most recent call last):
+  File "D:\Detection-and-Remove-Trojan\scanner\base_scanner.py", line 22, in is_suspicious_extension
+    from config.settings import load_scan_extensions
+ImportError: cannot import name 'load_scan_extensions' from 'config.settings' (D:\Detection-and-Remove-Trojan\config\settings.py)
+[2025-12-23 11:52:31,165] [ERROR] [BaseScanner] Failed to check file extension: D:/Detection-and-Remove-Trojan\build\main\EXE-00.toc
+Traceback (most recent call last):
+  File "D:\Detection-and-Remove-Trojan\scanner\base_scanner.py", line 22, in is_suspicious_extension
+    from config.settings import load_scan_extensions
+ImportError: cannot import name 'load_scan_extensions' from 'config.settings' (D:\Detection-and-Remove-Trojan\config\settings.py)
+[2025-12-23 11:52:31,165] [ERROR] [BaseScanner] Failed to check file extension: D:/Detection-and-Remove-Trojan\build\main\main.pkg
+Traceback (most recent call last):
+  File "D:\Detection-and-Remove-Trojan\scanner\base_scanner.py", line 22, in is_suspicious_extension
+    from config.settings import load_scan_extensions
+ImportError: cannot import name 'load_scan_extensions' from 'config.settings' (D:\Detection-and-Remove-Trojan\config\settings.py)
+[2025-12-23 11:52:31,165] [ERROR] [BaseScanner] Failed to check file extension: D:/Detection-and-Remove-Trojan\build\main\PKG-00.toc
+Traceback (most recent call last):
+  File "D:\Detection-and-Remove-Trojan\scanner\base_scanner.py", line 22, in is_suspicious_extension
+    from config.settings import load_scan_extensions
+ImportError: cannot import name 'load_scan_extensions' from 'config.settings' (D:\Detection-and-Remove-Trojan\config\settings.py)
+[2025-12-23 11:52:31,165] [ERROR] [BaseScanner] Failed to check file extension: D:/Detection-and-Remove-Trojan\build\main\PYZ-00.pyz
+Traceback (most recent call last):
+  File "D:\Detection-and-Remove-Trojan\scanner\base_scanner.py", line 22, in is_suspicious_extension
+    from config.settings import load_scan_extensions
+ImportError: cannot import name 'load_scan_extensions' from 'config.settings' (D:\Detection-and-Remove-Trojan\config\settings.py)
+[2025-12-23 11:52:31,165] [ERROR] [BaseScanner] Failed to check file extension: D:/Detection-and-Remove-Trojan\build\main\PYZ-00.toc
+Traceback (most recent call last):
+  File "D:\Detection-and-Remove-Trojan\scanner\base_scanner.py", line 22, in is_suspicious_extension
+    from config.settings import load_scan_extensions
+ImportError: cannot import name 'load_scan_extensions' from 'config.settings' (D:\Detection-and-Remove-Trojan\config\settings.py)
+[2025-12-23 11:52:31,165] [ERROR] [BaseScanner] Failed to check file extension: D:/Detection-and-Remove-Trojan\build\main\warn-main.txt
+Traceback (most recent call last):
+  File "D:\Detection-and-Remove-Trojan\scanner\base_scanner.py", line 22, in is_suspicious_extension
+    from config.settings import load_scan_extensions
+ImportError: cannot import name 'load_scan_extensions' from 'config.settings' (D:\Detection-and-Remove-Trojan\config\settings.py)
+[2025-12-23 11:52:31,165] [ERROR] [BaseScanner] Failed to check file extension: D:/Detection-and-Remove-Trojan\build\main\xref-main.html
+Traceback (most recent call last):
+  File "D:\Detection-and-Remove-Trojan\scanner\base_scanner.py", line 22, in is_suspicious_extension
+    from config.settings import load_scan_extensions
+ImportError: cannot import name 'load_scan_extensions' from 'config.settings' (D:\Detection-and-Remove-Trojan\config\settings.py)
+[2025-12-23 11:52:31,165] [ERROR] [BaseScanner] Failed to check file extension: D:/Detection-and-Remove-Trojan\build\main\localpycs\pyimod01_archive.pyc
+Traceback (most recent call last):
+  File "D:\Detection-and-Remove-Trojan\scanner\base_scanner.py", line 22, in is_suspicious_extension
+    from config.settings import load_scan_extensions
+ImportError: cannot import name 'load_scan_extensions' from 'config.settings' (D:\Detection-and-Remove-Trojan\config\settings.py)
+[2025-12-23 11:52:31,165] [ERROR] [BaseScanner] Failed to check file extension: D:/Detection-and-Remove-Trojan\build\main\localpycs\pyimod02_importers.pyc
+Traceback (most recent call last):
+  File "D:\Detection-and-Remove-Trojan\scanner\base_scanner.py", line 22, in is_suspicious_extension
+    from config.settings import load_scan_extensions
+ImportError: cannot import name 'load_scan_extensions' from 'config.settings' (D:\Detection-and-Remove-Trojan\config\settings.py)
+[2025-12-23 11:52:31,165] [ERROR] [BaseScanner] Failed to check file extension: D:/Detection-and-Remove-Trojan\build\main\localpycs\pyimod03_ctypes.pyc
+Traceback (most recent call last):
+  File "D:\Detection-and-Remove-Trojan\scanner\base_scanner.py", line 22, in is_suspicious_extension
+    from config.settings import load_scan_extensions
+ImportError: cannot import name 'load_scan_extensions' from 'config.settings' (D:\Detection-and-Remove-Trojan\config\settings.py)
+[2025-12-23 11:52:31,165] [ERROR] [BaseScanner] Failed to check file extension: D:/Detection-and-Remove-Trojan\build\main\localpycs\pyimod04_pywin32.pyc
+Traceback (most recent call last):
+  File "D:\Detection-and-Remove-Trojan\scanner\base_scanner.py", line 22, in is_suspicious_extension
+    from config.settings import load_scan_extensions
+ImportError: cannot import name 'load_scan_extensions' from 'config.settings' (D:\Detection-and-Remove-Trojan\config\settings.py)
+[2025-12-23 11:52:31,167] [ERROR] [BaseScanner] Failed to check file extension: D:/Detection-and-Remove-Trojan\build\main\localpycs\struct.pyc
+Traceback (most recent call last):
+  File "D:\Detection-and-Remove-Trojan\scanner\base_scanner.py", line 22, in is_suspicious_extension
+    from config.settings import load_scan_extensions
+ImportError: cannot import name 'load_scan_extensions' from 'config.settings' (D:\Detection-and-Remove-Trojan\config\settings.py)
+[2025-12-23 11:52:31,167] [ERROR] [BaseScanner] Failed to check file extension: D:/Detection-and-Remove-Trojan\build\simple_test\Analysis-00.toc
+Traceback (most recent call last):
+  File "D:\Detection-and-Remove-Trojan\scanner\base_scanner.py", line 22, in is_suspicious_extension
+    from config.settings import load_scan_extensions
+ImportError: cannot import name 'load_scan_extensions' from 'config.settings' (D:\Detection-and-Remove-Trojan\config\settings.py)
+[2025-12-23 11:52:31,167] [ERROR] [BaseScanner] Failed to check file extension: D:/Detection-and-Remove-Trojan\build\simple_test\base_library.zip
+Traceback (most recent call last):
+  File "D:\Detection-and-Remove-Trojan\scanner\base_scanner.py", line 22, in is_suspicious_extension
+    from config.settings import load_scan_extensions
+ImportError: cannot import name 'load_scan_extensions' from 'config.settings' (D:\Detection-and-Remove-Trojan\config\settings.py)
+[2025-12-23 11:52:31,169] [ERROR] [BaseScanner] Failed to check file extension: D:/Detection-and-Remove-Trojan\build\simple_test\EXE-00.toc
+Traceback (most recent call last):
+  File "D:\Detection-and-Remove-Trojan\scanner\base_scanner.py", line 22, in is_suspicious_extension
+    from config.settings import load_scan_extensions
+ImportError: cannot import name 'load_scan_extensions' from 'config.settings' (D:\Detection-and-Remove-Trojan\config\settings.py)
+[2025-12-23 11:52:31,169] [ERROR] [BaseScanner] Failed to check file extension: D:/Detection-and-Remove-Trojan\build\simple_test\PKG-00.toc
+Traceback (most recent call last):
+  File "D:\Detection-and-Remove-Trojan\scanner\base_scanner.py", line 22, in is_suspicious_extension
+    from config.settings import load_scan_extensions
+ImportError: cannot import name 'load_scan_extensions' from 'config.settings' (D:\Detection-and-Remove-Trojan\config\settings.py)
+[2025-12-23 11:52:31,169] [ERROR] [BaseScanner] Failed to check file extension: D:/Detection-and-Remove-Trojan\build\simple_test\PYZ-00.pyz
+Traceback (most recent call last):
+  File "D:\Detection-and-Remove-Trojan\scanner\base_scanner.py", line 22, in is_suspicious_extension
+    from config.settings import load_scan_extensions
+ImportError: cannot import name 'load_scan_extensions' from 'config.settings' (D:\Detection-and-Remove-Trojan\config\settings.py)
+[2025-12-23 11:52:31,169] [ERROR] [BaseScanner] Failed to check file extension: D:/Detection-and-Remove-Trojan\build\simple_test\PYZ-00.toc
+Traceback (most recent call last):
+  File "D:\Detection-and-Remove-Trojan\scanner\base_scanner.py", line 22, in is_suspicious_extension
+    from config.settings import load_scan_extensions
+ImportError: cannot import name 'load_scan_extensions' from 'config.settings' (D:\Detection-and-Remove-Trojan\config\settings.py)
+[2025-12-23 11:52:31,169] [ERROR] [BaseScanner] Failed to check file extension: D:/Detection-and-Remove-Trojan\build\simple_test\simple_test.pkg
+Traceback (most recent call last):
+  File "D:\Detection-and-Remove-Trojan\scanner\base_scanner.py", line 22, in is_suspicious_extension
+    from config.settings import load_scan_extensions
+ImportError: cannot import name 'load_scan_extensions' from 'config.settings' (D:\Detection-and-Remove-Trojan\config\settings.py)
+[2025-12-23 11:52:31,169] [ERROR] [BaseScanner] Failed to check file extension: D:/Detection-and-Remove-Trojan\build\simple_test\warn-simple_test.txt
+Traceback (most recent call last):
+  File "D:\Detection-and-Remove-Trojan\scanner\base_scanner.py", line 22, in is_suspicious_extension
+    from config.settings import load_scan_extensions
+ImportError: cannot import name 'load_scan_extensions' from 'config.settings' (D:\Detection-and-Remove-Trojan\config\settings.py)
+[2025-12-23 11:52:31,170] [ERROR] [BaseScanner] Failed to check file extension: D:/Detection-and-Remove-Trojan\build\simple_test\xref-simple_test.html
+Traceback (most recent call last):
+  File "D:\Detection-and-Remove-Trojan\scanner\base_scanner.py", line 22, in is_suspicious_extension
+    from config.settings import load_scan_extensions
+ImportError: cannot import name 'load_scan_extensions' from 'config.settings' (D:\Detection-and-Remove-Trojan\config\settings.py)
+[2025-12-23 11:52:31,170] [ERROR] [BaseScanner] Failed to check file extension: D:/Detection-and-Remove-Trojan\build\simple_test\localpycs\pyimod01_archive.pyc
+Traceback (most recent call last):
+  File "D:\Detection-and-Remove-Trojan\scanner\base_scanner.py", line 22, in is_suspicious_extension
+    from config.settings import load_scan_extensions
+ImportError: cannot import name 'load_scan_extensions' from 'config.settings' (D:\Detection-and-Remove-Trojan\config\settings.py)
+[2025-12-23 11:52:31,170] [ERROR] [BaseScanner] Failed to check file extension: D:/Detection-and-Remove-Trojan\build\simple_test\localpycs\pyimod02_importers.pyc
+Traceback (most recent call last):
+  File "D:\Detection-and-Remove-Trojan\scanner\base_scanner.py", line 22, in is_suspicious_extension
+    from config.settings import load_scan_extensions
+ImportError: cannot import name 'load_scan_extensions' from 'config.settings' (D:\Detection-and-Remove-Trojan\config\settings.py)
+[2025-12-23 11:52:31,170] [ERROR] [BaseScanner] Failed to check file extension: D:/Detection-and-Remove-Trojan\build\simple_test\localpycs\pyimod03_ctypes.pyc
+Traceback (most recent call last):
+  File "D:\Detection-and-Remove-Trojan\scanner\base_scanner.py", line 22, in is_suspicious_extension
+    from config.settings import load_scan_extensions
+ImportError: cannot import name 'load_scan_extensions' from 'config.settings' (D:\Detection-and-Remove-Trojan\config\settings.py)
+[2025-12-23 11:52:31,170] [ERROR] [BaseScanner] Failed to check file extension: D:/Detection-and-Remove-Trojan\build\simple_test\localpycs\pyimod04_pywin32.pyc
+Traceback (most recent call last):
+  File "D:\Detection-and-Remove-Trojan\scanner\base_scanner.py", line 22, in is_suspicious_extension
+    from config.settings import load_scan_extensions
+ImportError: cannot import name 'load_scan_extensions' from 'config.settings' (D:\Detection-and-Remove-Trojan\config\settings.py)
+[2025-12-23 11:52:31,171] [ERROR] [BaseScanner] Failed to check file extension: D:/Detection-and-Remove-Trojan\build\simple_test\localpycs\struct.pyc
+Traceback (most recent call last):
+  File "D:\Detection-and-Remove-Trojan\scanner\base_scanner.py", line 22, in is_suspicious_extension
+    from config.settings import load_scan_extensions
+ImportError: cannot import name 'load_scan_extensions' from 'config.settings' (D:\Detection-and-Remove-Trojan\config\settings.py)
+[2025-12-23 11:52:31,171] [ERROR] [BaseScanner] Failed to check file extension: D:/Detection-and-Remove-Trojan\config\api_keys.py
+Traceback (most recent call last):
+  File "D:\Detection-and-Remove-Trojan\scanner\base_scanner.py", line 22, in is_suspicious_extension
+    from config.settings import load_scan_extensions
+ImportError: cannot import name 'load_scan_extensions' from 'config.settings' (D:\Detection-and-Remove-Trojan\config\settings.py)
+[2025-12-23 11:52:31,171] [ERROR] [BaseScanner] Failed to check file extension: D:/Detection-and-Remove-Trojan\config\settings.py
+Traceback (most recent call last):
+  File "D:\Detection-and-Remove-Trojan\scanner\base_scanner.py", line 22, in is_suspicious_extension
+    from config.settings import load_scan_extensions
+ImportError: cannot import name 'load_scan_extensions' from 'config.settings' (D:\Detection-and-Remove-Trojan\config\settings.py)
+[2025-12-23 11:52:31,172] [ERROR] [BaseScanner] Failed to check file extension: D:/Detection-and-Remove-Trojan\config\__init__.py
+Traceback (most recent call last):
+  File "D:\Detection-and-Remove-Trojan\scanner\base_scanner.py", line 22, in is_suspicious_extension
+    from config.settings import load_scan_extensions
+ImportError: cannot import name 'load_scan_extensions' from 'config.settings' (D:\Detection-and-Remove-Trojan\config\settings.py)
+[2025-12-23 11:52:31,172] [ERROR] [BaseScanner] Failed to check file extension: D:/Detection-and-Remove-Trojan\config\__pycache__\api_keys.cpython-310.pyc
+Traceback (most recent call last):
+  File "D:\Detection-and-Remove-Trojan\scanner\base_scanner.py", line 22, in is_suspicious_extension
+    from config.settings import load_scan_extensions
+ImportError: cannot import name 'load_scan_extensions' from 'config.settings' (D:\Detection-and-Remove-Trojan\config\settings.py)
+[2025-12-23 11:52:31,172] [ERROR] [BaseScanner] Failed to check file extension: D:/Detection-and-Remove-Trojan\config\__pycache__\settings.cpython-310.pyc
+Traceback (most recent call last):
+  File "D:\Detection-and-Remove-Trojan\scanner\base_scanner.py", line 22, in is_suspicious_extension
+    from config.settings import load_scan_extensions
+ImportError: cannot import name 'load_scan_extensions' from 'config.settings' (D:\Detection-and-Remove-Trojan\config\settings.py)
+[2025-12-23 11:52:31,172] [ERROR] [BaseScanner] Failed to check file extension: D:/Detection-and-Remove-Trojan\config\__pycache__\__init__.cpython-310.pyc
+Traceback (most recent call last):
+  File "D:\Detection-and-Remove-Trojan\scanner\base_scanner.py", line 22, in is_suspicious_extension
+    from config.settings import load_scan_extensions
+ImportError: cannot import name 'load_scan_extensions' from 'config.settings' (D:\Detection-and-Remove-Trojan\config\settings.py)
+[2025-12-23 11:52:31,172] [ERROR] [BaseScanner] Failed to check file extension: D:/Detection-and-Remove-Trojan\database\db_manager.py
+Traceback (most recent call last):
+  File "D:\Detection-and-Remove-Trojan\scanner\base_scanner.py", line 22, in is_suspicious_extension
+    from config.settings import load_scan_extensions
+ImportError: cannot import name 'load_scan_extensions' from 'config.settings' (D:\Detection-and-Remove-Trojan\config\settings.py)
+[2025-12-23 11:52:31,172] [ERROR] [BaseScanner] Failed to check file extension: D:/Detection-and-Remove-Trojan\database\models.py
+Traceback (most recent call last):
+  File "D:\Detection-and-Remove-Trojan\scanner\base_scanner.py", line 22, in is_suspicious_extension
+    from config.settings import load_scan_extensions
+ImportError: cannot import name 'load_scan_extensions' from 'config.settings' (D:\Detection-and-Remove-Trojan\config\settings.py)
+[2025-12-23 11:52:31,174] [ERROR] [BaseScanner] Failed to check file extension: D:/Detection-and-Remove-Trojan\database\scanner.db
+Traceback (most recent call last):
+  File "D:\Detection-and-Remove-Trojan\scanner\base_scanner.py", line 22, in is_suspicious_extension
+    from config.settings import load_scan_extensions
+ImportError: cannot import name 'load_scan_extensions' from 'config.settings' (D:\Detection-and-Remove-Trojan\config\settings.py)
+[2025-12-23 11:52:31,174] [ERROR] [BaseScanner] Failed to check file extension: D:/Detection-and-Remove-Trojan\database\__init__.py
+Traceback (most recent call last):
+  File "D:\Detection-and-Remove-Trojan\scanner\base_scanner.py", line 22, in is_suspicious_extension
+    from config.settings import load_scan_extensions
+ImportError: cannot import name 'load_scan_extensions' from 'config.settings' (D:\Detection-and-Remove-Trojan\config\settings.py)
+[2025-12-23 11:52:31,174] [ERROR] [BaseScanner] Failed to check file extension: D:/Detection-and-Remove-Trojan\database\__pycache__\db_manager.cpython-310.pyc
+Traceback (most recent call last):
+  File "D:\Detection-and-Remove-Trojan\scanner\base_scanner.py", line 22, in is_suspicious_extension
+    from config.settings import load_scan_extensions
+ImportError: cannot import name 'load_scan_extensions' from 'config.settings' (D:\Detection-and-Remove-Trojan\config\settings.py)
+[2025-12-23 11:52:31,174] [ERROR] [BaseScanner] Failed to check file extension: D:/Detection-and-Remove-Trojan\database\__pycache__\models.cpython-310.pyc
+Traceback (most recent call last):
+  File "D:\Detection-and-Remove-Trojan\scanner\base_scanner.py", line 22, in is_suspicious_extension
+    from config.settings import load_scan_extensions
+ImportError: cannot import name 'load_scan_extensions' from 'config.settings' (D:\Detection-and-Remove-Trojan\config\settings.py)
+[2025-12-23 11:52:31,174] [ERROR] [BaseScanner] Failed to check file extension: D:/Detection-and-Remove-Trojan\database\__pycache__\__init__.cpython-310.pyc
+Traceback (most recent call last):
+  File "D:\Detection-and-Remove-Trojan\scanner\base_scanner.py", line 22, in is_suspicious_extension
+    from config.settings import load_scan_extensions
+ImportError: cannot import name 'load_scan_extensions' from 'config.settings' (D:\Detection-and-Remove-Trojan\config\settings.py)
+[2025-12-23 11:52:31,174] [ERROR] [BaseScanner] Failed to check file extension: D:/Detection-and-Remove-Trojan\dist\main.exe
+Traceback (most recent call last):
+  File "D:\Detection-and-Remove-Trojan\scanner\base_scanner.py", line 22, in is_suspicious_extension
+    from config.settings import load_scan_extensions
+ImportError: cannot import name 'load_scan_extensions' from 'config.settings' (D:\Detection-and-Remove-Trojan\config\settings.py)
+[2025-12-23 11:52:31,174] [ERROR] [BaseScanner] Failed to check file extension: D:/Detection-and-Remove-Trojan\dist\simple_test.exe
+Traceback (most recent call last):
+  File "D:\Detection-and-Remove-Trojan\scanner\base_scanner.py", line 22, in is_suspicious_extension
+    from config.settings import load_scan_extensions
+ImportError: cannot import name 'load_scan_extensions' from 'config.settings' (D:\Detection-and-Remove-Trojan\config\settings.py)
+[2025-12-23 11:52:31,174] [ERROR] [BaseScanner] Failed to check file extension: D:/Detection-and-Remove-Trojan\gui\gui.py
+Traceback (most recent call last):
+  File "D:\Detection-and-Remove-Trojan\scanner\base_scanner.py", line 22, in is_suspicious_extension
+    from config.settings import load_scan_extensions
+ImportError: cannot import name 'load_scan_extensions' from 'config.settings' (D:\Detection-and-Remove-Trojan\config\settings.py)
+[2025-12-23 11:52:31,174] [ERROR] [BaseScanner] Failed to check file extension: D:/Detection-and-Remove-Trojan\gui\main_window.py
+Traceback (most recent call last):
+  File "D:\Detection-and-Remove-Trojan\scanner\base_scanner.py", line 22, in is_suspicious_extension
+    from config.settings import load_scan_extensions
+ImportError: cannot import name 'load_scan_extensions' from 'config.settings' (D:\Detection-and-Remove-Trojan\config\settings.py)
+[2025-12-23 11:52:31,176] [ERROR] [BaseScanner] Failed to check file extension: D:/Detection-and-Remove-Trojan\gui\__init__.py
+Traceback (most recent call last):
+  File "D:\Detection-and-Remove-Trojan\scanner\base_scanner.py", line 22, in is_suspicious_extension
+    from config.settings import load_scan_extensions
+ImportError: cannot import name 'load_scan_extensions' from 'config.settings' (D:\Detection-and-Remove-Trojan\config\settings.py)
+[2025-12-23 11:52:31,177] [ERROR] [BaseScanner] Failed to check file extension: D:/Detection-and-Remove-Trojan\gui\__pycache__\main_window.cpython-310.pyc
+Traceback (most recent call last):
+  File "D:\Detection-and-Remove-Trojan\scanner\base_scanner.py", line 22, in is_suspicious_extension
+    from config.settings import load_scan_extensions
+ImportError: cannot import name 'load_scan_extensions' from 'config.settings' (D:\Detection-and-Remove-Trojan\config\settings.py)
+[2025-12-23 11:52:31,177] [ERROR] [BaseScanner] Failed to check file extension: D:/Detection-and-Remove-Trojan\gui\__pycache__\__init__.cpython-310.pyc
+Traceback (most recent call last):
+  File "D:\Detection-and-Remove-Trojan\scanner\base_scanner.py", line 22, in is_suspicious_extension
+    from config.settings import load_scan_extensions
+ImportError: cannot import name 'load_scan_extensions' from 'config.settings' (D:\Detection-and-Remove-Trojan\config\settings.py)
+[2025-12-23 11:52:31,177] [ERROR] [BaseScanner] Failed to check file extension: D:/Detection-and-Remove-Trojan\logs\app.log
+Traceback (most recent call last):
+  File "D:\Detection-and-Remove-Trojan\scanner\base_scanner.py", line 22, in is_suspicious_extension
+    from config.settings import load_scan_extensions
+ImportError: cannot import name 'load_scan_extensions' from 'config.settings' (D:\Detection-and-Remove-Trojan\config\settings.py)
+[2025-12-23 11:52:31,177] [ERROR] [BaseScanner] Failed to check file extension: D:/Detection-and-Remove-Trojan\logs\error.log
+Traceback (most recent call last):
+  File "D:\Detection-and-Remove-Trojan\scanner\base_scanner.py", line 22, in is_suspicious_extension
+    from config.settings import load_scan_extensions
+ImportError: cannot import name 'load_scan_extensions' from 'config.settings' (D:\Detection-and-Remove-Trojan\config\settings.py)
+[2025-12-23 11:52:31,177] [ERROR] [BaseScanner] Failed to check file extension: D:/Detection-and-Remove-Trojan\quarantine\quarantined\1_test.exe
+Traceback (most recent call last):
+  File "D:\Detection-and-Remove-Trojan\scanner\base_scanner.py", line 22, in is_suspicious_extension
+    from config.settings import load_scan_extensions
+ImportError: cannot import name 'load_scan_extensions' from 'config.settings' (D:\Detection-and-Remove-Trojan\config\settings.py)
+[2025-12-23 11:52:31,177] [ERROR] [BaseScanner] Failed to check file extension: D:/Detection-and-Remove-Trojan\quarantine\quarantined\4_eicar.exe
+Traceback (most recent call last):
+  File "D:\Detection-and-Remove-Trojan\scanner\base_scanner.py", line 22, in is_suspicious_extension
+    from config.settings import load_scan_extensions
+ImportError: cannot import name 'load_scan_extensions' from 'config.settings' (D:\Detection-and-Remove-Trojan\config\settings.py)
+[2025-12-23 11:52:31,178] [ERROR] [BaseScanner] Failed to check file extension: D:/Detection-and-Remove-Trojan\quarantine\quarantined\9_eicar.exe
+Traceback (most recent call last):
+  File "D:\Detection-and-Remove-Trojan\scanner\base_scanner.py", line 22, in is_suspicious_extension
+    from config.settings import load_scan_extensions
+ImportError: cannot import name 'load_scan_extensions' from 'config.settings' (D:\Detection-and-Remove-Trojan\config\settings.py)
+[2025-12-23 11:52:31,178] [ERROR] [BaseScanner] Failed to check file extension: D:/Detection-and-Remove-Trojan\scanner\base_scanner.py
+Traceback (most recent call last):
+  File "D:\Detection-and-Remove-Trojan\scanner\base_scanner.py", line 22, in is_suspicious_extension
+    from config.settings import load_scan_extensions
+ImportError: cannot import name 'load_scan_extensions' from 'config.settings' (D:\Detection-and-Remove-Trojan\config\settings.py)
+[2025-12-23 11:52:31,179] [ERROR] [BaseScanner] Failed to check file extension: D:/Detection-and-Remove-Trojan\scanner\behaviour_scanner.py
+Traceback (most recent call last):
+  File "D:\Detection-and-Remove-Trojan\scanner\base_scanner.py", line 22, in is_suspicious_extension
+    from config.settings import load_scan_extensions
+ImportError: cannot import name 'load_scan_extensions' from 'config.settings' (D:\Detection-and-Remove-Trojan\config\settings.py)
+[2025-12-23 11:52:31,179] [ERROR] [BaseScanner] Failed to check file extension: D:/Detection-and-Remove-Trojan\scanner\dynamic_analysis_api.py
+Traceback (most recent call last):
+  File "D:\Detection-and-Remove-Trojan\scanner\base_scanner.py", line 22, in is_suspicious_extension
+    from config.settings import load_scan_extensions
+ImportError: cannot import name 'load_scan_extensions' from 'config.settings' (D:\Detection-and-Remove-Trojan\config\settings.py)
+[2025-12-23 11:52:31,179] [ERROR] [BaseScanner] Failed to check file extension: D:/Detection-and-Remove-Trojan\scanner\dynamic_runner.py
+Traceback (most recent call last):
+  File "D:\Detection-and-Remove-Trojan\scanner\base_scanner.py", line 22, in is_suspicious_extension
+    from config.settings import load_scan_extensions
+ImportError: cannot import name 'load_scan_extensions' from 'config.settings' (D:\Detection-and-Remove-Trojan\config\settings.py)
+[2025-12-23 11:52:31,179] [ERROR] [BaseScanner] Failed to check file extension: D:/Detection-and-Remove-Trojan\scanner\full_scan.py
+Traceback (most recent call last):
+  File "D:\Detection-and-Remove-Trojan\scanner\base_scanner.py", line 22, in is_suspicious_extension
+    from config.settings import load_scan_extensions
+ImportError: cannot import name 'load_scan_extensions' from 'config.settings' (D:\Detection-and-Remove-Trojan\config\settings.py)
+[2025-12-23 11:52:31,180] [ERROR] [BaseScanner] Failed to check file extension: D:/Detection-and-Remove-Trojan\scanner\signature_scanner.py
+Traceback (most recent call last):
+  File "D:\Detection-and-Remove-Trojan\scanner\base_scanner.py", line 22, in is_suspicious_extension
+    from config.settings import load_scan_extensions
+ImportError: cannot import name 'load_scan_extensions' from 'config.settings' (D:\Detection-and-Remove-Trojan\config\settings.py)
+[2025-12-23 11:52:31,180] [ERROR] [BaseScanner] Failed to check file extension: D:/Detection-and-Remove-Trojan\scanner\virustotal_scanner.py
+Traceback (most recent call last):
+  File "D:\Detection-and-Remove-Trojan\scanner\base_scanner.py", line 22, in is_suspicious_extension
+    from config.settings import load_scan_extensions
+ImportError: cannot import name 'load_scan_extensions' from 'config.settings' (D:\Detection-and-Remove-Trojan\config\settings.py)
+[2025-12-23 11:52:31,180] [ERROR] [BaseScanner] Failed to check file extension: D:/Detection-and-Remove-Trojan\scanner\__init__.py
+Traceback (most recent call last):
+  File "D:\Detection-and-Remove-Trojan\scanner\base_scanner.py", line 22, in is_suspicious_extension
+    from config.settings import load_scan_extensions
+ImportError: cannot import name 'load_scan_extensions' from 'config.settings' (D:\Detection-and-Remove-Trojan\config\settings.py)
+[2025-12-23 11:52:31,180] [ERROR] [BaseScanner] Failed to check file extension: D:/Detection-and-Remove-Trojan\scanner\monitors\fs_monitor.py
+Traceback (most recent call last):
+  File "D:\Detection-and-Remove-Trojan\scanner\base_scanner.py", line 22, in is_suspicious_extension
+    from config.settings import load_scan_extensions
+ImportError: cannot import name 'load_scan_extensions' from 'config.settings' (D:\Detection-and-Remove-Trojan\config\settings.py)
+[2025-12-23 11:52:31,181] [ERROR] [BaseScanner] Failed to check file extension: D:/Detection-and-Remove-Trojan\scanner\monitors\init.py
+Traceback (most recent call last):
+  File "D:\Detection-and-Remove-Trojan\scanner\base_scanner.py", line 22, in is_suspicious_extension
+    from config.settings import load_scan_extensions
+ImportError: cannot import name 'load_scan_extensions' from 'config.settings' (D:\Detection-and-Remove-Trojan\config\settings.py)
+[2025-12-23 11:52:31,181] [ERROR] [BaseScanner] Failed to check file extension: D:/Detection-and-Remove-Trojan\scanner\monitors\network_monitor.py
+Traceback (most recent call last):
+  File "D:\Detection-and-Remove-Trojan\scanner\base_scanner.py", line 22, in is_suspicious_extension
+    from config.settings import load_scan_extensions
+ImportError: cannot import name 'load_scan_extensions' from 'config.settings' (D:\Detection-and-Remove-Trojan\config\settings.py)
+[2025-12-23 11:52:31,181] [ERROR] [BaseScanner] Failed to check file extension: D:/Detection-and-Remove-Trojan\scanner\monitors\process_monitor.py
+Traceback (most recent call last):
+  File "D:\Detection-and-Remove-Trojan\scanner\base_scanner.py", line 22, in is_suspicious_extension
+    from config.settings import load_scan_extensions
+ImportError: cannot import name 'load_scan_extensions' from 'config.settings' (D:\Detection-and-Remove-Trojan\config\settings.py)
+[2025-12-23 11:52:31,181] [ERROR] [BaseScanner] Failed to check file extension: D:/Detection-and-Remove-Trojan\scanner\monitors\__pycache__\fs_monitor.cpython-310.pyc
+Traceback (most recent call last):
+  File "D:\Detection-and-Remove-Trojan\scanner\base_scanner.py", line 22, in is_suspicious_extension
+    from config.settings import load_scan_extensions
+ImportError: cannot import name 'load_scan_extensions' from 'config.settings' (D:\Detection-and-Remove-Trojan\config\settings.py)
+[2025-12-23 11:52:31,181] [ERROR] [BaseScanner] Failed to check file extension: D:/Detection-and-Remove-Trojan\scanner\monitors\__pycache__\network_monitor.cpython-310.pyc
+Traceback (most recent call last):
+  File "D:\Detection-and-Remove-Trojan\scanner\base_scanner.py", line 22, in is_suspicious_extension
+    from config.settings import load_scan_extensions
+ImportError: cannot import name 'load_scan_extensions' from 'config.settings' (D:\Detection-and-Remove-Trojan\config\settings.py)
+[2025-12-23 11:52:31,181] [ERROR] [BaseScanner] Failed to check file extension: D:/Detection-and-Remove-Trojan\scanner\monitors\__pycache__\process_monitor.cpython-310.pyc
+Traceback (most recent call last):
+  File "D:\Detection-and-Remove-Trojan\scanner\base_scanner.py", line 22, in is_suspicious_extension
+    from config.settings import load_scan_extensions
+ImportError: cannot import name 'load_scan_extensions' from 'config.settings' (D:\Detection-and-Remove-Trojan\config\settings.py)
+[2025-12-23 11:52:31,182] [ERROR] [BaseScanner] Failed to check file extension: D:/Detection-and-Remove-Trojan\scanner\__pycache__\base_scanner.cpython-310.pyc
+Traceback (most recent call last):
+  File "D:\Detection-and-Remove-Trojan\scanner\base_scanner.py", line 22, in is_suspicious_extension
+    from config.settings import load_scan_extensions
+ImportError: cannot import name 'load_scan_extensions' from 'config.settings' (D:\Detection-and-Remove-Trojan\config\settings.py)
+[2025-12-23 11:52:31,183] [ERROR] [BaseScanner] Failed to check file extension: D:/Detection-and-Remove-Trojan\scanner\__pycache__\behaviour_scanner.cpython-310.pyc
+Traceback (most recent call last):
+  File "D:\Detection-and-Remove-Trojan\scanner\base_scanner.py", line 22, in is_suspicious_extension
+    from config.settings import load_scan_extensions
+ImportError: cannot import name 'load_scan_extensions' from 'config.settings' (D:\Detection-and-Remove-Trojan\config\settings.py)
+[2025-12-23 11:52:31,183] [ERROR] [BaseScanner] Failed to check file extension: D:/Detection-and-Remove-Trojan\scanner\__pycache__\dynamic_analysis_api.cpython-310.pyc
+Traceback (most recent call last):
+  File "D:\Detection-and-Remove-Trojan\scanner\base_scanner.py", line 22, in is_suspicious_extension
+    from config.settings import load_scan_extensions
+ImportError: cannot import name 'load_scan_extensions' from 'config.settings' (D:\Detection-and-Remove-Trojan\config\settings.py)
+[2025-12-23 11:52:31,183] [ERROR] [BaseScanner] Failed to check file extension: D:/Detection-and-Remove-Trojan\scanner\__pycache__\dynamic_runner.cpython-310.pyc
+Traceback (most recent call last):
+  File "D:\Detection-and-Remove-Trojan\scanner\base_scanner.py", line 22, in is_suspicious_extension
+    from config.settings import load_scan_extensions
+ImportError: cannot import name 'load_scan_extensions' from 'config.settings' (D:\Detection-and-Remove-Trojan\config\settings.py)
+[2025-12-23 11:52:31,183] [ERROR] [BaseScanner] Failed to check file extension: D:/Detection-and-Remove-Trojan\scanner\__pycache__\full_scan.cpython-310.pyc
+Traceback (most recent call last):
+  File "D:\Detection-and-Remove-Trojan\scanner\base_scanner.py", line 22, in is_suspicious_extension
+    from config.settings import load_scan_extensions
+ImportError: cannot import name 'load_scan_extensions' from 'config.settings' (D:\Detection-and-Remove-Trojan\config\settings.py)
+[2025-12-23 11:52:31,183] [ERROR] [BaseScanner] Failed to check file extension: D:/Detection-and-Remove-Trojan\scanner\__pycache__\signature_scanner.cpython-310.pyc
+Traceback (most recent call last):
+  File "D:\Detection-and-Remove-Trojan\scanner\base_scanner.py", line 22, in is_suspicious_extension
+    from config.settings import load_scan_extensions
+ImportError: cannot import name 'load_scan_extensions' from 'config.settings' (D:\Detection-and-Remove-Trojan\config\settings.py)
+[2025-12-23 11:52:31,183] [ERROR] [BaseScanner] Failed to check file extension: D:/Detection-and-Remove-Trojan\scanner\__pycache__\virustotal_scanner.cpython-310.pyc
+Traceback (most recent call last):
+  File "D:\Detection-and-Remove-Trojan\scanner\base_scanner.py", line 22, in is_suspicious_extension
+    from config.settings import load_scan_extensions
+ImportError: cannot import name 'load_scan_extensions' from 'config.settings' (D:\Detection-and-Remove-Trojan\config\settings.py)
+[2025-12-23 11:52:31,184] [ERROR] [BaseScanner] Failed to check file extension: D:/Detection-and-Remove-Trojan\scanner\__pycache__\__init__.cpython-310.pyc
+Traceback (most recent call last):
+  File "D:\Detection-and-Remove-Trojan\scanner\base_scanner.py", line 22, in is_suspicious_extension
+    from config.settings import load_scan_extensions
+ImportError: cannot import name 'load_scan_extensions' from 'config.settings' (D:\Detection-and-Remove-Trojan\config\settings.py)
+[2025-12-23 11:52:31,184] [ERROR] [BaseScanner] Failed to check file extension: D:/Detection-and-Remove-Trojan\tests\test_eicar.py
+Traceback (most recent call last):
+  File "D:\Detection-and-Remove-Trojan\scanner\base_scanner.py", line 22, in is_suspicious_extension
+    from config.settings import load_scan_extensions
+ImportError: cannot import name 'load_scan_extensions' from 'config.settings' (D:\Detection-and-Remove-Trojan\config\settings.py)
+[2025-12-23 11:52:31,184] [ERROR] [BaseScanner] Failed to check file extension: D:/Detection-and-Remove-Trojan\tests\test_file_hash.py
+Traceback (most recent call last):
+  File "D:\Detection-and-Remove-Trojan\scanner\base_scanner.py", line 22, in is_suspicious_extension
+    from config.settings import load_scan_extensions
+ImportError: cannot import name 'load_scan_extensions' from 'config.settings' (D:\Detection-and-Remove-Trojan\config\settings.py)
+[2025-12-23 11:52:31,184] [ERROR] [BaseScanner] Failed to check file extension: D:/Detection-and-Remove-Trojan\tests\__init__.py
+Traceback (most recent call last):
+  File "D:\Detection-and-Remove-Trojan\scanner\base_scanner.py", line 22, in is_suspicious_extension
+    from config.settings import load_scan_extensions
+ImportError: cannot import name 'load_scan_extensions' from 'config.settings' (D:\Detection-and-Remove-Trojan\config\settings.py)
+[2025-12-23 11:52:31,185] [ERROR] [BaseScanner] Failed to check file extension: D:/Detection-and-Remove-Trojan\utils\file_hash.py
+Traceback (most recent call last):
+  File "D:\Detection-and-Remove-Trojan\scanner\base_scanner.py", line 22, in is_suspicious_extension
+    from config.settings import load_scan_extensions
+ImportError: cannot import name 'load_scan_extensions' from 'config.settings' (D:\Detection-and-Remove-Trojan\config\settings.py)
+[2025-12-23 11:52:31,185] [ERROR] [BaseScanner] Failed to check file extension: D:/Detection-and-Remove-Trojan\utils\logger.py
+Traceback (most recent call last):
+  File "D:\Detection-and-Remove-Trojan\scanner\base_scanner.py", line 22, in is_suspicious_extension
+    from config.settings import load_scan_extensions
+ImportError: cannot import name 'load_scan_extensions' from 'config.settings' (D:\Detection-and-Remove-Trojan\config\settings.py)
+[2025-12-23 11:52:31,185] [ERROR] [BaseScanner] Failed to check file extension: D:/Detection-and-Remove-Trojan\utils\__init__.py
+Traceback (most recent call last):
+  File "D:\Detection-and-Remove-Trojan\scanner\base_scanner.py", line 22, in is_suspicious_extension
+    from config.settings import load_scan_extensions
+ImportError: cannot import name 'load_scan_extensions' from 'config.settings' (D:\Detection-and-Remove-Trojan\config\settings.py)
+[2025-12-23 11:52:31,186] [ERROR] [BaseScanner] Failed to check file extension: D:/Detection-and-Remove-Trojan\utils\__pycache__\file_hash.cpython-310.pyc
+Traceback (most recent call last):
+  File "D:\Detection-and-Remove-Trojan\scanner\base_scanner.py", line 22, in is_suspicious_extension
+    from config.settings import load_scan_extensions
+ImportError: cannot import name 'load_scan_extensions' from 'config.settings' (D:\Detection-and-Remove-Trojan\config\settings.py)
+[2025-12-23 11:52:31,186] [ERROR] [BaseScanner] Failed to check file extension: D:/Detection-and-Remove-Trojan\utils\__pycache__\logger.cpython-310.pyc
+Traceback (most recent call last):
+  File "D:\Detection-and-Remove-Trojan\scanner\base_scanner.py", line 22, in is_suspicious_extension
+    from config.settings import load_scan_extensions
+ImportError: cannot import name 'load_scan_extensions' from 'config.settings' (D:\Detection-and-Remove-Trojan\config\settings.py)
+[2025-12-23 11:52:31,187] [ERROR] [BaseScanner] Failed to check file extension: D:/Detection-and-Remove-Trojan\utils\__pycache__\__init__.cpython-310.pyc
+Traceback (most recent call last):
+  File "D:\Detection-and-Remove-Trojan\scanner\base_scanner.py", line 22, in is_suspicious_extension
+    from config.settings import load_scan_extensions
+ImportError: cannot import name 'load_scan_extensions' from 'config.settings' (D:\Detection-and-Remove-Trojan\config\settings.py)
+[2025-12-23 21:35:27,379] [WARNING] [scanner.dynamic_runner] Failed to apply network block (out): 
+[2025-12-23 21:45:01,531] [INFO] [scanner.dynamic_runner] Network guard skipped; admin privileges required (out): The requested operation requires elevation (Run as administrator).
+[2025-12-23 23:11:08,979] [WARNING] [scanner.pe_heuristic_scanner] Not a valid PE file: [WinError 2] The system cannot find the file specified: 'fake.exe'
+[2025-12-23 23:11:09,017] [WARNING] [scanner.pe_heuristic_scanner] Not a valid PE file: [WinError 2] The system cannot find the file specified: 'clean.exe'
+[2025-12-23 23:13:21,012] [WARNING] [scanner.pe_heuristic_scanner] Not a valid PE file: test_pe_heuristic_flags_suspicious.<locals>.<lambda>() got an unexpected keyword argument 'fast_load'
+[2025-12-23 23:13:21,068] [WARNING] [scanner.pe_heuristic_scanner] Not a valid PE file: test_pe_heuristic_clean_file.<locals>.<lambda>() got an unexpected keyword argument 'fast_load'
+[2025-12-24 09:06:14,965] [INFO] [scanner.dynamic_runner] Network guard skipped; admin privileges required (out): The requested operation requires elevation (Run as administrator).
+[2025-12-24 09:11:12,281] [INFO] [scanner.dynamic_runner] Network guard skipped; admin privileges required (out): The requested operation requires elevation (Run as administrator).
+[2025-12-30 20:48:22,683] [INFO] [scanner.dynamic_runner] Network guard skipped; admin privileges required (out): The requested operation requires elevation (Run as administrator).

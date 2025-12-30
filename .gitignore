@@ -63,3 +63,8 @@ quarantine/
 dynamic_analysis/samples/
 temp/
 cache/
+
+# Scan exclusions
+build/
+dist/
+.git/

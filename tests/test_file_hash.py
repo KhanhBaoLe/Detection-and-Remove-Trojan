@@ -8,10 +8,14 @@ def test_calculate_file_hash_valid_file():
         tmp.write(b"hello world")
         tmp_path = tmp.name
 
-    file_hash = calculate_file_hash(tmp_path)
+    sha_hash = calculate_file_hash(tmp_path)
+    md5_hash = calculate_file_hash(tmp_path, algorithm="md5")
 
-    assert file_hash is not None
-    assert len(file_hash) == 64  # SHA-256
+    assert sha_hash is not None
+    assert len(sha_hash) == 64  # SHA-256
+
+    assert md5_hash is not None
+    assert len(md5_hash) == 32  # MD5
 
     os.remove(tmp_path)
 
