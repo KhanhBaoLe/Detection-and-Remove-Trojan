@@ -15,6 +15,8 @@ from config.settings import (
 from scanner.monitors.fs_monitor import FileSystemMonitor
 from scanner.monitors.network_monitor import NetworkMonitor
 from scanner.monitors.process_monitor import ProcessMonitor
+
+from scanner.monitors.registry_monitor import RegistryMonitor 
 from utils.logger import setup_logger
 
 logger = setup_logger(__name__)
@@ -25,7 +27,6 @@ class SandboxNetworkGuard:
     Best-effort network isolation using Windows firewall rules.
     Falls back silently if not supported or lacking privileges.
     """
-
     def __init__(self, program_path: str):
         self.program_path = program_path
         self.rule_name = f"TrojanScanner_Block_{int(time.time() * 1000)}"
@@ -45,40 +46,17 @@ class SandboxNetworkGuard:
         try:
             for direction in ("out", "in"):
                 cmd = [
-                    "netsh",
-                    "advfirewall",
-                    "firewall",
-                    "add",
-                    "rule",
-                    f"name={self.rule_name}",
-                    f"dir={direction}",
-                    "action=block",
-                    f"program={self.program_path}",
-                    "enable=yes",
-                    "profile=any",
+                    "netsh", "advfirewall", "firewall", "add", "rule",
+                    f"name={self.rule_name}", f"dir={direction}",
+                    "action=block", f"program={self.program_path}",
+                    "enable=yes", "profile=any",
                 ]
-                result = subprocess.run(cmd, capture_output=True, text=True)
-                if result.returncode != 0:
-                    output = (result.stderr or result.stdout or "").strip()
-                    lowered = output.lower()
-                    if "requires elevation" in lowered or "access is denied" in lowered:
-                        logger.info(
-                            "Network guard skipped; admin privileges required (%s): %s",
-                            direction,
-                            output or "no output",
-                        )
-                    else:
-                        logger.warning(
-                            "Failed to apply network block (%s), continuing without guard: %s",
-                            direction,
-                            output or "no output",
-                        )
-                    return False
-
+                subprocess.run(cmd, capture_output=True, text=True)
+            
             self.applied = True
             logger.info("Applied sandbox network block for %s", self.program_path)
             return True
-        except Exception as exc:  # pragma: no cover - defensive
+        except Exception as exc:
             logger.warning("Network block apply failed: %s", exc)
             return False
 
@@ -87,16 +65,12 @@ class SandboxNetworkGuard:
             return
         try:
             cmd = [
-                "netsh",
-                "advfirewall",
-                "firewall",
-                "delete",
-                "rule",
+                "netsh", "advfirewall", "firewall", "delete", "rule",
                 f"name={self.rule_name}",
             ]
             subprocess.run(cmd, capture_output=True)
             logger.info("Removed sandbox network block rule %s", self.rule_name)
-        except Exception as exc:  # pragma: no cover - defensive
+        except Exception as exc:
             logger.warning("Network block cleanup failed: %s", exc)
 
 
@@ -108,6 +82,7 @@ class ExecutionResult:
         process_monitors=None,
         fs_monitors=None,
         network_monitors=None,
+        registry_monitors=None,
         duration=0,
         status="completed",
         reason=None,
@@ -117,8 +92,8 @@ class ExecutionResult:
         self.sample_path = sample_path
         self.exit_code = exit_code
         self.duration = duration
-        self.status = status          # completed | skipped | failed
-        self.reason = reason          # not_executable | timeout | error
+        self.status = status
+        self.reason = reason
         self.timestamp = datetime.now().isoformat()
         self.sandbox_dir = sandbox_dir
         self.copied_sample = copied_sample
@@ -126,7 +101,8 @@ class ExecutionResult:
         self.process_monitors = process_monitors or []
         self.fs_monitors = fs_monitors or []
         self.network_monitors = network_monitors or []
-
+        self.registry_monitors = registry_monitors or [] 
+        
     def to_dict(self):
         return {
             "sample_path": self.sample_path,
@@ -137,22 +113,17 @@ class ExecutionResult:
             "timestamp": self.timestamp,
             "sandbox_dir": self.sandbox_dir,
             "copied_sample": self.copied_sample,
+            
+            # SUMMARIES
             "process_summary": [m.get_summary() for m in self.process_monitors],
             "fs_summary": [m.get_summary() for m in self.fs_monitors],
             "network_summary": [m.get_summary() for m in self.network_monitors],
-            # Trimmed raw events for richer behaviour logs
-            "process_events": [
-                getattr(m, "get_records", lambda: [])()[:50]
-                for m in self.process_monitors
-            ],
-            "fs_events": [
-                getattr(m, "get_records", lambda: [])()[:50]
-                for m in self.fs_monitors
-            ],
-            "network_events": [
-                getattr(m, "get_records", lambda: [])()[:50]
-                for m in self.network_monitors
-            ],
+            "registry_summary": [m.get_summary() for m in self.registry_monitors], 
+
+            # EVENTS (Trimmed for logs)
+            "process_events": [getattr(m, "get_summary", lambda: {})().get("raw_events", [])[:50] for m in self.process_monitors],
+            "fs_events": [getattr(m, "get_records", lambda: [])()[:50] for m in self.fs_monitors],
+            "network_events": [getattr(m, "get_summary", lambda: {})().get("traffic_log", [])[:50] for m in self.network_monitors],
         }
 
 
@@ -174,10 +145,6 @@ class DynamicRunner:
         self.network_guard = None
 
     def run_sample(self, sample_path, env_opts=None):
-        """
-        Khởi chạy mẫu và thu thập hành vi runtime
-        """
-
         if not os.path.exists(sample_path):
             raise FileNotFoundError(f"Sample not found: {sample_path}")
 
@@ -185,11 +152,9 @@ class DynamicRunner:
         sandbox_dir = tempfile.mkdtemp(prefix="dyn_", dir=DYNAMIC_SANDBOX_DIR)
         self.sandbox_dir = sandbox_dir
 
-        sandbox_temp = os.path.join(sandbox_dir, "tmp")
-        sandbox_appdata = os.path.join(sandbox_dir, "appdata")
-        sandbox_home = os.path.join(sandbox_dir, "home")
-        for d in [sandbox_temp, sandbox_appdata, sandbox_home]:
-            os.makedirs(d, exist_ok=True)
+        # Tạo các thư mục giả lập
+        for d in ["tmp", "appdata", "home"]:
+            os.makedirs(os.path.join(sandbox_dir, d), exist_ok=True)
 
         copied_sample = os.path.join(sandbox_dir, os.path.basename(sample_path))
         shutil.copy2(sample_path, copied_sample)
@@ -197,29 +162,19 @@ class DynamicRunner:
         try:
             # ===== PREPARE ENV =====
             env = os.environ.copy()
-            if env_opts:
-                env.update(env_opts)
+            if env_opts: env.update(env_opts)
+            
+            env.update({
+                "TEMP": os.path.join(sandbox_dir, "tmp"),
+                "TMP": os.path.join(sandbox_dir, "tmp"),
+                "APPDATA": os.path.join(sandbox_dir, "appdata"),
+                "LOCALAPPDATA": os.path.join(sandbox_dir, "appdata"),
+                "USERPROFILE": os.path.join(sandbox_dir, "home"),
+            })
 
-            sandbox_env = {
-                "TEMP": sandbox_temp,
-                "TMP": sandbox_temp,
-                "APPDATA": sandbox_appdata,
-                "LOCALAPPDATA": sandbox_appdata,
-                "USERPROFILE": sandbox_home,
-                "HOME": sandbox_home,
-            }
-            env.update(sandbox_env)
-
-            # Apply firewall rule to block outbound/inbound traffic when disabled
             if not self.enable_network and self.use_firewall_guard:
                 self.network_guard = SandboxNetworkGuard(copied_sample)
                 self.network_guard.apply()
-
-            if not self.enable_network:
-                # Best-effort network hardening for sandboxed runs
-                env["NO_PROXY"] = "*"
-                for proxy_key in ["http_proxy", "https_proxy", "HTTP_PROXY", "HTTPS_PROXY"]:
-                    env[proxy_key] = ""
 
             # ===== EXECUTE SAMPLE =====
             self.process = subprocess.Popen(
@@ -228,23 +183,31 @@ class DynamicRunner:
                 stdout=subprocess.DEVNULL,
                 stderr=subprocess.DEVNULL,
                 cwd=sandbox_dir,
-                creationflags=0x200 | 0x08000000  # CREATE_NEW_PROCESS_GROUP | CREATE_NO_WINDOW
+                creationflags=0x200 | 0x08000000 
             )
 
             # ===== INIT MONITORS =====
+            # 1. Process Monitor
             process_monitor = ProcessMonitor(self.process.pid, timeout=self.timeout)
+            
+            # 2. FileSystem Monitor
             fs_monitor = FileSystemMonitor(
                 sample_path,
-                monitor_dirs=[sandbox_dir, sandbox_temp, sandbox_appdata],
+                monitor_dirs=[sandbox_dir, os.path.join(sandbox_dir, "tmp"), os.path.join(sandbox_dir, "appdata")],
                 timeout=self.timeout
             )
+            
+            # 3. Network Monitor
             network_monitor = NetworkMonitor(
                 self.process.pid,
                 timeout=self.timeout,
                 enabled=self.enable_network
             )
 
-            self.monitors = [process_monitor, fs_monitor, network_monitor]
+            # 4. Registry Monitor
+            registry_monitor = RegistryMonitor(timeout=self.timeout)
+
+            self.monitors = [process_monitor, fs_monitor, network_monitor, registry_monitor]
 
             for monitor in self.monitors:
                 monitor.start()
@@ -272,6 +235,7 @@ class DynamicRunner:
                 process_monitors=[process_monitor],
                 fs_monitors=[fs_monitor],
                 network_monitors=[network_monitor],
+                registry_monitors=[registry_monitor], 
                 duration=duration,
                 status=status,
                 reason=reason,
@@ -279,22 +243,15 @@ class DynamicRunner:
                 copied_sample=copied_sample
             )
 
-        # ==========================================================
-        # FIX: HANDLE WINERROR 216 (NOT A VALID WINDOWS EXECUTABLE)
-        # ==========================================================
         except OSError as e:
             if hasattr(e, "winerror") and e.winerror == 216:
-                duration = time.time() - start_time
-
                 return ExecutionResult(
                     sample_path=copied_sample,
                     exit_code=-216,
-                    duration=duration,
+                    duration=time.time() - start_time,
                     status="skipped",
                     reason="not_executable"
                 )
-
-            # Cleanup for other OS errors
             self._cleanup()
             raise Exception(f"Dynamic analysis OS error: {str(e)}")
 
@@ -302,55 +259,27 @@ class DynamicRunner:
             self._cleanup()
             raise Exception(f"Dynamic analysis failed: {str(e)}")
         finally:
-            try:
-                if self.network_guard:
-                    self.network_guard.remove()
-            finally:
-                try:
-                    shutil.rmtree(sandbox_dir, ignore_errors=True)
-                except Exception:
-                    pass
-
-    def _terminate_process_tree(self):
-        """Kill the process and any children to enforce cleanup."""
-        if not self.process:
-            return
-
-        try:
-            proc = psutil.Process(self.process.pid)
-            for child in proc.children(recursive=True):
-                try:
-                    child.kill()
-                except Exception:
-                    continue
-            proc.kill()
-        except Exception:
-            try:
-                self.process.kill()
-            except Exception:
-                pass
+            self._cleanup()
 
     def _cleanup(self):
-        """Terminate process and stop monitors safely"""
-        self._terminate_process_tree()
-
-        for monitor in self.monitors:
+        """Cleanup logic"""
+        if self.process:
             try:
-                monitor.stop()
+                psutil.Process(self.process.pid).kill()
             except:
                 pass
+        
+        for monitor in self.monitors:
+            try: monitor.stop()
+            except: pass
 
-        try:
-            if self.network_guard:
-                self.network_guard.remove()
-        except Exception:
-            pass
+        if self.network_guard:
+            try: self.network_guard.remove()
+            except: pass
 
-        try:
-            if self.sandbox_dir:
-                shutil.rmtree(self.sandbox_dir, ignore_errors=True)
-        except Exception:
-            pass
+        if self.sandbox_dir:
+            try: shutil.rmtree(self.sandbox_dir, ignore_errors=True)
+            except: pass
 
     def terminate(self):
         self._cleanup()

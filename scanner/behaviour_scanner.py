@@ -33,14 +33,23 @@ class BehaviourScanner(BaseScanner):
             files_to_scan = [path]
         else:
             files_to_scan = []
+
+            ALLOWED_BEHAVIOUR_EXTENSIONS = (
+                ".exe", ".dll",
+                ".bat", ".ps1", ".vbs", ".js",
+                ".py", ".txt"
+            )
+
             for root, dirs, files in os.walk(path):
                 # ✅ Skip unwanted directories
                 dirs[:] = [d for d in dirs if d not in self.skip_dirs]
 
                 for file in files:
                     file_path = os.path.join(root, file)
-                    if self.is_suspicious_extension(file_path):
+
+                    if file_path.lower().endswith(ALLOWED_BEHAVIOUR_EXTENSIONS):
                         files_to_scan.append(file_path)
+
 
         # ---------------------------
         # Header

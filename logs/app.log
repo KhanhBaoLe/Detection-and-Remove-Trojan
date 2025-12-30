@@ -2080,3 +2080,10 @@ Traceback (most recent call last):
 ImportError: cannot import name 'load_scan_extensions' from 'config.settings' (D:\Detection-and-Remove-Trojan\config\settings.py)
 [2025-12-23 21:35:27,379] [WARNING] [scanner.dynamic_runner] Failed to apply network block (out): 
 [2025-12-23 21:45:01,531] [INFO] [scanner.dynamic_runner] Network guard skipped; admin privileges required (out): The requested operation requires elevation (Run as administrator).
+[2025-12-23 23:11:08,979] [WARNING] [scanner.pe_heuristic_scanner] Not a valid PE file: [WinError 2] The system cannot find the file specified: 'fake.exe'
+[2025-12-23 23:11:09,017] [WARNING] [scanner.pe_heuristic_scanner] Not a valid PE file: [WinError 2] The system cannot find the file specified: 'clean.exe'
+[2025-12-23 23:13:21,012] [WARNING] [scanner.pe_heuristic_scanner] Not a valid PE file: test_pe_heuristic_flags_suspicious.<locals>.<lambda>() got an unexpected keyword argument 'fast_load'
+[2025-12-23 23:13:21,068] [WARNING] [scanner.pe_heuristic_scanner] Not a valid PE file: test_pe_heuristic_clean_file.<locals>.<lambda>() got an unexpected keyword argument 'fast_load'
+[2025-12-24 09:06:14,965] [INFO] [scanner.dynamic_runner] Network guard skipped; admin privileges required (out): The requested operation requires elevation (Run as administrator).
+[2025-12-24 09:11:12,281] [INFO] [scanner.dynamic_runner] Network guard skipped; admin privileges required (out): The requested operation requires elevation (Run as administrator).
+[2025-12-30 20:48:22,683] [INFO] [scanner.dynamic_runner] Network guard skipped; admin privileges required (out): The requested operation requires elevation (Run as administrator).

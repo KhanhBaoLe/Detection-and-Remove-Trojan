@@ -118,8 +118,6 @@ class DatabaseManager:
     def sync_behaviour_patterns(self):
         """
         Import behaviour patterns from JSON bundles in SIGNATURE_DIR.
-        Expected schema: list of dicts with keys
-        pattern_name, pattern_type, pattern_value, severity_score, is_active
         """
         bundle_path = os.path.join(SIGNATURE_DIR, "behaviour_patterns.json")
         if not os.path.isfile(bundle_path):
@@ -144,7 +142,7 @@ class DatabaseManager:
                     continue
 
                 self.session.add(BehaviourPattern(
-                    pattern_name=name,
+                    pattern_name="pattern_name",
                     pattern_type=pattern.get("pattern_type", "generic"),
                     pattern_value=pattern.get("pattern_value", ""),
                     severity_score=pattern.get("severity_score", 5.0),
@@ -186,8 +184,7 @@ class DatabaseManager:
         self.session.commit()
         return run.id
 
-    
-    def add_behavior_sample(self, dynamic_run_id, execution_result):
+    def add_behavior_sample(self, dynamic_run_id, execution_result, score_data=None):
         behavior_data = execution_result.to_dict()
 
         def safe_first(lst):
@@ -204,10 +201,23 @@ class DatabaseManager:
             or network_summary.get("remote_hosts", [])
         )
 
+        # Xử lý Score Data
+        threat_score = 0.0
+        score_details = {}
+        
+        if score_data:
+            threat_score = score_data.get("score", 0.0)
+            score_details = {
+                "level": score_data.get("level", "Unknown"),
+                "reasons": score_data.get("reasons", [])
+            }
+
+        # Đóng gói thông tin phụ vào JSON notes
         note_payload = {
             "status": behavior_data.get("status"),
             "reason": behavior_data.get("reason"),
-            "sandbox_dir": behavior_data.get("sandbox_dir")
+            "sandbox_dir": behavior_data.get("sandbox_dir"),
+            "analysis_details": score_details 
         }
 
         sample = BehaviorSample(
@@ -223,34 +233,12 @@ class DatabaseManager:
             network_indicators=json.dumps(network_indicators),
             notes=json.dumps(note_payload),
 
-            threat_score=self._calculate_threat_score(
-                process_summary,
-                fs_summary,
-                network_summary
-            )
+            threat_score=threat_score  
         )
 
         self.session.add(sample)
         self.session.commit()
         return sample
-
-    # THREAT SCORE
-    def _calculate_threat_score(self, process, fs, network):
-        score = 0.0
-
-        if process.get("child_processes"):
-            score += 20
-
-        score += min(len(fs.get("created_files", [])) * 5, 30)
-
-        if fs.get("modified_files"):
-            score += 15
-
-        connections = network.get("connections") or network.get("remote_hosts")
-        if connections:
-            score += 25
-
-        return min(score, 100)
 
     # CLEANUP
     def update_dynamic_run(self, run_id, **kwargs):
@@ -295,17 +283,14 @@ class DatabaseManager:
         if limit is not None:
             query = query.limit(limit)
 
-        return query.all()   # ⚠️ TRẢ VỀ ORM OBJECT
-
+        return query.all()
 
     def get_detections_by_scan(self, scan_id):
         return self.session.query(TrojanDetection)\
                         .filter_by(scan_id=scan_id)\
                         .all()
 
-
-
-        # ===== STATIC / SIGNATURE =====
+    # ===== STATIC / SIGNATURE =====
     def add_detection(self, scan_id, file_path, file_hash,
                     trojan_name, detection_method, threat_level):
         detection = TrojanDetection(
@@ -362,7 +347,6 @@ class DatabaseManager:
         return self.session.query(BehaviorSample)\
             .filter_by(dynamic_run_id=dynamic_run_id)\
             .all()
-
 
     def close(self):
         self.session.close()
