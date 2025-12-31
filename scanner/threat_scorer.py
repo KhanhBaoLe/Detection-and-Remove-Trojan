@@ -1,92 +1,132 @@
+import os
+
 class ThreatScorer:
+    # 1. Các Port mà Trojan/RAT (Remote Access Trojan) hay dùng
+    BAD_PORTS = {
+        4444: "Metasploit/Reverse Shell",
+        3333: "Crypto Mining (Trojan Miner)",
+        6667: "IRC Botnet",
+        135: "RPC Exploit",
+        21: "FTP (Stealing Data)",
+        23: "Telnet",
+        8080: "Alternative HTTP (Proxy Trojan)"
+    }
+
+    # 2. Từ khóa Trojan (Tập trung vào tải xuống, ẩn mình, lấy thông tin)
+    # Đã XÓA các lệnh Ransomware như: vssadmin, bcdedit, wbadmin
+    CRITICAL_KEYWORDS = [
+        "mimikatz",             # Trộm mật khẩu
+        "powershell -enc",      # Mã hóa lệnh để ẩn mình
+        "downloadstring",       # Tải payload về (Dropper)
+        "invoke-expression",    # Chạy lệnh từ xa
+        "bypass",               # Vượt qua bảo mật
+        "reg add",              # Ghi vào Registry (Persistence)
+        "netsh advfirewall",    # Tắt tường lửa
+        "attrib +h",            # Ẩn file
+        "schtasks /create"      # Tạo task để tự chạy lại
+    ]
+
     @staticmethod
     def calculate_score(process_data, network_data, file_data, registry_data=None):
-        """
-        Input: Dictionaries từ get_summary() của 4 monitors
-        Output: {score, level, reasons}
-        """
         score = 0
         reasons = []
         registry_data = registry_data or {}
 
-        # --- 1. PROCESS ANALYSIS ---
+        # =================================================================
+        # 1. PROCESS (Hành vi tiến trình)
+        # =================================================================
         cmd_lines = process_data.get("command_lines", [])
         procs = process_data.get("processes", [])
         
-        # Check Shell spawn
-        shell_count = sum(1 for p in procs if p.lower() in ['cmd.exe', 'powershell.exe', 'wscript.exe'])
+        # Trojan thường cố gắng ẩn mình nên ít khi ăn RAM quá lớn
+        # Tuy nhiên nếu là Trojan đào coin thì sẽ ăn CPU/RAM
+        max_ram = process_data.get("max_memory_mb", 0)
+        if max_ram > 500:
+            score += 15
+            reasons.append("High Resource Usage (Possible Trojan Miner)")
+
+        # Kiểm tra Shell (Trojan thường gọi cmd để thực thi lệnh ngầm)
+        shell_count = sum(1 for p in procs if any(s in p.lower() for s in ['cmd.exe', 'powershell.exe', 'wscript.exe']))
         if shell_count > 0:
-            score += 30 * shell_count
-            reasons.append(f"Spawned {shell_count} shell processes")
+            score += 25 + (shell_count * 5)
+            reasons.append(f"Spawning hidden shells ({shell_count} detected)")
 
-        # Check Encoded Commands (Base64)
+        # Kiểm tra lệnh nguy hiểm
         for cmd in cmd_lines:
-            if "-enc" in cmd.lower() or "base64" in cmd.lower():
-                score += 50
-                reasons.append("Detected Base64 encoded command (Obfuscation)")
-                break
+            cmd_lower = cmd.lower()
+            for kw in ThreatScorer.CRITICAL_KEYWORDS:
+                if kw in cmd_lower:
+                    score += 50 # Phạt nặng
+                    reasons.append(f"Trojan command detected: '{kw}'")
+                    break
 
-        # Check Injection/Persistence keywords
-        dangerous_keywords = ["reg add", "schtasks", "vssadmin", "bitsadmin", "bcdedit"]
-        for cmd in cmd_lines:
-            if any(k in cmd.lower() for k in dangerous_keywords):
-                score += 40
-                reasons.append(f"Suspicious command execution: {cmd[:30]}...")
+        # =================================================================
+        # 2. NETWORK (Quan trọng nhất với Trojan/RAT)
+        # =================================================================
+        # Trojan bắt buộc phải kết nối ra ngoài để nhận lệnh hoặc gửi dữ liệu
+        unique_hosts = network_data.get("unique_remote_hosts", [])
+        traffic_log = network_data.get("traffic_log", [])
         
-        # Check Suspicious Tags from Monitor
-        tags = process_data.get("suspicious_tags", [])
-        if "fake_svchost" in tags:
-            score += 60
-            reasons.append("Fake svchost.exe detected (Process Masquerading)")
+        if len(unique_hosts) > 0:
+            score += 15 # Có kết nối lạ là đáng ngờ với file exe không rõ nguồn gốc
+            reasons.append(f"Established external connection ({len(unique_hosts)} hosts)")
 
-        # --- 2. NETWORK ANALYSIS ---
-        if network_data.get("status") == "ok":
-            hosts = network_data.get("unique_remote_hosts", [])
-            
-            exploit_ports = network_data.get("exploit_ports", [])
-            
-            if len(hosts) > 3: 
-                score += 10
-                reasons.append(f"Connected to multiple hosts ({len(hosts)})")
-            
-            if exploit_ports:
-                score += 50 
-                reasons.append(f"Connected to exploit/sensitive ports: {', '.join(exploit_ports)}")
+        # Check Port đen
+        detected_ports = set()
+        for log in traffic_log:
+            try:
+                port = int(log.get("remote_port", 0))
+                if port in ThreatScorer.BAD_PORTS:
+                    detected_ports.add(port)
+            except: pass
+        
+        if detected_ports:
+            score += 60 # Gần như chắc chắn là RAT/Backdoor
+            port_names = [f"{p}" for p in detected_ports]
+            reasons.append(f"Connected to C2/Backdoor Ports: {', '.join(port_names)}")
 
-        # --- 3. FILE SYSTEM ANALYSIS ---
+        # =================================================================
+        # 3. FILE SYSTEM (Trojan Dropper)
+        # =================================================================
         files_created = file_data.get("created_files", [])
-        files_modified = file_data.get("modified_files", [])
         
-        # Check Ransomware behavior
-        if len(files_modified) > 10:
-            score += 60
-            reasons.append("Mass file modification detected (Ransomware-like)")
-
-        # Check Dropper behavior
-        exe_drops = [f for f in files_created if f.endswith(('.exe', '.dll', '.bat', '.ps1'))]
+        # Trojan thường "đẻ" ra file .exe/.dll khác (Dropper)
+        exe_drops = [f for f in files_created if f.lower().endswith(('.exe', '.dll', '.bat', '.ps1', '.vbs'))]
+        
         if exe_drops:
-            score += 30
-            reasons.append(f"Dropped executable files: {len(exe_drops)}")
+            score += 40
+            reasons.append(f"Dropper Behavior: Created {len(exe_drops)} executable files")
 
-        # Kiểm tra Persistence (Khởi động cùng Windows)
+        # =================================================================
+        # 4. PERSISTENCE (Sự bền vững - Đặc trưng của Trojan)
+        # =================================================================
+        # Trojan luôn muốn khởi động cùng Windows
         persistence = registry_data.get("persistence_changes", [])
         if persistence:
-            score += 80 
-            count = len(persistence)
-            reasons.append(f"Persistence detected: Modified {count} registry Run Keys")
+            score += 50 
+            reasons.append("Persistence Detected: Added to Startup/Registry")
 
-        # --- FINALIZE ---
-        # Normalize Score
+        # =================================================================
+        # 5. KẾT LUẬN
+        # =================================================================
         score = min(100, score)
-        
-        # Determine Threat Level Logic
-        threat_name = "Clean"
-        if score >= 80: threat_name = "Trojan.Heuristic.Critical"
-        elif score >= 50: threat_name = "Trojan.Heuristic.High"
-        elif score >= 20: threat_name = "Suspicious.Activity"
+
+        if score >= 70: 
+            threat_name = "Trojan.Heuristic.Critical"
+            level = "critical"
+        elif score >= 40: 
+            threat_name = "Trojan.Heuristic.High"
+            level = "high"
+        elif score >= 20: 
+            threat_name = "Suspicious.TrojanLike"
+            level = "medium"
+        else:
+            threat_name = "Clean"
+            level = "low"
 
         return {
-            "score": score,
-            "level": threat_name,
+            "threat_score": score,
+            "threat_level": level,
+            "trojan_name": threat_name,
             "reasons": reasons
         }

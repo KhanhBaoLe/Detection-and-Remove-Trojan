@@ -14,16 +14,24 @@ class NetworkMonitor:
         self.running = False
         self.monitor_thread = None
 
-        
+        # Danh sách Port "đen" thường được Trojan/RAT sử dụng
         self.SENSITIVE_PORTS = {
+            # RATs / Backdoors
             4444: "Metasploit/Shell",
+            1604: "DarkComet RAT",
+            1177: "NjRAT",
             8080: "Alt HTTP/Proxy",
+            81:   "Alt Web (Common C2)",
+            
+            # Exploits / Botnets
             135:  "RPC (Exploit)",
             445:  "SMB (WannaCry/Exploit)",
             3389: "RDP (Remote Access)",
-            21:   "FTP (Data Exfiltration)",
-            23:   "Telnet (Insecure)",
             6667: "IRC (Botnet C2)",
+            
+            # Data Exfiltration
+            21:   "FTP (Data Theft)",
+            23:   "Telnet (Insecure)",
             53:   "DNS (Tunneling Check)" 
         }
 
@@ -55,55 +63,46 @@ class NetworkMonitor:
     # =============================
     def _monitor_loop(self):
         start_time = time.time()
-        
-        # Chỉ quan tâm các kết nối đã thiết lập hoặc đang gửi gói tin
-        INTERESTING_STATUSES = {psutil.CONN_ESTABLISHED, psutil.CONN_SYN_SENT}
+        # Dùng set để lưu các kết nối đã ghi nhận nhằm tránh trùng lặp
+        seen_connections = set() 
 
         while self.running:
             if time.time() - start_time > self.timeout:
                 break
 
             try:
-                # Quét toàn bộ kết nối
                 connections = psutil.net_connections(kind="inet")
-                
                 for c in connections:
-                    # 1. LỌC: Chỉ lấy kết nối của PID malware
+                    # Chỉ bắt kết nối của Process mục tiêu
                     if c.pid != self.target_pid:
                         continue
-
-                    # 2. LỌC: Trạng thái kết nối
-                    if c.status not in INTERESTING_STATUSES:
-                        continue
-
-                    # 3. XỬ LÝ DỮ LIỆU
-                    remote_ip = f"{c.raddr.ip}" if c.raddr else None
-                    remote_port = c.raddr.port if c.raddr else None
-                    remote_full = f"{remote_ip}:{remote_port}" if remote_ip else None
                     
-                    local_ip = f"{c.laddr.ip}" if c.laddr else None
+                    # Tạo ID duy nhất: (IP đích, Port đích, Trạng thái)
+                    conn_id = (
+                        c.raddr.ip if c.raddr else "N/A", 
+                        c.raddr.port if c.raddr else 0,
+                        c.status
+                    )
 
-                    # Tránh spam log trùng lặp liên tục
-                    if self.records:
-                        last = self.records[-1]
-                        if last.get("remote_addr") == remote_full and last.get("status") == c.status:
-                            continue
-
-                    # Ghi nhận record
-                    self.records.append({
-                        "timestamp": datetime.now().isoformat(),
-                        "pid": c.pid,
-                        "local_addr": local_ip,
-                        "remote_addr": remote_full,
-                        "remote_port": remote_port, 
-                        "status": c.status,
-                        "protocol": "TCP" if c.type == socket.SOCK_STREAM else "UDP"
-                    })
-
-            except Exception:
+                    # Chỉ ghi nhận nếu là kết nối mới
+                    if conn_id not in seen_connections:
+                        seen_connections.add(conn_id)
+                        
+                        self.records.append({
+                            "timestamp": datetime.now().isoformat(),
+                            "pid": c.pid,
+                            "local_addr": f"{c.laddr.ip}:{c.laddr.port}" if c.laddr else None,
+                            "remote_addr": f"{c.raddr.ip}:{c.raddr.port}" if c.raddr else None,
+                            "remote_port": c.raddr.port if c.raddr else 0,
+                            "status": c.status,
+                            "type": str(c.type)
+                        })
+            except:
                 pass
 
-            # Polling rate: 0.5s để bắt kết nối nhanh
+            # [TỐI ƯU HÓA]
+            # Tăng từ 0.1s lên 0.5s để giảm tải CPU.
+            # Trojan thường giữ kết nối lâu (Beacon) hoặc mở cổng Listen nên 0.5s là đủ bắt.
             time.sleep(0.5)
 
     # =============================
@@ -136,13 +135,10 @@ class NetworkMonitor:
             # Lấy Port nhạy cảm
             port = r.get("remote_port")
             if port:
-                # Check trong danh sách đen
+                # Chỉ check trong danh sách đen đã định nghĩa
                 if port in self.SENSITIVE_PORTS:
                     detected_sensitive_ports.add(f"{port} ({self.SENSITIVE_PORTS[port]})")
-                # Hoặc port lạ > 10000
-                elif port > 10000:
-                    detected_sensitive_ports.add(f"{port} (High Port)")
-
+                
         return {
             "status": "ok",
             "total_connections": len(self.records),

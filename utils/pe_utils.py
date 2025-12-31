@@ -39,7 +39,7 @@ def analyze_pe_file(file_path: str) -> Dict:
     """
     result = {
         "score": 0.0,
-        "reasons": [],  # human-readable reasons
+        "reasons": [],  
         "entropy": 0.0,
         "packer_markers": [],
         "suspicious_imports": [],
@@ -64,16 +64,31 @@ def analyze_pe_file(file_path: str) -> Dict:
         found_markers = [m.decode("ascii", errors="ignore") for m in packer_markers if m in blob]
         if found_markers:
             result["packer_markers"] = found_markers
-            result["score"] += 3.0
+            result["score"] += 1.5  
             result["reasons"].append(f"Packer markers: {', '.join(found_markers)}")
 
-        # Suspicious API imports (naive substring check)
         suspicious_imports = [
+            # Process Injection / Manipulation
             b"VirtualAlloc", b"VirtualProtect", b"WriteProcessMemory",
-            b"CreateRemoteThread", b"WinExec", b"ShellExecute",
+            b"CreateRemoteThread", b"OpenProcess", b"ReadProcessMemory",
+            b"QueueUserAPC", b"SetThreadContext",
+            
+            # Execution
+            b"WinExec", b"ShellExecute", b"CreateProcess",
+            
+            # Network / Dropper
             b"URLDownloadToFile", b"InternetOpen", b"InternetConnect",
-            b"CryptEncrypt", b"CryptDecrypt", b"GetProcAddress",
+            
+            # Keylogging / Hooking (Đặc trưng Trojan)
+            b"SetWindowsHookEx", b"GetAsyncKeyState", b"GetForegroundWindow",
+            
+            # Persistence / Registry (Đặc trưng Trojan)
+            b"RegSetValueEx", b"RegCreateKeyEx",
+            
+            # Anti-Debug / Stealth
+            b"IsDebuggerPresent", b"ShowWindow"
         ]
+        
         found_imports: List[str] = []
         lower_blob = blob.lower()
         for imp in suspicious_imports:
@@ -82,8 +97,8 @@ def analyze_pe_file(file_path: str) -> Dict:
 
         if found_imports:
             result["suspicious_imports"] = found_imports
-            result["score"] += min(2.0 + 0.5 * (len(found_imports) - 1), 4.0)
-            result["reasons"].append(f"Suspicious imports: {', '.join(found_imports)}")
+            result["score"] += min(2.0 + 0.5 * (len(found_imports) - 1), 6.0)
+            result["reasons"].append(f"Suspicious imports: {', '.join(found_imports[:5])}...")
 
         # Abnormal size (very small PE often suspect)
         try:
@@ -141,4 +156,3 @@ def is_trusted_signer(file_path: str, trusted_signers: Set[str]) -> Tuple[bool, 
         return (matched is not None), matched
     except Exception:
         return False, None
-

@@ -262,23 +262,48 @@ class DynamicRunner:
             self._cleanup()
 
     def _cleanup(self):
-        """Cleanup logic"""
+        """Cleanup logic: Kill process tree & remove files"""
+        # 1. Kill Process Tree (Cha + Con + Cháu)
         if self.process:
             try:
-                psutil.Process(self.process.pid).kill()
-            except:
+                parent = psutil.Process(self.process.pid)
+                children = parent.children(recursive=True)  # Lấy toàn bộ con cháu
+                
+                # Kill con trước
+                for child in children:
+                    try:
+                        child.terminate()
+                    except psutil.NoSuchProcess:
+                        pass
+                
+                # Đợi chút cho con chết hẳn
+                _, alive = psutil.wait_procs(children, timeout=1)
+                for p in alive:
+                    try: p.kill() # Cứng rắn hơn nếu chưa chịu chết
+                    except psutil.NoSuchProcess: pass
+
+                # Kill cha
+                parent.kill()
+            except psutil.NoSuchProcess:
                 pass
+            except Exception as e:
+                logger.error(f"Error killing process tree: {e}")
         
+        # 2. Stop Monitors
         for monitor in self.monitors:
             try: monitor.stop()
             except: pass
 
+        # 3. Remove Firewall Rule
         if self.network_guard:
             try: self.network_guard.remove()
             except: pass
 
+        # 4. Clean Sandbox Dir
         if self.sandbox_dir:
-            try: shutil.rmtree(self.sandbox_dir, ignore_errors=True)
+            try:
+                # Thử xóa vài lần vì Windows hay lock file
+                shutil.rmtree(self.sandbox_dir, ignore_errors=True)
             except: pass
 
     def terminate(self):
