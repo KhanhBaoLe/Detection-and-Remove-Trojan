@@ -55,56 +55,46 @@ class NetworkMonitor:
     # =============================
     def _monitor_loop(self):
         start_time = time.time()
-        
-        # Chỉ quan tâm các kết nối đã thiết lập hoặc đang gửi gói tin
-        INTERESTING_STATUSES = {psutil.CONN_ESTABLISHED, psutil.CONN_SYN_SENT}
+        # Dùng set để lưu các kết nối đã ghi nhận nhằm tránh trùng lặp
+        seen_connections = set() 
 
         while self.running:
             if time.time() - start_time > self.timeout:
                 break
 
             try:
-                # Quét toàn bộ kết nối
+                # Quét liên tục, sleep cực ngắn
                 connections = psutil.net_connections(kind="inet")
-                
                 for c in connections:
-                    # 1. LỌC: Chỉ lấy kết nối của PID malware
+                    # Logic lọc PID cũ của bạn
                     if c.pid != self.target_pid:
                         continue
-
-                    # 2. LỌC: Trạng thái kết nối
-                    if c.status not in INTERESTING_STATUSES:
-                        continue
-
-                    # 3. XỬ LÝ DỮ LIỆU
-                    remote_ip = f"{c.raddr.ip}" if c.raddr else None
-                    remote_port = c.raddr.port if c.raddr else None
-                    remote_full = f"{remote_ip}:{remote_port}" if remote_ip else None
                     
-                    local_ip = f"{c.laddr.ip}" if c.laddr else None
+                    # Tạo ID duy nhất cho kết nối: (IP đích, Port đích, Trạng thái)
+                    conn_id = (
+                        c.raddr.ip if c.raddr else "N/A", 
+                        c.raddr.port if c.raddr else 0,
+                        c.status
+                    )
 
-                    # Tránh spam log trùng lặp liên tục
-                    if self.records:
-                        last = self.records[-1]
-                        if last.get("remote_addr") == remote_full and last.get("status") == c.status:
-                            continue
-
-                    # Ghi nhận record
-                    self.records.append({
-                        "timestamp": datetime.now().isoformat(),
-                        "pid": c.pid,
-                        "local_addr": local_ip,
-                        "remote_addr": remote_full,
-                        "remote_port": remote_port, 
-                        "status": c.status,
-                        "protocol": "TCP" if c.type == socket.SOCK_STREAM else "UDP"
-                    })
-
-            except Exception:
+                    # Chỉ ghi nhận nếu là kết nối mới hoặc trạng thái thay đổi
+                    if conn_id not in seen_connections:
+                        seen_connections.add(conn_id)
+                        
+                        self.records.append({
+                            "timestamp": datetime.now().isoformat(),
+                            "pid": c.pid,
+                            "local_addr": f"{c.laddr.ip}:{c.laddr.port}" if c.laddr else None,
+                            "remote_addr": f"{c.raddr.ip}:{c.raddr.port}" if c.raddr else None,
+                            "remote_port": c.raddr.port if c.raddr else 0, # Thêm trường này cho dễ check port
+                            "status": c.status,
+                            "type": str(c.type)
+                        })
+            except:
                 pass
 
-            # Polling rate: 0.5s để bắt kết nối nhanh
-            time.sleep(0.5)
+            # Giảm thời gian ngủ xuống 0.1s để bắt dính kết nối nhanh
+            time.sleep(0.1)
 
     # =============================
     # SAFE OUTPUT (Data Mapping cho Scorer)

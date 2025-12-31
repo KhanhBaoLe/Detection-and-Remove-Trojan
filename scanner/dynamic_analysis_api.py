@@ -43,29 +43,31 @@ class DynamicAPI:
 
             # ===== 3. PREPARE DATA & SCORING (UPDATED) =====
             summary = {}
+            # SỬA 1: Đồng bộ Key mặc định cho khớp với ThreatScorer
             score_result = {
-                "score": 0, 
-                "level": "Unknown", 
+                "threat_score": 0, 
+                "threat_level": "Unknown", 
                 "reasons": []
             }
+            
             if result:
                 try:
                     summary = result.to_dict()
                     
-                    # Helper lấy phần tử đầu tiên từ List (vì runner trả về list monitors)
                     def safe_get_first(data_dict, key):
                         val = data_dict.get(key)
                         if isinstance(val, list) and len(val) > 0:
                             return val[0] 
                         return {}
 
-                    # Tách dữ liệu riêng lẻ để Scorer chấm điểm
+                    # Tách dữ liệu riêng lẻ
                     proc_data = safe_get_first(summary, "process_summary")
                     net_data = safe_get_first(summary, "network_summary")
                     fs_data = safe_get_first(summary, "fs_summary")
                     reg_data = safe_get_first(summary, "registry_summary")
 
                     # --- GỌI SCORER ---
+                    # Hàm này trả về dict: {'threat_score': ..., 'threat_level': ...}
                     score_result = ThreatScorer.calculate_score(
                         proc_data, 
                         net_data, 
@@ -73,7 +75,7 @@ class DynamicAPI:
                         registry_data=reg_data  
                     )
                     
-                    # Merge kết quả chấm điểm vào summary để trả về cho GUI
+                    # Merge kết quả chấm điểm vào summary
                     summary["analysis_score"] = score_result
                 except Exception as e:
                     print(f"Error processing summary/scoring: {e}")
@@ -95,14 +97,18 @@ class DynamicAPI:
                 duration=getattr(result, "duration", 0)
             )
 
+            # SỬA 2: Lấy đúng key "threat_score" thay vì "score"
             return {
                 'success': True,
                 'run_id': run_id,
                 'sample_id': behavior_sample.id if behavior_sample else None,
                 'exit_code': getattr(result, "exit_code", None),
                 'duration': getattr(result, "duration", 0),
-                'threat_score': score_result.get("score", 0),
-                'threat_level': score_result.get("level", "clean"),
+                
+                # ---> ĐÂY LÀ CHỖ GÂY LỖI TRƯỚC ĐÓ <---
+                'threat_score': score_result.get("threat_score", 0), 
+                'threat_level': score_result.get("threat_level", "clean"),
+                
                 'summary': summary
             }
 

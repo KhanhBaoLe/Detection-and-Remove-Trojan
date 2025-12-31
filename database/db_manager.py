@@ -206,9 +206,12 @@ class DatabaseManager:
         score_details = {}
         
         if score_data:
-            threat_score = score_data.get("score", 0.0)
+            # Ưu tiên lấy "threat_score", nếu không có mới lấy "score"
+            threat_score = score_data.get("threat_score", score_data.get("score", 0.0))
+            
             score_details = {
-                "level": score_data.get("level", "Unknown"),
+                # Lấy "threat_level" (chuẩn mới) hoặc "level" (chuẩn cũ)
+                "level": score_data.get("threat_level", score_data.get("level", "Unknown")),
                 "reasons": score_data.get("reasons", [])
             }
 
@@ -342,6 +345,12 @@ class DatabaseManager:
         return self.session.query(DynamicRun)\
             .filter_by(id=run_id)\
             .first()
+    def get_all_dynamic_runs(self, limit=50):
+        """Lấy danh sách các lần chạy Dynamic Analysis để hiện History"""
+        return self.session.query(DynamicRun)\
+            .order_by(DynamicRun.id.desc())\
+            .limit(limit)\
+            .all()
 
     def get_behavior_samples(self, dynamic_run_id):
         return self.session.query(BehaviorSample)\

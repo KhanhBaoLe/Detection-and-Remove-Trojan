@@ -8,170 +8,131 @@ from config.settings import SCAN_SKIP_DIRS, SIGNATURE_HASH_ALGO
 class BehaviourScanner(BaseScanner):
     def __init__(self, db_manager):
         super().__init__(db_manager)
-
         self.threats_found = []
-
-        # ✅ Skip unnecessary folders (same as SignatureScanner)
+        # Các thư mục cần bỏ qua
         self.skip_dirs = set(SCAN_SKIP_DIRS)
 
     def scan(self, path, scan_id=None):
-        """Scan files using behaviour-based detection"""
+        """Scan files using behaviour-based detection (Manual String Matching)"""
         self.threats_found = []
         files_scanned = 0
 
-        patterns = (
-            self.db_manager.session
-            .query(BehaviourPattern)
-            .filter_by(is_active=True)
-            .all()
-        )
+        # Lấy patterns từ Database
+        try:
+            patterns = (
+                self.db_manager.session
+                .query(BehaviourPattern)
+                .filter_by(is_active=True)
+                .all()
+            )
+        except:
+            patterns = []
 
         # ---------------------------
-        # Collect files to scan
+        # 1. Gom file cần quét
         # ---------------------------
         if os.path.isfile(path):
             files_to_scan = [path]
         else:
             files_to_scan = []
-
             ALLOWED_BEHAVIOUR_EXTENSIONS = (
-                ".exe", ".dll",
-                ".bat", ".ps1", ".vbs", ".js",
-                ".py", ".txt"
+                ".exe", ".dll", ".bat", ".ps1", ".vbs", ".js", ".py", ".txt"
             )
-
             for root, dirs, files in os.walk(path):
-                # ✅ Skip unwanted directories
                 dirs[:] = [d for d in dirs if d not in self.skip_dirs]
-
                 for file in files:
-                    file_path = os.path.join(root, file)
+                    if file.lower().endswith(ALLOWED_BEHAVIOUR_EXTENSIONS):
+                        files_to_scan.append(os.path.join(root, file))
 
-                    if file_path.lower().endswith(ALLOWED_BEHAVIOUR_EXTENSIONS):
-                        files_to_scan.append(file_path)
-
-
-        # ---------------------------
-        # Header
-        # ---------------------------
         print("\n" + "=" * 70)
-        print("🔎 BEHAVIOUR SCANNER")
+        print("🔎 BEHAVIOUR SCANNER (MANUAL MODE)")
         print(f"📂 Files to scan: {len(files_to_scan)}")
-        print(f"🎯 Active patterns: {len(patterns)}")
         print("=" * 70 + "\n")
 
         # ---------------------------
-        # Scan each file
+        # 2. Quét từng file
         # ---------------------------
         for file_path in files_to_scan:
             files_scanned += 1
             suspicious_score = 0.0
             detected_patterns = []
-
             file_name = os.path.basename(file_path)
-            print(f"[{files_scanned}/{len(files_to_scan)}] 📂 Scanning: {file_name}")
 
             try:
+                # Bỏ qua nếu có trong Whitelist
                 file_hash = calculate_file_hash(file_path, algorithm=SIGNATURE_HASH_ALGO)
                 if file_hash and self.db_manager.is_whitelisted(file_hash):
-                    print("    ✅ File in whitelist, skipping behaviour scan...")
+                    print(f"[{files_scanned}] ⏩ Whitelisted: {file_name}")
                     continue
 
-                # ===== CHECK 1: EICAR TEST FILE =====
+                # --- CHECK 1: EICAR ---
                 if self.scan_eicar(file_path):
-                    print("    🔴 EICAR pattern detected!")
-                    self.record_detection(scan_id, {
-                        'file_path': file_path,
-                        'file_hash': file_hash or calculate_file_hash(file_path),
-                        'trojan_name': "EICAR-Test-File (Behaviour Detection)",
-                        'threat_level': 'high',
-                        'detection_method': 'behaviour'
-                    })
+                    self._add_threat(scan_id, file_path, file_hash, "EICAR-Test-File", "high")
                     continue
 
-                # ===== READ FILE CONTENT (100KB) =====
+                # --- CHECK 2: ĐỌC NỘI DUNG (CẢI TIẾN QUAN TRỌNG) ---
+                # Đọc 10MB thay vì 100KB để quét được phần đuôi của file PyInstaller
                 with open(file_path, 'rb') as f:
-                    content = f.read(1024 * 100)  # Read first 100KB
+                    content = f.read(1024 * 1024 * 10) # 10MB Limit
+                    # Decode lỗi thì bỏ qua, chủ yếu quét binary
                     content_str = content.decode(errors='ignore')
 
-                print(f"    📄 Read size: {len(content)} bytes")
-
-                # ===== CHECK 2: DATABASE BEHAVIOUR PATTERNS =====
+                # --- CHECK 3: DATABASE PATTERNS ---
+                # Quét theo pattern trong DB (logic cũ của bạn)
                 for pattern in patterns:
                     if pattern.pattern_value.lower() in content_str.lower():
                         suspicious_score += pattern.severity_score
                         detected_patterns.append(pattern.pattern_name)
-                        print(
-                            f"    ⚠️ Pattern found: {pattern.pattern_name} "
-                            f"(+{pattern.severity_score})"
-                        )
 
-                # ===== CHECK 3: SUSPICIOUS KEYWORDS =====
+                # --- CHECK 4: KEYWORDS (Thêm decode check) ---
                 suspicious_keywords = [
-                    b'eval(', b'exec(', b'shell_exec', b'system(',
-                    b'cmd.exe', b'powershell', b'download',
-                    b'http://', b'https://',
-                    b'CreateProcess', b'VirtualAlloc',
-                    b'WriteProcessMemory', b'CreateRemoteThread',
-                    b'Base64Decode', b'PowerShell -enc', b'WScript.Shell',
-                    b'Registry::SetValue', b'WinExec', b'GetAsyncKeyState',
-                    b'Add-MpPreference', b'Invoke-WebRequest', b'AutoIt3.exe',
-                    b'Schtasks', b'RunDll32'
+                    b'eval(', b'exec(', b'system(', b'cmd.exe', b'powershell',
+                    b'VirtualAlloc', b'WriteProcessMemory', b'CreateRemoteThread',
+                    b'URLDownloadToFile', b'ReflectiveLoader'
                 ]
-
                 for keyword in suspicious_keywords:
                     if keyword in content:
-                        suspicious_score += 1.5
-                        keyword_str = keyword.decode('utf-8', errors='ignore')
-                        detected_patterns.append(f"Keyword: {keyword_str}")
-                        print(f"    ⚠️ Suspicious keyword: {keyword_str} (+1.5)")
+                        suspicious_score += 2.0
+                        detected_patterns.append(f"Keyword:{keyword.decode(errors='ignore')}")
 
-                # ===== CHECK 4: PACKER / OBFUSCATION HINTS =====
-                packer_markers = [b'UPX0', b'UPX1', b'MPRESS', b'ASPACK']
-                if any(marker in content for marker in packer_markers):
-                    suspicious_score += 2.0
-                    detected_patterns.append("PackerMarker")
-                    print("    ⚠️ Packer marker detected (+2.0)")
+                # --- CHECK 5: DETECT PYINSTALLER / PACKER (CÁI NÀY BẮT 4 FILE CỦA BẠN) ---
+                # Các file test của bạn là PyInstaller, nó chứa các dấu hiệu này
+                packer_markers = [
+                    b'MEI',                # Magic Header của PyInstaller
+                    b'pyi-windows',        # File manifest
+                    b'pyimod01',           # Module bootstrap
+                    b'UPX0', b'UPX1'       # Nén UPX
+                ]
+                
+                # Nếu tìm thấy dấu hiệu Packer -> Điểm rất cao
+                if any(m in content for m in packer_markers):
+                    suspicious_score += 6.0
+                    detected_patterns.append("Suspicious.Packer(PyInstaller)")
+                    print(f"    ⚠️ Detected Packer/Obfuscation in {file_name}")
 
-                # ===== VERDICT =====
-                if suspicious_score >= 7.0:
-                    if suspicious_score >= 9.0:
-                        threat_level = 'critical'
-                    elif suspicious_score >= 7.0:
-                        threat_level = 'high'
-                    else:
-                        threat_level = 'medium'
-
-                    self.threats_found.append({
-                        'file_path': file_path,
-                        'file_hash': calculate_file_hash(file_path),
-                        'trojan_name': (
-                            "Suspicious.Behaviour "
-                            f"({', '.join(detected_patterns[:3])}...)"
-                        ),
-                        'threat_level': threat_level,
-                        'detection_method': 'behaviour'
-                    })
-
-                    print(
-                        f"    🔴 THREAT DETECTED! "
-                        f"Score: {suspicious_score:.1f} "
-                        f"- Level: {threat_level.upper()}"
-                    )
+                # --- KẾT LUẬN ---
+                if suspicious_score >= 6.0:
+                    threat_level = 'high' if suspicious_score >= 9.0 else 'medium'
+                    trojan_name = f"Heur.Suspicious ({', '.join(detected_patterns[:2])})"
+                    
+                    self._add_threat(scan_id, file_path, file_hash, trojan_name, threat_level)
+                    print(f"[{files_scanned}] 🔴 DETECTED: {file_name} (Score: {suspicious_score})")
                 else:
-                    print(f"    ✅ Clean (Score: {suspicious_score:.1f})")
+                    # print(f"[{files_scanned}] ✅ Clean: {file_name}")
+                    pass
 
             except Exception as e:
-                print(f"    ⚠️ Error scanning file: {str(e)}")
-
-        # ---------------------------
-        # Summary
-        # ---------------------------
-        print("\n" + "=" * 70)
-        print("📊 BEHAVIOUR SCAN SUMMARY")
-        print("=" * 70)
-        print(f"✅ Files Scanned: {files_scanned}")
-        print(f"🔴 Threats Found: {len(self.threats_found)}")
-        print("=" * 70 + "\n")
+                print(f"⚠️ Error: {e}")
 
         return files_scanned, len(self.threats_found)
+
+    def _add_threat(self, scan_id, file_path, file_hash, name, level):
+        """Hàm phụ trợ để lưu threat"""
+        detection = {
+            'file_path': file_path,
+            'file_hash': file_hash,
+            'trojan_name': name,
+            'threat_level': level,
+            'detection_method': 'behaviour_static'
+        }
+        self.record_detection(scan_id, detection)

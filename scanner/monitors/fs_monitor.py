@@ -110,10 +110,12 @@ class FileSystemMonitor:
         return self.file_events
 
     def get_summary(self):
+        # Nếu không có sự kiện nào
         if not self.file_events:
             return {
                 "status": "no_fs_activity",
                 "total_events": 0,
+                "is_ransomware_suspect": False,
                 "files_created": 0,
                 "files_modified": 0,
                 "created_files": [],
@@ -123,23 +125,39 @@ class FileSystemMonitor:
 
         created = []
         modified = []
+        # Tập hợp các đuôi file bị tác động (VD: .exe, .enc, .locked)
+        affected_extensions = set() 
 
         for e in self.file_events:
             if not isinstance(e, dict):
                 continue
+            
+            path = e.get("file_path", "")
+            event_type = e.get("event_type")
+            
+            try:
+                _, ext = os.path.splitext(path)
+                if ext:
+                    affected_extensions.add(ext.lower())
+            except:
+                pass
 
-            if e.get("event_type") == "created":
-                created.append(e.get("file_path"))
-            elif e.get("event_type") == "modified":
-                modified.append(e.get("file_path"))
+            if event_type == "created":
+                created.append(path)
+            elif event_type == "modified":
+                modified.append(path)
+        is_ransomware_suspect = False
+        if len(modified) > 15 or (len(modified) > 10 and len(created) > 10):
+            is_ransomware_suspect = True
 
         return {
             "status": "ok",
+            "is_ransomware_suspect": is_ransomware_suspect,
+            "affected_extensions": list(affected_extensions),
             "total_events": len(self.file_events),
             "files_created": len(created),
             "files_modified": len(modified),
             "created_files": created[:20],
             "modified_files": modified[:20],
-            # Include a small slice of raw events for richer behaviour logs
             "events": self.file_events[:50]
         }

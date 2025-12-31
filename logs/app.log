@@ -2087,3 +2087,68 @@ ImportError: cannot import name 'load_scan_extensions' from 'config.settings' (D
 [2025-12-24 09:06:14,965] [INFO] [scanner.dynamic_runner] Network guard skipped; admin privileges required (out): The requested operation requires elevation (Run as administrator).
 [2025-12-24 09:11:12,281] [INFO] [scanner.dynamic_runner] Network guard skipped; admin privileges required (out): The requested operation requires elevation (Run as administrator).
 [2025-12-30 20:48:22,683] [INFO] [scanner.dynamic_runner] Network guard skipped; admin privileges required (out): The requested operation requires elevation (Run as administrator).
+[2025-12-31 00:21:12,090] [WARNING] [BaseScanner] Detection signature | EICAR-Test-File | level=high
+[2025-12-31 00:21:12,607] [WARNING] [BaseScanner] Detection static_heuristic | Suspicious.PE.Heuristic (High entropy (7.92); Packer markers: UPX) | level=high
+[2025-12-31 00:21:12,984] [WARNING] [BaseScanner] Detection static_heuristic | Suspicious.PE.Heuristic (High entropy (7.92); Packer markers: UPX) | level=high
+[2025-12-31 00:21:13,404] [WARNING] [BaseScanner] Detection static_heuristic | Suspicious.PE.Heuristic (High entropy (7.92); Packer markers: UPX) | level=high
+[2025-12-31 00:21:13,871] [WARNING] [BaseScanner] Detection static_heuristic | Suspicious.PE.Heuristic (High entropy (7.92); Packer markers: UPX) | level=high
+[2025-12-31 00:21:31,286] [WARNING] [BaseScanner] Detection behaviour | EICAR-Test-File (Behaviour Detection) | level=high
+[2025-12-31 00:22:49,173] [INFO] [scanner.dynamic_runner] Applied sandbox network block for d:\Detection-and-Remove-Trojan\temp\dynamic_sandbox\dyn_o8aqugqh\test_dropper_spawner.exe
+[2025-12-31 00:23:03,357] [INFO] [scanner.dynamic_runner] Removed sandbox network block rule TrojanScanner_Block_1767115369056
+[2025-12-31 00:23:16,468] [INFO] [scanner.dynamic_runner] Applied sandbox network block for d:\Detection-and-Remove-Trojan\temp\dynamic_sandbox\dyn_91xwm38v\test_dropper_spawner.exe
+[2025-12-31 00:23:30,642] [INFO] [scanner.dynamic_runner] Removed sandbox network block rule TrojanScanner_Block_1767115396396
+[2025-12-31 00:55:03,318] [INFO] [YaraScanner] Loaded DEFAULT embedded YARA rules
+[2025-12-31 00:55:03,322] [WARNING] [BaseScanner] Detection behaviour_yara | Heur.EICAR_Test_File | level=critical
+[2025-12-31 00:55:37,442] [INFO] [YaraScanner] Loaded DEFAULT embedded YARA rules
+[2025-12-31 00:55:37,449] [WARNING] [BaseScanner] Detection behaviour_yara | Heur.EICAR_Test_File | level=critical
+[2025-12-31 01:00:27,586] [WARNING] [BaseScanner] Detection behaviour_static | EICAR-Test-File | level=high
+[2025-12-31 01:00:27,871] [WARNING] [BaseScanner] Detection behaviour_static | Heur.Suspicious (Suspicious.Packer(PyInstaller)) | level=medium
+[2025-12-31 01:00:28,184] [WARNING] [BaseScanner] Detection behaviour_static | Heur.Suspicious (Suspicious.Packer(PyInstaller)) | level=medium
+[2025-12-31 01:00:28,501] [WARNING] [BaseScanner] Detection behaviour_static | Heur.Suspicious (Suspicious.Packer(PyInstaller)) | level=medium
+[2025-12-31 01:00:28,820] [WARNING] [BaseScanner] Detection behaviour_static | Heur.Suspicious (Suspicious.Packer(PyInstaller)) | level=medium
+[2025-12-31 01:02:20,234] [INFO] [scanner.dynamic_runner] Applied sandbox network block for d:\Detection-and-Remove-Trojan\temp\dynamic_sandbox\dyn_6f9qt933\test_aggressive_spawner.exe
+[2025-12-31 01:02:34,449] [INFO] [scanner.dynamic_runner] Removed sandbox network block rule TrojanScanner_Block_1767117740139
+[2025-12-31 01:05:37,553] [INFO] [scanner.dynamic_runner] Applied sandbox network block for d:\Detection-and-Remove-Trojan\temp\dynamic_sandbox\dyn__0oghder\test_aggressive_spawner.exe
+[2025-12-31 01:05:51,804] [INFO] [scanner.dynamic_runner] Removed sandbox network block rule TrojanScanner_Block_1767117937489
+[2025-12-31 01:09:24,640] [INFO] [scanner.dynamic_runner] Applied sandbox network block for d:\Detection-and-Remove-Trojan\temp\dynamic_sandbox\dyn_24g1wvql\test_aggressive_spawner.exe
+[2025-12-31 01:09:38,838] [INFO] [scanner.dynamic_runner] Removed sandbox network block rule TrojanScanner_Block_1767118164574
+[2025-12-31 01:11:40,393] [INFO] [scanner.dynamic_runner] Applied sandbox network block for d:\Detection-and-Remove-Trojan\temp\dynamic_sandbox\dyn_cahxqpge\test_aggressive_spawner.exe
+[2025-12-31 01:11:54,571] [INFO] [scanner.dynamic_runner] Removed sandbox network block rule TrojanScanner_Block_1767118300332
+[2025-12-31 01:12:06,232] [INFO] [scanner.dynamic_runner] Applied sandbox network block for d:\Detection-and-Remove-Trojan\temp\dynamic_sandbox\dyn_b3qirf6p\test_aggressive_spawner.exe
+[2025-12-31 01:12:20,417] [INFO] [scanner.dynamic_runner] Removed sandbox network block rule TrojanScanner_Block_1767118326129
+[2025-12-31 01:25:57,527] [INFO] [scanner.dynamic_runner] Applied sandbox network block for d:\Detection-and-Remove-Trojan\temp\dynamic_sandbox\dyn_uokxhdmd\test_aggressive_spawner.exe
+[2025-12-31 01:26:11,728] [INFO] [scanner.dynamic_runner] Removed sandbox network block rule TrojanScanner_Block_1767119157452
+[2025-12-31 01:31:36,161] [INFO] [scanner.dynamic_runner] Applied sandbox network block for d:\Detection-and-Remove-Trojan\temp\dynamic_sandbox\dyn_2j68fp7e\test_aggressive_spawner.exe
+[2025-12-31 01:31:50,353] [INFO] [scanner.dynamic_runner] Removed sandbox network block rule TrojanScanner_Block_1767119496075
+[2025-12-31 01:35:04,128] [INFO] [scanner.dynamic_runner] Applied sandbox network block for d:\Detection-and-Remove-Trojan\temp\dynamic_sandbox\dyn_y1rubvfu\test_aggressive_spawner.exe
+[2025-12-31 01:35:18,282] [INFO] [scanner.dynamic_runner] Removed sandbox network block rule TrojanScanner_Block_1767119704067
+[2025-12-31 01:36:09,403] [INFO] [scanner.dynamic_runner] Applied sandbox network block for d:\Detection-and-Remove-Trojan\temp\dynamic_sandbox\dyn_hilc6qjx\test_memory_bomber.exe
+[2025-12-31 01:36:13,563] [INFO] [scanner.dynamic_runner] Removed sandbox network block rule TrojanScanner_Block_1767119769340
+[2025-12-31 01:36:20,584] [INFO] [scanner.dynamic_runner] Applied sandbox network block for d:\Detection-and-Remove-Trojan\temp\dynamic_sandbox\dyn_ltkjpmpv\test_aggressive_spawner.exe
+[2025-12-31 01:36:34,754] [INFO] [scanner.dynamic_runner] Removed sandbox network block rule TrojanScanner_Block_1767119780519
+[2025-12-31 01:37:29,148] [INFO] [scanner.dynamic_runner] Applied sandbox network block for d:\Detection-and-Remove-Trojan\temp\dynamic_sandbox\dyn_r5hzke6r\test_aggressive_spawner.exe
+[2025-12-31 01:37:43,322] [INFO] [scanner.dynamic_runner] Removed sandbox network block rule TrojanScanner_Block_1767119849081
+[2025-12-31 01:41:56,843] [INFO] [scanner.dynamic_runner] Applied sandbox network block for d:\Detection-and-Remove-Trojan\temp\dynamic_sandbox\dyn_nqtja956\test.exe
+[2025-12-31 01:41:56,892] [INFO] [scanner.dynamic_runner] Removed sandbox network block rule TrojanScanner_Block_1767120116775
+[2025-12-31 01:42:03,695] [INFO] [scanner.dynamic_runner] Applied sandbox network block for d:\Detection-and-Remove-Trojan\temp\dynamic_sandbox\dyn_03ud717h\test_aggressive_spawner.exe
+[2025-12-31 01:42:17,877] [INFO] [scanner.dynamic_runner] Removed sandbox network block rule TrojanScanner_Block_1767120123631
+[2025-12-31 01:42:37,647] [INFO] [scanner.dynamic_runner] Applied sandbox network block for d:\Detection-and-Remove-Trojan\temp\dynamic_sandbox\dyn_1lkbany1\test_dropper_spawner.exe
+[2025-12-31 01:42:51,795] [INFO] [scanner.dynamic_runner] Removed sandbox network block rule TrojanScanner_Block_1767120157584
+[2025-12-31 01:49:05,460] [INFO] [scanner.dynamic_runner] Applied sandbox network block for d:\Detection-and-Remove-Trojan\temp\dynamic_sandbox\dyn_5eufv61a\test_aggressive_spawner.exe
+[2025-12-31 01:49:19,644] [INFO] [scanner.dynamic_runner] Removed sandbox network block rule TrojanScanner_Block_1767120545377
+[2025-12-31 01:51:48,345] [INFO] [scanner.dynamic_runner] Applied sandbox network block for d:\Detection-and-Remove-Trojan\temp\dynamic_sandbox\dyn_9gqxnkl0\test_aggressive_spawner.exe
+[2025-12-31 01:52:02,492] [INFO] [scanner.dynamic_runner] Removed sandbox network block rule TrojanScanner_Block_1767120708278
+[2025-12-31 02:01:51,560] [INFO] [scanner.dynamic_runner] Applied sandbox network block for d:\Detection-and-Remove-Trojan\temp\dynamic_sandbox\dyn_fv3rwprh\test_memory_loader_malware.exe
+[2025-12-31 02:01:55,730] [INFO] [scanner.dynamic_runner] Removed sandbox network block rule TrojanScanner_Block_1767121311468
+[2025-12-31 02:02:00,978] [INFO] [scanner.dynamic_runner] Applied sandbox network block for d:\Detection-and-Remove-Trojan\temp\dynamic_sandbox\dyn_g6hjj2ay\test_dropper_spawner.exe
+[2025-12-31 02:02:15,151] [INFO] [scanner.dynamic_runner] Removed sandbox network block rule TrojanScanner_Block_1767121320912
+[2025-12-31 02:12:47,297] [INFO] [scanner.dynamic_runner] Applied sandbox network block for d:\Detection-and-Remove-Trojan\temp\dynamic_sandbox\dyn_pj23kkij\test_memory_bomber.exe
+[2025-12-31 02:12:49,456] [INFO] [scanner.dynamic_runner] Removed sandbox network block rule TrojanScanner_Block_1767121967230
+[2025-12-31 02:27:19,461] [INFO] [scanner.dynamic_runner] Applied sandbox network block for d:\Detection-and-Remove-Trojan\temp\dynamic_sandbox\dyn_354aloui\test_memory_bomber.exe
+[2025-12-31 02:27:23,657] [INFO] [scanner.dynamic_runner] Removed sandbox network block rule TrojanScanner_Block_1767122839373
+[2025-12-31 02:34:18,393] [INFO] [scanner.dynamic_runner] Applied sandbox network block for d:\Detection-and-Remove-Trojan\temp\dynamic_sandbox\dyn_yh3ffvmj\test_memory_bomber.exe
+[2025-12-31 02:34:20,547] [INFO] [scanner.dynamic_runner] Removed sandbox network block rule TrojanScanner_Block_1767123258326
+[2025-12-31 02:35:42,684] [INFO] [scanner.dynamic_runner] Applied sandbox network block for D:\Detection-and-Remove-Trojan\temp\dynamic_sandbox\dyn_j4ah32o9\test_memory_bomber.exe
+[2025-12-31 02:35:44,818] [INFO] [scanner.dynamic_runner] Removed sandbox network block rule TrojanScanner_Block_1767123342621
+[2025-12-31 02:39:44,310] [INFO] [scanner.dynamic_runner] Applied sandbox network block for D:\Detection-and-Remove-Trojan\temp\dynamic_sandbox\dyn_e266_shx\test_memory_bomber.exe
+[2025-12-31 02:39:48,483] [INFO] [scanner.dynamic_runner] Removed sandbox network block rule TrojanScanner_Block_1767123584223
