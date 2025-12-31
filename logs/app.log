@@ -2152,3 +2152,16 @@ ImportError: cannot import name 'load_scan_extensions' from 'config.settings' (D
 [2025-12-31 02:35:44,818] [INFO] [scanner.dynamic_runner] Removed sandbox network block rule TrojanScanner_Block_1767123342621
 [2025-12-31 02:39:44,310] [INFO] [scanner.dynamic_runner] Applied sandbox network block for D:\Detection-and-Remove-Trojan\temp\dynamic_sandbox\dyn_e266_shx\test_memory_bomber.exe
 [2025-12-31 02:39:48,483] [INFO] [scanner.dynamic_runner] Removed sandbox network block rule TrojanScanner_Block_1767123584223
+[2025-12-31 15:48:50,117] [WARNING] [BaseScanner] Detection signature | EICAR-Test-File | level=high
+[2025-12-31 15:48:50,603] [WARNING] [BaseScanner] Detection static_heuristic | Suspicious.PE.Heuristic (High entropy (7.92); Packer markers: UPX) | level=high
+[2025-12-31 15:48:50,975] [WARNING] [BaseScanner] Detection static_heuristic | Suspicious.PE.Heuristic (High entropy (7.92); Packer markers: UPX) | level=high
+[2025-12-31 15:48:51,398] [WARNING] [BaseScanner] Detection static_heuristic | Suspicious.PE.Heuristic (High entropy (7.92); Packer markers: UPX) | level=high
+[2025-12-31 15:48:51,773] [WARNING] [BaseScanner] Detection static_heuristic | Suspicious.PE.Heuristic (High entropy (7.92); Packer markers: UPX) | level=high
+[2025-12-31 15:49:09,441] [WARNING] [BaseScanner] Detection behaviour_static | EICAR-Test-File | level=high
+[2025-12-31 15:49:09,730] [WARNING] [BaseScanner] Detection behaviour_static | Heur.Suspicious (Suspicious.Packer(PyInstaller)) | level=medium
+[2025-12-31 15:49:10,001] [WARNING] [BaseScanner] Detection behaviour_static | Heur.Suspicious (Suspicious.Packer(PyInstaller)) | level=medium
+[2025-12-31 15:49:10,277] [WARNING] [BaseScanner] Detection behaviour_static | Heur.Suspicious (Suspicious.Packer(PyInstaller)) | level=medium
+[2025-12-31 15:49:10,555] [WARNING] [BaseScanner] Detection behaviour_static | Heur.Suspicious (Suspicious.Packer(PyInstaller)) | level=medium
+[2025-12-31 15:50:46,640] [INFO] [scanner.dynamic_runner] Applied sandbox network block for d:\Detection-and-Remove-Trojan\temp\dynamic_sandbox\dyn_6u8zaj0x\test_aggressive_spawner.exe
+[2025-12-31 15:51:00,825] [INFO] [scanner.dynamic_runner] Removed sandbox network block rule TrojanScanner_Block_1767171046541
+[2025-12-31 15:52:27,646] [WARNING] [BaseScanner] Detection behaviour_static | Heur.Suspicious (Suspicious.Packer(PyInstaller)) | level=medium
