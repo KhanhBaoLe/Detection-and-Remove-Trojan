@@ -9,7 +9,9 @@ class FileSystemMonitor:
         self.sample_path = sample_path
         self.monitor_dirs = monitor_dirs or [
             os.path.expandvars("%APPDATA%"),
-            os.path.expandvars("%TEMP%")
+            os.path.expandvars("%TEMP%"),
+            os.path.expandvars("%LOCALAPPDATA%"),
+            os.path.join(os.path.expandvars("%USERPROFILE%"), "Downloads")
         ]
         self.timeout = timeout
         self.running = False
@@ -101,7 +103,7 @@ class FileSystemMonitor:
                         except:
                             continue
 
-            time.sleep(2)
+            time.sleep(1.0)
 
     # =============================
     # SAFE OUTPUT
@@ -110,10 +112,13 @@ class FileSystemMonitor:
         return self.file_events
 
     def get_summary(self):
+        # Nếu không có sự kiện nào
         if not self.file_events:
             return {
                 "status": "no_fs_activity",
                 "total_events": 0,
+                "is_dropper": False,  
+                "dropper_files": [],
                 "files_created": 0,
                 "files_modified": 0,
                 "created_files": [],
@@ -123,23 +128,54 @@ class FileSystemMonitor:
 
         created = []
         modified = []
+        # Tập hợp các đuôi file bị tác động (VD: .exe, .enc, .locked)
+        affected_extensions = set() 
 
         for e in self.file_events:
             if not isinstance(e, dict):
                 continue
+            
+            path = e.get("file_path", "")
+            event_type = e.get("event_type")
+            
+            try:
+                _, ext = os.path.splitext(path)
+                if ext:
+                    affected_extensions.add(ext.lower())
+            except:
+                pass
 
-            if e.get("event_type") == "created":
-                created.append(e.get("file_path"))
-            elif e.get("event_type") == "modified":
-                modified.append(e.get("file_path"))
+            if event_type == "created":
+                created.append(path)
+            elif event_type == "modified":
+                modified.append(path)
+                
+        # Trojan thường "thả" (drop) các file thực thi hoặc script để chạy payload
+        suspicious_extensions = {'.exe', '.dll', '.bat', '.ps1', '.vbs', '.js', '.scr', '.jar'}
+        dropper_files = []
+
+        for path in created:
+            try:
+                # Kiểm tra đuôi file của các file mới được TẠO RA
+                _, ext = os.path.splitext(path)
+                if ext.lower() in suspicious_extensions:
+                    dropper_files.append(os.path.basename(path))
+            except:
+                pass
+
+        # Nếu có bất kỳ file thực thi nào được tạo ra -> Đánh dấu là Dropper
+        is_dropper = len(dropper_files) > 0
 
         return {
             "status": "ok",
+            "is_dropper": is_dropper,
+            "dropper_files": dropper_files,
+            
+            "affected_extensions": list(affected_extensions),
             "total_events": len(self.file_events),
             "files_created": len(created),
             "files_modified": len(modified),
             "created_files": created[:20],
             "modified_files": modified[:20],
-            # Include a small slice of raw events for richer behaviour logs
             "events": self.file_events[:50]
         }

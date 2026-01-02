@@ -15,8 +15,8 @@ QUARANTINE_DIR = os.path.join(BASE_DIR, 'quarantine', 'quarantined')
 LOG_DIR = os.path.join(BASE_DIR, 'logs')
 SIGNATURE_DIR = os.path.join(BASE_DIR, 'signatures')
 SIGNATURE_HASH_ALGO = 'md5'  # match local signature database format
-PE_HEURISTIC_MIN_SCORE = 6.0
-PE_TRUSTED_SIGNER_MAX_SCORE = 3.5  # trusted signers bypass if heuristics below this
+PE_HEURISTIC_MIN_SCORE = 6.5
+PE_TRUSTED_SIGNER_MAX_SCORE = 5.0  # trusted signers bypass if heuristics below this
 TRUSTED_SIGNERS = {
     "Microsoft Corporation",
     "Microsoft Windows",
@@ -24,6 +24,8 @@ TRUSTED_SIGNERS = {
     "Adobe Systems",
     "Apple Inc",
     "NVIDIA Corporation",
+    "Oracle Corporation", 
+    "Mozilla Corporation" 
 }
 
 # DYNAMIC ANALYSIS SETTINGS

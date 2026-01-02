@@ -10,18 +10,29 @@ from utils.logger import setup_logger
 
 logger = setup_logger(__name__)
 
-
 SUSPICIOUS_APIS = {
-    "WriteProcessMemory",
-    "CreateRemoteThread",
-    "WinExec",
-    "ShellExecuteA",
-    "ShellExecuteW",
-    "URLDownloadToFileA",
-    "URLDownloadToFileW",
-    "VirtualAllocEx",
-    "SetWindowsHookExA",
-    "SetWindowsHookExW",
+    # 1. Code Injection (Tiêm mã độc vào tiến trình sạch để ẩn mình)
+    "CreateRemoteThread", 
+    "WriteProcessMemory", 
+    "VirtualAllocEx", 
+    "QueueUserAPC",
+    "SetThreadContext",
+
+    # 2. Keylogging / Spying (Theo dõi người dùng)
+    "SetWindowsHookExA", 
+    "SetWindowsHookExW", 
+    "GetAsyncKeyState", 
+    "GetForegroundWindow",
+    "BitBlt", # Chụp màn hình
+
+    # 3. Persistence / Stealth (Tự khởi động, ẩn console)
+    "RegSetValueExA", 
+    "RegCreateKeyExA",
+    "ShowWindow", # Thường dùng với tham số SW_HIDE
+
+    # 4. Downloading (Tải payload phụ)
+    "URLDownloadToFileA", 
+    "InternetOpenUrlA"
 }
 
 
@@ -65,19 +76,19 @@ class PEHeuristicScanner:
         # ---------- IMPORTS ----------
         suspicious_imports = self._analyze_imports(pe)
         if suspicious_imports:
-            score += min(len(suspicious_imports) * 5, 25)
+            score += min(len(suspicious_imports) * 7, 35)
             reasons.append(
-                "Suspicious imports: " + ", ".join(suspicious_imports)
+                "Suspicious imports: " + ", ".join(suspicious_imports[:3])
             )
 
         # ---------- SIGNATURE ----------
         sig_info = self._get_signature_info(file_path)
         if sig_info:
             if sig_info["trusted"]:
-                score -= 40
+                score -= 50
                 reasons.append("Trusted digital signature")
             elif sig_info["signed"] and not sig_info["trusted"]:
-                score += 15
+                score += 25
                 reasons.append("Signed but untrusted certificate")
         else:
             score += 10

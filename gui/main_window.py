@@ -69,7 +69,7 @@ class TrojanScannerGUI:
         ).start()
     
     def _run_dynamic_analysis(self, sample_path):
-        """Chạy dynamic analysis trong background"""
+        """Chạy dynamic analysis (Đã thêm logic tự động chuyển sang Detection để xóa)"""
         try:
             api = DynamicAPI(self.db)
 
@@ -80,40 +80,100 @@ class TrojanScannerGUI:
                 self.log_message(f"❌ Error: {result.get('error')}")
                 return
 
+            # Lấy các thông số
+            score = result.get('threat_score', 0)
+            level = result.get('threat_level', 'clean')
+            exit_code = result.get('exit_code')
+            duration = result.get('duration', 0)
+
             self.log_message("✅ Dynamic analysis completed")
-            self.log_message(f"📊 Exit code: {result.get('exit_code')}")
-            self.log_message(f"⏱️ Duration: {result.get('duration', 0):.2f}s")
-            self.log_message(f"🔴 Threat score: {result.get('threat_score', 0):.1f}/100")
+            self.log_message(f"📊 Exit code: {exit_code}")
+            self.log_message(f"⏱️ Duration: {duration:.2f}s")
+            self.log_message(f"🔴 Threat score: {score:.1f}/100 ({level.upper()})")
 
+            # --- 1. HIỂN THỊ LOG ---
             summary = result.get('summary') or {}
-
-            # ================= PROCESS SUMMARY =================
+            
+            # Process Info
             process_summary = summary.get('process_summary')
-
+            child_count = 0
+            peak_mem = 0
             if isinstance(process_summary, list) and len(process_summary) > 0:
                 proc = process_summary[0]
-                child_count = len(proc.get('child_processes', []))
+                child_count = proc.get('process_tree_count', 0)
                 peak_mem = proc.get('max_memory_mb', 0)
-            else:
-                child_count = 0
-                peak_mem = 0
+                procs = proc.get('processes', [])
+                if len(procs) > 1:
+                    self.log_message(f"   ► Tree: {', '.join(procs[:3])}...")
 
             self.log_message(f"📦 Child processes: {child_count}")
-            self.log_message(f"💾 Peak memory: {peak_mem:.1f} MB")
+            self.log_message(f"💾 Activity/Mem score: {peak_mem:.1f}")
 
-            # ================= FILE SYSTEM SUMMARY =================
+            # File Info
             fs_summary = summary.get('fs_summary')
-
+            files_created = 0
+            files_modified = 0
             if isinstance(fs_summary, list) and len(fs_summary) > 0:
                 fs = fs_summary[0]
-                files_created = fs.get('files_created', 0)
-                files_modified = fs.get('files_modified', 0)
-            else:
-                files_created = 0
-                files_modified = 0
+                created_list = fs.get('created_files', [])
+                modified_list = fs.get('modified_files', [])
+                files_created = len(created_list)
+                files_modified = len(modified_list)
 
             self.log_message(f"📄 Files created: {files_created}")
             self.log_message(f"🔨 Files modified: {files_modified}")
+            
+            # Reasons
+            analysis_score = summary.get('analysis_score', {})
+            reasons = analysis_score.get('reasons', [])
+            if reasons:
+                self.log_message("⚠️ DETECTION REASONS:")
+                for r in reasons:
+                    self.log_message(f"   - {r}")
+
+            # --- 2. LOGIC QUAN TRỌNG: KẾT NỐI VỚI NÚT REMOVE ---
+            # Nếu điểm >= 20 (Ngưỡng nguy hiểm), ta coi nó là Threat cần xóa
+            # MỨC 1: Cảnh báo nhẹ (20-40 điểm)
+            if 20 <= score < 40:
+                self.log_message(f"⚠️ Suspicious activity detected (Score: {score}), but not enough to quarantine.")
+            
+            # MỨC 2: Nguy hiểm thực sự (>= 40 điểm) -> Mới cho phép xóa
+            # Bạn có thể sửa số 40 thành 50 nếu muốn an toàn hơn nữa
+            elif score >= 40:
+                self.log_message(f"🚨 MALICIOUS THREAT CONFIRMED! Registering for removal...")
+                
+                # A. Tạo một "Scan Session" ảo để chứa threat này
+                scan_id = self.db.add_scan('dynamic_detection', sample_path)
+                
+                # B. Cập nhật ID hiện tại để nút Remove biết cần xóa ở đâu
+                self.current_scan_id = scan_id
+                
+                # C. Thêm vào bảng Detection (Bảng mà nút Remove sẽ đọc)
+                self.db.add_detection(
+                    scan_id=scan_id,
+                    file_path=sample_path,
+                    file_hash="DYNAMIC_HASH",
+                    trojan_name=f"Trojan.Dynamic.Generic (Score: {score:.0f})",
+                    detection_method="dynamic_analysis",
+                    threat_level=level
+                )
+                
+                # D. Cập nhật trạng thái scan ảo là hoàn tất
+                self.db.update_scan(
+                    scan_id, 
+                    end_time=datetime.now(), 
+                    files_scanned=1, 
+                    threats_found=1, 
+                    status='completed'
+                )
+                
+                # E. Refresh lại giao diện để hiện lên bảng History
+                self.root.after(0, self.refresh_all)
+                
+                messagebox.showwarning(
+                    "Threat Detected", 
+                    f"Malicious behavior detected!\nScore: {score}/100\n\nYou can now click 'Remove Threats' to quarantine this file."
+                )
 
         except Exception as e:
             import traceback
@@ -510,21 +570,71 @@ class TrojanScannerGUI:
     def load_scan_history(self):
         for item in self.tree.get_children():
             self.tree.delete(item)
-        
-        scans = self.db.get_all_scans(limit=50)
-        for scan in scans:
-            detections = self.db.get_detections_by_scan(scan.id)
+        history_items = []
+        static_scans = self.db.get_all_scans(limit=20)
+        for s in static_scans:
+            # Đếm số file đã bị xóa/quarantine
+            detections = self.db.get_detections_by_scan(s.id)
             removed_count = sum(1 for d in detections if d.is_removed)
             
+            history_items.append({
+                'id': s.id,
+                'type': s.scan_type,          # full, signature, behaviour
+                'path': s.scan_path,
+                'time': s.start_time,
+                'files': s.files_scanned,
+                'threats': s.threats_found,   # Hiển thị số lượng (int)
+                'removed': removed_count,
+                'status': s.status,
+                'is_dynamic': False           # Cờ đánh dấu
+            })
+        if hasattr(self.db, 'get_all_dynamic_runs'):
+            dynamic_runs = self.db.get_all_dynamic_runs(limit=20)
+            
+            for d in dynamic_runs:
+                # Lấy điểm số từ bảng behavior_samples
+                samples = self.db.get_behavior_samples(d.id)
+                score_display = "0 pts"
+                if samples:
+                    # Hiển thị điểm số thay vì số lượng threat
+                    score = samples[0].threat_score
+                    score_display = f"{score:.0f} pts"
+                
+                history_items.append({
+                    'id': d.id,
+                    'type': 'dynamic',        # Đặt type riêng để dễ phân biệt
+                    'path': d.sample_path,
+                    'time': getattr(d, 'start_time', datetime.now()),     # Thời gian chạy
+                    'files': 1,               # Dynamic chỉ chạy 1 file
+                    'threats': score_display, # Hiển thị điểm (VD: 50 pts)
+                    'removed': 'N/A',         # Dynamic chưa hỗ trợ auto-remove
+                    'status': d.status,
+                    'is_dynamic': True
+                })
+
+        history_items.sort(key=lambda x: x['time'] or datetime.min, reverse=True)
+        
+        for item in history_items:
+            # Cắt ngắn đường dẫn nếu quá dài
+            path_display = item['path']
+            if len(path_display) > 35:
+                path_display = "..." + path_display[-32:]
+            
+            # Format thời gian
+            time_str = ""
+            if item['time']:
+                time_str = item['time'].strftime('%Y-%m-%d %H:%M:%S')
+
+            # Insert vào bảng
             self.tree.insert('', 'end', values=(
-                scan.id,
-                scan.scan_type,
-                scan.scan_path[:25] + '...' if len(scan.scan_path) > 25 else scan.scan_path,
-                scan.start_time.strftime('%Y-%m-%d %H:%M:%S') if scan.start_time else '',
-                scan.files_scanned,
-                scan.threats_found,
-                removed_count,
-                scan.status
+                item['id'],
+                item['type'].upper(),
+                path_display,
+                time_str,
+                item['files'],
+                item['threats'],
+                item['removed'],
+                item['status']
             ))
     
     def refresh_all(self):
