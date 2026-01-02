@@ -2241,3 +2241,43 @@ ImportError: cannot import name 'load_scan_extensions' from 'config.settings' (D
 [2025-12-31 22:24:55,972] [WARNING] [BaseScanner] Detection behaviour_static | Heur.Suspicious (Keyword:powershell, Keyword:VirtualAlloc, Keyword:WriteProcessMemory) | level=high
 [2025-12-31 22:41:15,291] [INFO] [scanner.dynamic_runner] Applied sandbox network block for D:\Detection-and-Remove-Trojan\temp\dynamic_sandbox\dyn_rl0txkjx\test_memory_bomber.exe
 [2025-12-31 22:41:40,553] [INFO] [scanner.dynamic_runner] Removed sandbox network block rule TrojanScanner_Block_1767195675202
+[2026-01-01 20:20:42,328] [WARNING] [BaseScanner] Detection signature | EICAR-Test-File | level=high
+[2026-01-01 20:20:44,082] [WARNING] [BaseScanner] Detection static_heuristic | Suspicious.PE.Heuristic (High entropy (7.92); Packer markers: UPX) | level=high
+[2026-01-01 20:20:45,478] [WARNING] [BaseScanner] Detection static_heuristic | Suspicious.PE.Heuristic (High entropy (7.92); Packer markers: UPX) | level=high
+[2026-01-01 20:20:46,927] [WARNING] [BaseScanner] Detection static_heuristic | Suspicious.PE.Heuristic (High entropy (7.92); Packer markers: UPX) | level=high
+[2026-01-01 20:22:21,505] [WARNING] [BaseScanner] Detection signature | EICAR-Test-File | level=high
+[2026-01-01 20:22:22,209] [WARNING] [BaseScanner] Detection static_heuristic | Suspicious.PE.Heuristic (High entropy (7.92); Packer markers: UPX) | level=high
+[2026-01-01 20:22:22,879] [WARNING] [BaseScanner] Detection static_heuristic | Suspicious.PE.Heuristic (High entropy (7.92); Packer markers: UPX) | level=high
+[2026-01-01 20:22:23,544] [WARNING] [BaseScanner] Detection static_heuristic | Suspicious.PE.Heuristic (High entropy (7.92); Packer markers: UPX) | level=high
+[2026-01-01 20:22:23,582] [WARNING] [BaseScanner] Detection behaviour_static | Heur.Suspicious (Keyword:cmd.exe, Keyword:VirtualAlloc, Keyword:RegSetValueEx) | level=high
+[2026-01-01 20:22:23,606] [WARNING] [BaseScanner] Detection behaviour_static | Heur.Suspicious (Keyword:GetForegroundWindow, Keyword:RegSetValueEx, Keyword:RegCreateKeyEx) | level=high
+[2026-01-01 20:22:23,622] [WARNING] [BaseScanner] Detection behaviour_static | EICAR-Test-File | level=high
+[2026-01-01 20:22:23,960] [WARNING] [BaseScanner] Detection behaviour_static | Heur.Suspicious (Keyword:IsDebuggerPresent, Keyword:ShowWindow, Packed/Obfuscated (PyInstaller/UPX)) | level=medium
+[2026-01-01 20:22:24,296] [WARNING] [BaseScanner] Detection behaviour_static | Heur.Suspicious (Keyword:IsDebuggerPresent, Keyword:ShowWindow, Packed/Obfuscated (PyInstaller/UPX)) | level=medium
+[2026-01-01 20:22:24,618] [WARNING] [BaseScanner] Detection behaviour_static | Heur.Suspicious (Keyword:IsDebuggerPresent, Keyword:ShowWindow, Packed/Obfuscated (PyInstaller/UPX)) | level=medium
+[2026-01-01 20:24:42,960] [INFO] [scanner.dynamic_runner] Applied sandbox network block for D:\Detection-and-Remove-Trojan\temp\dynamic_sandbox\dyn_vuwth74o\test_dropper_spawner.exe
+[2026-01-01 20:25:09,330] [INFO] [scanner.dynamic_runner] Removed sandbox network block rule TrojanScanner_Block_1767273882812
+[2026-01-01 20:25:19,500] [INFO] [scanner.dynamic_runner] Applied sandbox network block for D:\Detection-and-Remove-Trojan\temp\dynamic_sandbox\dyn_6yzzkedt\test_memory_bomber.exe
+[2026-01-01 20:25:37,818] [INFO] [scanner.dynamic_runner] Removed sandbox network block rule TrojanScanner_Block_1767273919414
+[2026-01-02 14:44:37,315] [WARNING] [BaseScanner] Detection signature | EICAR-Test-File | level=high
+[2026-01-02 14:44:39,108] [WARNING] [BaseScanner] Detection static_heuristic | Suspicious.PE.Heuristic (High entropy (7.92); Packer markers: UPX) | level=high
+[2026-01-02 14:44:40,393] [WARNING] [BaseScanner] Detection static_heuristic | Suspicious.PE.Heuristic (High entropy (7.92); Packer markers: UPX) | level=high
+[2026-01-02 14:44:41,853] [WARNING] [BaseScanner] Detection static_heuristic | Suspicious.PE.Heuristic (High entropy (7.92); Packer markers: UPX) | level=high
+[2026-01-02 14:45:19,114] [WARNING] [BaseScanner] Detection behaviour_static | Heur.Suspicious (Keyword:cmd.exe, Keyword:VirtualAlloc, Keyword:RegSetValueEx) | level=high
+[2026-01-02 14:45:19,139] [WARNING] [BaseScanner] Detection behaviour_static | Heur.Suspicious (Keyword:GetForegroundWindow, Keyword:RegSetValueEx, Keyword:RegCreateKeyEx) | level=high
+[2026-01-02 14:45:19,154] [WARNING] [BaseScanner] Detection behaviour_static | EICAR-Test-File | level=high
+[2026-01-02 14:45:19,492] [WARNING] [BaseScanner] Detection behaviour_static | Heur.Suspicious (Keyword:IsDebuggerPresent, Keyword:ShowWindow, Packed/Obfuscated (PyInstaller/UPX)) | level=medium
+[2026-01-02 14:45:19,836] [WARNING] [BaseScanner] Detection behaviour_static | Heur.Suspicious (Keyword:IsDebuggerPresent, Keyword:ShowWindow, Packed/Obfuscated (PyInstaller/UPX)) | level=medium
+[2026-01-02 14:45:20,192] [WARNING] [BaseScanner] Detection behaviour_static | Heur.Suspicious (Keyword:IsDebuggerPresent, Keyword:ShowWindow, Packed/Obfuscated (PyInstaller/UPX)) | level=medium
+[2026-01-02 14:45:43,229] [WARNING] [BaseScanner] Detection signature | EICAR-Test-File | level=high
+[2026-01-02 14:45:43,883] [WARNING] [BaseScanner] Detection static_heuristic | Suspicious.PE.Heuristic (High entropy (7.92); Packer markers: UPX) | level=high
+[2026-01-02 14:45:44,534] [WARNING] [BaseScanner] Detection static_heuristic | Suspicious.PE.Heuristic (High entropy (7.92); Packer markers: UPX) | level=high
+[2026-01-02 14:45:45,192] [WARNING] [BaseScanner] Detection static_heuristic | Suspicious.PE.Heuristic (High entropy (7.92); Packer markers: UPX) | level=high
+[2026-01-02 14:45:45,228] [WARNING] [BaseScanner] Detection behaviour_static | Heur.Suspicious (Keyword:cmd.exe, Keyword:VirtualAlloc, Keyword:RegSetValueEx) | level=high
+[2026-01-02 14:45:45,253] [WARNING] [BaseScanner] Detection behaviour_static | Heur.Suspicious (Keyword:GetForegroundWindow, Keyword:RegSetValueEx, Keyword:RegCreateKeyEx) | level=high
+[2026-01-02 14:45:45,268] [WARNING] [BaseScanner] Detection behaviour_static | EICAR-Test-File | level=high
+[2026-01-02 14:45:45,602] [WARNING] [BaseScanner] Detection behaviour_static | Heur.Suspicious (Keyword:IsDebuggerPresent, Keyword:ShowWindow, Packed/Obfuscated (PyInstaller/UPX)) | level=medium
+[2026-01-02 14:45:45,935] [WARNING] [BaseScanner] Detection behaviour_static | Heur.Suspicious (Keyword:IsDebuggerPresent, Keyword:ShowWindow, Packed/Obfuscated (PyInstaller/UPX)) | level=medium
+[2026-01-02 14:45:46,267] [WARNING] [BaseScanner] Detection behaviour_static | Heur.Suspicious (Keyword:IsDebuggerPresent, Keyword:ShowWindow, Packed/Obfuscated (PyInstaller/UPX)) | level=medium
+[2026-01-02 14:48:24,905] [INFO] [scanner.dynamic_runner] Applied sandbox network block for D:\Detection-and-Remove-Trojan\temp\dynamic_sandbox\dyn_1aovmicm\test_memory_bomber.exe
+[2026-01-02 14:48:41,242] [INFO] [scanner.dynamic_runner] Removed sandbox network block rule TrojanScanner_Block_1767340104767
