@@ -70,29 +70,7 @@ Hệ thống tích hợp 4 lớp bảo vệ chính:
 
 2. Xử lý mối đe dọa:
     Sau khi quét, nếu phát hiện mối đe dọa (Threat Score cao), nhấn nút "Remove Threats" để di chuyển file vào thư mục cách ly (`quarantine/`).
-
-📂 Cấu trúc dự án
-Project/
-├── config/
-│   ├── settings.py          # Cấu hình hệ thống (ngưỡng điểm, đường dẫn)
-│   ├── api_keys.py          # Chứa key VirusTotal
-├── database/
-│   ├── db_manager.py        # Quản lý SQLite & SQLAlchemy
-│   ├── models.py            # Định nghĩa bảng dữ liệu
-├── gui/
-│   ├── main_window.py       # Giao diện chính (Tkinter)
-├── scanner/
-│   ├── monitors/            # Các module giám sát thời gian thực
-│   │   ├── fs_monitor.py
-│   │   ├── network_monitor.py
-│   │   ├── process_monitor.py
-│   │   └── registry_monitor.py
-│   ├── behaviour_scanner.py # Quét hành vi tĩnh (Yara/Strings)
-│   ├── dynamic_runner.py    # Điều phối Sandbox
-│   ├── pe_heuristic_scanner.py # Phân tích PE Header
-│   ├── signature_scanner.py # Quét mã băm
-│   ├── threat_scorer.py     # Thuật toán chấm điểm rủi ro
-│   └── virustotal_scanner.py# Tích hợp Cloud
 ├── utils/                   # Các hàm tiện ích (Logger, Hash)
 ├── main.py                  # Entry point
 └── requirements.txt         # Danh sách thư viện
+
